@@ -599,7 +599,7 @@
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/RealmSwift",
 				);
 				INFOPLIST_FILE = HomeworkManager/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ac.tsukuba.coins-p.HomeworkManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -618,7 +618,7 @@
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/RealmSwift",
 				);
 				INFOPLIST_FILE = HomeworkManager/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.ac.tsukuba.coins-p.HomeworkManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -19,3 +19,7 @@ profile
 
 #CocoaPod
 Pods/*
+
+#Ruby
+.ruby-version
+
