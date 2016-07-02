@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  HomeworkManager
-//
-//  Created by takayuki abe on 2016/07/02.
-//  Copyright © 2016年 takayuki abe. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
