@@ -22,6 +22,8 @@
 		6F264F9D1D2CB646006509D0 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264F9C1D2CB646006509D0 /* ListTableViewCell.swift */; };
 		AAE29B828CBA1FDB68D8F924 /* Pods_HomeworkManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CFE211446D052E954E88EE /* Pods_HomeworkManagerTests.framework */; };
 		B1E632DCBC4FE8CE9E7602CD /* Pods_HomeworkManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */; };
+		B21A9FCF1D27AB4100B2CBF7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21A9FCE1D27AB4100B2CBF7 /* Model.swift */; };
+		B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2805F3F1D2CA02900016645 /* RealmModelManager.swift */; };
 		C7F2AA645F66BBEB2F9BBC2D /* Pods_HomeworkManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */; };
 		E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E8B1E41D276D8400E33644 /* Subject.swift */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,8 @@
 		7E6E28BD80A798FAD40F5248 /* Pods-HomeworkManagerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerTests/Pods-HomeworkManagerTests.release.xcconfig"; sourceTree = "<group>"; };
 		90CBC98A4DA0928E0928F435 /* Pods-HomeworkManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerTests/Pods-HomeworkManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManagerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B21A9FCE1D27AB4100B2CBF7 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		B2805F3F1D2CA02900016645 /* RealmModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModelManager.swift; sourceTree = "<group>"; };
 		BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BF25799A1331E9CE2A5CE7 /* Pods-HomeworkManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerUITests/Pods-HomeworkManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E5E8B1E41D276D8400E33644 /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 				6F264F5D1D274CCA006509D0 /* Assets.xcassets */,
 				6F264F5F1D274CCA006509D0 /* LaunchScreen.storyboard */,
 				6F264F621D274CCA006509D0 /* Info.plist */,
+				B21A9FCE1D27AB4100B2CBF7 /* Model.swift */,
+				B2805F3F1D2CA02900016645 /* RealmModelManager.swift */,
 			);
 			path = HomeworkManager;
 			sourceTree = "<group>";
@@ -456,7 +462,9 @@
 				6F264F8F1D2782AC006509D0 /* Homework.swift in Sources */,
 				6F264F591D274CCA006509D0 /* ViewController.swift in Sources */,
 				E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */,
+				B21A9FCF1D27AB4100B2CBF7 /* Model.swift in Sources */,
 				6F264F571D274CCA006509D0 /* AppDelegate.swift in Sources */,
+				B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
