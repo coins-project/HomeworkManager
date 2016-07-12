@@ -18,12 +18,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         .DocumentDirectory,
         .UserDomainMask, true)[0]
     
-//    @IBAction func addButton(sender: AnyObject) {
-//        self.pickImageFromCamera()
-//        //self.pickImageFromLibrary()
-//    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -75,35 +69,25 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                     // 保存ディレクトリ: Documents/Photo/
                     let fileManager = NSFileManager.defaultManager()
-                    let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] + "image" as NSString
-                    
-                    
-                    if !fileManager.fileExistsAtPath(dir as String) {
-                        do {
-                            try fileManager.createDirectoryAtPath(dir as String, withIntermediateDirectories: true, attributes: nil)
-                        }
-                        catch {
-                            print("Unable to create director y: \(error)")
-                        }
+                    let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+                    let imagePath = "\(dir)/image/"
+                    do {
+                        try fileManager.createDirectoryAtPath(imagePath, withIntermediateDirectories: true, attributes: nil)
+                    } catch let error as NSError {
+                        NSLog("Unable to create directory \(error.debugDescription)")
                     }
+                
                     
                     // ファイル名: 現在日時.png
                     CameraViewController.imageName = "\(NSDate().description).png"
                     photoRealm.createdAt = NSDate()
-                    photoRealm.url = (dir as String) + CameraViewController.imageName
+                    photoRealm.url = imagePath + CameraViewController.imageName
                     photoRealm.id = CameraViewController.lastId()
-                    
                     if (photoData.writeToFile(photoRealm.url, atomically: true)) {
-                        // 写真表示
-                        let myImage = UIImageView(image: image)
-                        
-                        // 画像の中心を設定
-                        myImage.center = CGPointMake(187.5, 333.5)
-                        
-                        // UIImageViewのインスタンスをビューに追加
-                        self.view.addSubview(myImage)
+                        let myImage = UIImageView(image: image) // 写真表示
+                        myImage.center = CGPointMake(187.5, 333.5) // 画像の中心を設定
+                        self.view.addSubview(myImage) // UIImageViewのインスタンスをビューに追加
                     }
-                        // 保存エラー
                     else {
                         print("error writing file: \(photoRealm.url)")
                     }
