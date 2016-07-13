@@ -1,11 +1,3 @@
-//
-//  CameraViewController.swift
-//  HomeworkManager
-//
-//  Created by 古川 和輝 on 2016/07/06.
-//  Copyright © 2016年 takayuki abe. All rights reserved.
-//
-
 import UIKit
 import RealmSwift
 
@@ -20,12 +12,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(animated: Bool) {
         self.pickImageFromCamera()
-//        self.pickImageFromLibrary()
     }
     
     override func shouldAutorotate() -> Bool {
@@ -42,7 +32,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
-    
     // ライブラリから写真を選択する
     func pickImageFromLibrary() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
@@ -52,7 +41,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
- 
     
     // 写真を選択した時に呼ばれる
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
@@ -67,7 +55,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                 if let photoData = UIImagePNGRepresentation(image) {
                     let photoRealm = Photo()
                     
-                    // 保存ディレクトリ: Documents/Photo/
+                    // 保存ディレクトリ: Documents/image/
                     let fileManager = NSFileManager.defaultManager()
                     let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                     let imagePath = "\(dir)/image/"
@@ -76,7 +64,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     } catch let error as NSError {
                         NSLog("Unable to create directory \(error.debugDescription)")
                     }
-                
                     
                     // ファイル名: 現在日時.png
                     CameraViewController.imageName = "\(NSDate().description).png"
@@ -95,12 +82,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     try! CameraViewController.realm.write {
                         CameraViewController.realm.add(photoRealm )
                     }
-                    
-                    
-                                    }
+                }
             }
         }
-        
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -111,5 +95,4 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             return 1
         }
     }
-    
 }
