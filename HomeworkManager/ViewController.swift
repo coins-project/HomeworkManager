@@ -7,6 +7,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private var homeworks: [Homework] = []
     private var closeDates: [NSDate] = []
     private var section = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let dateFormatter = NSDateFormatter()
@@ -48,12 +49,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        self.section = (self.section + 1) % (closeDates.count)
+        return (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section])).count
     }
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
+        let homeworksOfToday = (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section]))
+        cell.subjectNameLabel.text = (homeworksOfToday[indexPath.row] as! Homework).subjects[0].name
+        cell.referenceLabel.text = (homeworksOfToday[indexPath.row] as! Homework).reference
         return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
     }
 }
 
