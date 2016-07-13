@@ -21,7 +21,7 @@
 		AAE29B828CBA1FDB68D8F924 /* Pods_HomeworkManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CFE211446D052E954E88EE /* Pods_HomeworkManagerTests.framework */; };
 		B1E632DCBC4FE8CE9E7602CD /* Pods_HomeworkManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */; };
 		B21A9FCF1D27AB4100B2CBF7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21A9FCE1D27AB4100B2CBF7 /* Model.swift */; };
-		B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2805F3F1D2CA02900016645 /* RealmModelManager.swift */; };		
+		B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2805F3F1D2CA02900016645 /* RealmModelManager.swift */; };
 		C7F2AA645F66BBEB2F9BBC2D /* Pods_HomeworkManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */; };
 		D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */; };
 		E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E8B1E41D276D8400E33644 /* Subject.swift */; };
@@ -460,8 +460,8 @@
 				E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */,
 				B21A9FCF1D27AB4100B2CBF7 /* Model.swift in Sources */,
 				6F264F571D274CCA006509D0 /* AppDelegate.swift in Sources */,
-				B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */,				
 				D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */,
+				B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
