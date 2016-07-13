@@ -196,10 +196,14 @@
                                                                 </mask>
                                                             </variation>
                                                             <connections>
-                                                                <outlet property="SubjectNameLabel" destination="0re-vQ-jJ3" id="0EM-Nl-0eu"/>
+                                                                <outlet property="referenceLabel" destination="Add-sA-YQe" id="x21-gE-5th"/>
+                                                                <outlet property="subjectNameLabel" destination="0re-vQ-jJ3" id="xZB-nj-JUx"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
+                                                    <variation key="widthClass=regular" misplaced="YES">
+                                                        <rect key="frame" x="8" y="8" width="224" height="183"/>
+                                                    </variation>
                                                     <connections>
                                                         <outlet property="dataSource" destination="BYZ-38-t0r" id="YdY-kB-Hje"/>
                                                         <outlet property="delegate" destination="BYZ-38-t0r" id="lnH-CN-p2R"/>
