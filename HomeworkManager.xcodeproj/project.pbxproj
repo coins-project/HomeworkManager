@@ -21,6 +21,9 @@
 		AAE29B828CBA1FDB68D8F924 /* Pods_HomeworkManagerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CFE211446D052E954E88EE /* Pods_HomeworkManagerTests.framework */; };
 		B1E632DCBC4FE8CE9E7602CD /* Pods_HomeworkManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */; };
 		C7F2AA645F66BBEB2F9BBC2D /* Pods_HomeworkManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */; };
+		E589F84C1D27A4C000EC0BE8 /* InputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E589F84B1D27A4C000EC0BE8 /* InputViewController.swift */; };
+		E589F84E1D27A4DA00EC0BE8 /* Input.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E589F84D1D27A4DA00EC0BE8 /* Input.storyboard */; };
+		E5C7DFE01D27BE5A00B93377 /* InputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C7DFDF1D27BE5A00B93377 /* InputTableViewController.swift */; };
 		E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E8B1E41D276D8400E33644 /* Subject.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +71,9 @@
 		A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManagerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BF25799A1331E9CE2A5CE7 /* Pods-HomeworkManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerUITests/Pods-HomeworkManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E589F84B1D27A4C000EC0BE8 /* InputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewController.swift; sourceTree = "<group>"; };
+		E589F84D1D27A4DA00EC0BE8 /* Input.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Input.storyboard; sourceTree = "<group>"; };
+		E5C7DFDF1D27BE5A00B93377 /* InputTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTableViewController.swift; path = Assets.xcassets/InputTableViewController.swift; sourceTree = "<group>"; };
 		E5E8B1E41D276D8400E33644 /* Subject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,9 +150,12 @@
 				6F264F8C1D277153006509D0 /* Photo.swift */,
 				6F264F8E1D2782AC006509D0 /* Homework.swift */,
 				6F264F5A1D274CCA006509D0 /* Main.storyboard */,
+				E589F84B1D27A4C000EC0BE8 /* InputViewController.swift */,
+				E589F84D1D27A4DA00EC0BE8 /* Input.storyboard */,
 				6F264F5D1D274CCA006509D0 /* Assets.xcassets */,
 				6F264F5F1D274CCA006509D0 /* LaunchScreen.storyboard */,
 				6F264F621D274CCA006509D0 /* Info.plist */,
+				E5C7DFDF1D27BE5A00B93377 /* InputTableViewController.swift */,
 			);
 			path = HomeworkManager;
 			sourceTree = "<group>";
@@ -297,6 +306,7 @@
 				6F264F611D274CCA006509D0 /* LaunchScreen.storyboard in Resources */,
 				6F264F5E1D274CCA006509D0 /* Assets.xcassets in Resources */,
 				6F264F5C1D274CCA006509D0 /* Main.storyboard in Resources */,
+				E589F84E1D27A4DA00EC0BE8 /* Input.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,11 +454,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5C7DFE01D27BE5A00B93377 /* InputTableViewController.swift in Sources */,
 				6F264F8D1D277153006509D0 /* Photo.swift in Sources */,
 				6F264F8F1D2782AC006509D0 /* Homework.swift in Sources */,
 				6F264F591D274CCA006509D0 /* ViewController.swift in Sources */,
 				E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */,
 				6F264F571D274CCA006509D0 /* AppDelegate.swift in Sources */,
+				E589F84C1D27A4C000EC0BE8 /* InputViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
