@@ -22,10 +22,10 @@
                             <tableViewSection headerTitle="入力済みの今日の課題" id="0CP-G5-TYC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="11" rowHeight="107" id="cJ8-4E-Yeb">
-                                        <rect key="frame" x="0.0" y="49.5" width="600" height="152"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="600" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJ8-4E-Yeb" id="Sda-gF-9VV">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="151.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="106.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
@@ -99,9 +99,6 @@
                                                             </variation>
                                                         </collectionViewCell>
                                                     </cells>
-                                                    <variation key="widthClass=regular" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="800" height="151.5"/>
-                                                    </variation>
                                                     <connections>
                                                         <outlet property="dataSource" destination="MxV-5y-NY7" id="ixL-xC-xL8"/>
                                                         <outlet property="delegate" destination="MxV-5y-NY7" id="NZm-W5-mVS"/>
@@ -143,10 +140,10 @@
                             <tableViewSection headerTitle="追加する課題の教科" id="on7-OG-F42">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="93" id="EV4-uA-4Jf">
-                                        <rect key="frame" x="0.0" y="251.5" width="600" height="120"/>
+                                        <rect key="frame" x="0.0" y="206.5" width="600" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EV4-uA-4Jf" id="CgG-cn-qep">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="119.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
@@ -158,9 +155,6 @@
                                                         <segment title="社会"/>
                                                         <segment title="英語"/>
                                                     </segments>
-                                                    <variation key="widthClass=regular" misplaced="YES">
-                                                        <rect key="frame" x="8" y="8" width="784" height="104.5"/>
-                                                    </variation>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -198,7 +192,7 @@
                             <tableViewSection headerTitle="追加する課題の種類と締め切り" id="6UP-5j-tOH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="219" id="aW4-Cr-cgW">
-                                        <rect key="frame" x="0.0" y="421.5" width="600" height="219"/>
+                                        <rect key="frame" x="0.0" y="349.5" width="600" height="219"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aW4-Cr-cgW" id="pfZ-33-2jk">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="218.5"/>
@@ -348,10 +342,10 @@
                             <tableViewSection headerTitle=" " id="O75-pV-Yau" userLabel="　">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="97" id="78b-aM-Ufr">
-                                        <rect key="frame" x="0.0" y="421.5" width="600" height="219"/>
+                                        <rect key="frame" x="0.0" y="618.5" width="600" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="78b-aM-Ufr" id="g1p-Ol-bWA">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="218.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="96.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqm-dW-gtn">
