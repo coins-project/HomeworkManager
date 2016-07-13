@@ -3,7 +3,7 @@ import RealmSwift
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    static var realm = try! Realm()
+    private let realm = RealmModelManager.sharedManager
     static var imageName:String = ""
     
     let documents = NSSearchPathForDirectoriesInDomains(
@@ -46,7 +46,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     CameraViewController.imageName = "\(NSDate().description).png"
                     photoRealm.createdAt = NSDate()
                     photoRealm.url = imagePath + CameraViewController.imageName
-                    photoRealm.id = CameraViewController.lastId()
                     
                     if (photoData.writeToFile(photoRealm.url, atomically: true)) {
                         let myImage = UIImageView(image: image)
@@ -57,20 +56,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                         print("error writing file: \(photoRealm.url)")
                     }
                     
-                    try! CameraViewController.realm.write {
-                        CameraViewController.realm.add(photoRealm )
-                    }
+                    realm.create(Photo.self, value: photoRealm)
                 }
             }
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    static func lastId() -> Int {
-        if let user = realm.objects(Photo).last {
-            return user.id + 1
-        } else {
-            return 1
-        }
     }
 }
