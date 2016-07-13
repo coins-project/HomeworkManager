@@ -1,7 +1,6 @@
 import UIKit
-import RealmSwift
-class Subject: Object {
-    dynamic var id = 0
+
+class Subject: Model {
     dynamic var name = ""
     dynamic var hexColor = ""
 }
