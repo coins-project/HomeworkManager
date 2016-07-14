@@ -65,18 +65,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
         let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.editItem() })
-        let cancelAction = UIAlertAction(title: "キャンセル", style: .Cancel) {
-                action in print("pushed cancel") }
         
         alertController.addAction(startCameraAction)
         alertController.addAction(editItemAction)
-        alertController.addAction(cancelAction)
         
-        if let popoverController = alertController.popoverPresentationController {
-            alertController.popoverPresentationController?.sourceView = sender as UIView;
-            alertController.popoverPresentationController?.sourceRect = CGRect(x: (sender.frame.width/2), y: sender.frame.height, width: 0, height: 0)        }
-        self.presentViewController(alertController, animated: true, completion: nil)
-        }//ポップバーじゃない?
+        if alertController.popoverPresentationController != nil {
+            alertController.popoverPresentationController!.sourceView = sender
+            alertController.popoverPresentationController!.sourceRect = sender.bounds
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
  
     func startCamera() {
         print("start camera")
@@ -88,9 +86,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func editItem() {
         print("edit item")
-        let myInputTableViewController: UITableViewController = InputTableViewController()
-        myInputTableViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
-        self.presentViewController(myInputTableViewController, animated: true, completion: nil)
+        let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
+        let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
+        
+        self.presentViewController(inputTableViewController, animated: true, completion: nil)
     }
 }
-
