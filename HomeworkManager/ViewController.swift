@@ -77,7 +77,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
  
     func startCamera() {
-        print("start camera")
         let myCameraViewController = CameraViewController()
         myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
         self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
@@ -85,10 +84,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func editItem() {
-        print("edit item")
         let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
         let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
-        
         self.presentViewController(inputTableViewController, animated: true, completion: nil)
     }
 }
