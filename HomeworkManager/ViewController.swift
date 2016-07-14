@@ -12,14 +12,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-        dateFormatter.timeStyle = .NoStyle
-        dateFormatter.dateStyle = .ShortStyle
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "JST")
-        let today = dateFormatter.dateFromString(dateFormatter.stringFromDate(NSDate()))
+        let today = TimezoneConverter.convertToJST(NSDate())
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
-            if homework.closeAt.timeIntervalSinceDate(today!) > 0 {
+            if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
                 homeworks.append(homework)
             }
         }
