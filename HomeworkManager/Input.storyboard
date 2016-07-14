@@ -210,8 +210,8 @@
                                                     <subviews>
                                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4M-pI-qtz">
                                                             <rect key="frame" x="-160" y="-108" width="320" height="216"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="490076802.18232203">
-                                                                <!--2016-07-13 04:26:42 +0000-->
+                                                            <date key="date" timeIntervalSinceReferenceDate="490796802.18232203">
+                                                                <!--2016-07-21 12:26:42 +0000-->
                                                             </date>
                                                             <locale key="locale" localeIdentifier="ja_JP"/>
                                                             <connections>
@@ -357,10 +357,19 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="96.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-uy-ZMO">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <color key="backgroundColor" red="0.95197886228561401" green="0.80939644575119019" blue="0.90375465154647827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <state key="normal" title="取消"/>
+                                                    <connections>
+                                                        <action selector="cancelUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="MUn-bZ-CFm"/>
+                                                    </connections>
+                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqm-dW-gtn">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <color key="backgroundColor" red="0.68221765756607056" green="0.93034571409225464" blue="0.92758327722549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                     <state key="normal" title="決定">
                                                         <color key="titleShadowColor" red="0.8597145676612854" green="0.96514767408370972" blue="0.96570867300033569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -372,29 +381,45 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="vqm-dW-gtn" secondAttribute="bottom" id="2NB-dw-ll5"/>
                                                 <constraint firstItem="vqm-dW-gtn" firstAttribute="top" secondItem="g1p-Ol-bWA" secondAttribute="topMargin" id="FU0-T2-Fmn"/>
-                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="leading" secondItem="g1p-Ol-bWA" secondAttribute="leadingMargin" id="imN-yl-fPf"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="h4e-uy-ZMO" secondAttribute="bottom" id="evc-GG-onK"/>
+                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="leading" secondItem="g1p-Ol-bWA" secondAttribute="leadingMargin" id="imN-yl-fPf">
+                                                    <variation key="widthClass=regular" constant="200"/>
+                                                </constraint>
+                                                <constraint firstItem="h4e-uy-ZMO" firstAttribute="top" secondItem="g1p-Ol-bWA" secondAttribute="topMargin" id="jmF-Bf-8xf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="vqm-dW-gtn" secondAttribute="trailing" id="n4p-fA-DX3"/>
+                                                <constraint firstItem="h4e-uy-ZMO" firstAttribute="leading" secondItem="g1p-Ol-bWA" secondAttribute="leadingMargin" id="nKR-He-t95"/>
+                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="leading" secondItem="h4e-uy-ZMO" secondAttribute="trailing" id="nrH-nC-aVe"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
+                                                    <exclude reference="h4e-uy-ZMO"/>
                                                     <exclude reference="vqm-dW-gtn"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="evc-GG-onK"/>
+                                                    <exclude reference="jmF-Bf-8xf"/>
+                                                    <exclude reference="nKR-He-t95"/>
                                                     <exclude reference="2NB-dw-ll5"/>
                                                     <exclude reference="FU0-T2-Fmn"/>
                                                     <exclude reference="imN-yl-fPf"/>
                                                     <exclude reference="n4p-fA-DX3"/>
+                                                    <exclude reference="nrH-nC-aVe"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=regular">
                                                 <mask key="subviews">
+                                                    <include reference="h4e-uy-ZMO"/>
                                                     <include reference="vqm-dW-gtn"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="evc-GG-onK"/>
+                                                    <include reference="jmF-Bf-8xf"/>
+                                                    <include reference="nKR-He-t95"/>
                                                     <include reference="2NB-dw-ll5"/>
                                                     <include reference="FU0-T2-Fmn"/>
                                                     <include reference="imN-yl-fPf"/>
                                                     <include reference="n4p-fA-DX3"/>
+                                                    <include reference="nrH-nC-aVe"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

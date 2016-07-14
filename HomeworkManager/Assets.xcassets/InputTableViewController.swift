@@ -1,25 +1,36 @@
 import UIKit
+import RealmSwift
 
 class InputTableViewController: UITableViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     private let realm = RealmModelManager.sharedManager
-    private var subject = "国語"
+    private var subjectName = ""
+    private var subjectColor = ""
     private var reference = "プリント"
+    private var closeAt = NSDate()
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            subject = "国語"
+            subjectName = "国語"
+            subjectColor = ""
         case 1:
-            subject = "数学"
+            subjectName = "数学"
+            subjectColor = ""
         case 2:
-            subject = "理科"
+            subjectName = "理科"
+            subjectColor = ""
         case 3:
-            subject = "社会"
+            subjectName = "社会"
+            subjectColor = ""
         case 4:
-            subject = "英語"
+            subjectName = "英語"
+            subjectColor = ""
         default:
-            subject = ""
+            subjectName = ""
+            subjectColor = ""
         }
+        
+        print(realm.findAllObjects(Homework.self))
         
     }
     
@@ -41,8 +52,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeZone = NSTimeZone(abbreviation: "JST")
         let date = dateFormatter.dateFromString(dateFormatter.stringFromDate(sender.date))
-        print(date)
-    }
+        closeAt = NSDate(timeInterval: 9*60*60, sinceDate: date!)
+        }
     
     
     
@@ -62,12 +73,21 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     }
     
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        let homework = Homework()
-        homework.subjects[0] = subject
+        var subjects: List<Subject> = List<Subject>()
+        var subject = Subject()
+        var homework = Homework()
+        subject.name = subjectName
+        subject.hexColor = subjectColor
+        subjects.append(subject)
+        homework.subjects = subjects
         homework.reference = reference
+        homework.closeAt = closeAt
+        homework.createdAt = NSDate()
         
-        
+        realm.create(Homework.self, value: homework)
     }
     
+    @IBAction func cancelUIButtonTouchUpInside(sender: UIButton) {
+    }
     
 }
