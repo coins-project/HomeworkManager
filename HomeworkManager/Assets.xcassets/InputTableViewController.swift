@@ -96,9 +96,14 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))
         
         realm.create(Homework.self, value: homework)
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     @IBAction func cancelUIButtonTouchUpInside(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }

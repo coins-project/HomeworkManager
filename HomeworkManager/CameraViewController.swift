@@ -39,9 +39,9 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                         NSLog("Unable to create directory \(error.debugDescription)")
                     }
                     
-                    CameraViewController.imageName = "\(NSDate().description).png"
+                    CameraViewController.imageName = "\(TimezoneConverter.convertToJST(NSDate()).description).png"
                     
-                    photoRealm.createdAt = NSDate()
+                    photoRealm.createdAt = TimezoneConverter.convertToJST(NSDate())
                     photoRealm.url = imagePath + CameraViewController.imageName
                     realm.create(Photo.self, value: photoRealm)
 
