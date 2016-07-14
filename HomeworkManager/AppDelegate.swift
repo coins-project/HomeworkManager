@@ -1,3 +1,11 @@
+//
+//  AppDelegate.swift
+//  HomeworkManager
+//
+//  Created by takayuki abe on 2016/07/02.
+//  Copyright © 2016年 takayuki abe. All rights reserved.
+//
+
 import UIKit
 
 @UIApplicationMain
@@ -5,16 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        //以下を追加した
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        var storyboard = UIStoryboard(name: "Input", bundle: nil)
-
-        var initialViewController = storyboard.instantiateViewControllerWithIdentifier("InputScreen") as! UIViewController
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
-        //以上を追加した
         return true
     }
 
