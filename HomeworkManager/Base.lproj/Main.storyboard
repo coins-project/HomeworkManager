@@ -275,6 +275,9 @@
                                         <include reference="XcE-ye-RPo"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="tapAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RcG-al-Bge"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -318,6 +321,9 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="kDp-hx-50U"/>
+                    <connections>
+                        <outlet property="addButton" destination="VcS-Bi-RAf" id="iRT-tc-HGF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
