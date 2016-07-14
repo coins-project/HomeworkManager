@@ -69,8 +69,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let createdAt = (collectionView.cellForItemAtIndexPath(indexPath) as! ListCollectionViewCell).createdAt
+        if realm.findAllObjects(Photo).count != 0 {
+            let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createdAt))
+        }
     }
-}
     
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
