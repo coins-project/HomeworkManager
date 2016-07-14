@@ -155,6 +155,9 @@
                                                         <segment title="社会"/>
                                                         <segment title="英語"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="subjectSegmentedControl:" destination="MxV-5y-NY7" eventType="valueChanged" id="eaC-ER-m2I"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -211,6 +214,9 @@
                                                                 <!--2016-07-13 04:26:42 +0000-->
                                                             </date>
                                                             <locale key="locale" localeIdentifier="ja_JP"/>
+                                                            <connections>
+                                                                <action selector="deadlineDatePicker:" destination="MxV-5y-NY7" eventType="valueChanged" id="YKJ-Km-8w9"/>
+                                                            </connections>
                                                         </datePicker>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -265,6 +271,9 @@
                                                             <exclude reference="pSG-Ji-Gqi"/>
                                                         </mask>
                                                     </variation>
+                                                    <connections>
+                                                        <action selector="referenceSegmentedControl:" destination="MxV-5y-NY7" eventType="valueChanged" id="vJz-pL-H63"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -355,6 +364,9 @@
                                                     <state key="normal" title="決定">
                                                         <color key="titleShadowColor" red="0.8597145676612854" green="0.96514767408370972" blue="0.96570867300033569" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="saveUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="PjG-j3-eXZ"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -395,9 +407,6 @@
                             <outlet property="delegate" destination="MxV-5y-NY7" id="hay-p5-t1h"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="SubjectSegmentedControl" destination="CQh-ys-9Y3" id="xHG-Nd-dmD"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1R-Yv-m61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
