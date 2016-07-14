@@ -21,6 +21,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 homeworks.append(homework)
             }
         }
+        self.section = 0
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -60,11 +61,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let homeworksOfToday = (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section]))
         cell.subjectNameLabel.text = (homeworksOfToday[indexPath.row] as! Homework).subjects[0].name
         cell.referenceLabel.text = (homeworksOfToday[indexPath.row] as! Homework).reference
+        cell.createdAt = (homeworksOfToday[indexPath.row] as! Homework).createdAt
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
+        let createdAt = (collectionView.cellForItemAtIndexPath(indexPath) as! ListCollectionViewCell).createdAt
     }
 }
 
