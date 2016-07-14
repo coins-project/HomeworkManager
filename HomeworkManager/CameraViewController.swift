@@ -10,10 +10,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         .DocumentDirectory,
         .UserDomainMask, true)[0]
     
-    override func viewDidAppear(animated: Bool) {
-        self.pickImageFromCamera()
-    }
-
     func pickImageFromCamera() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             let controller = UIImagePickerController()
@@ -26,7 +22,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if info[UIImagePickerControllerOriginalImage] != nil {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            print(image)
         }
         
         if info[UIImagePickerControllerOriginalImage] != nil {
@@ -37,6 +32,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     let fileManager = NSFileManager.defaultManager()
                     let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
                     let imagePath = "\(dir)/image/"
+                    
                     do {
                         try fileManager.createDirectoryAtPath(imagePath, withIntermediateDirectories: true, attributes: nil)
                     } catch let error as NSError {
@@ -44,22 +40,23 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     }
                     
                     CameraViewController.imageName = "\(NSDate().description).png"
+                    
                     photoRealm.createdAt = NSDate()
                     photoRealm.url = imagePath + CameraViewController.imageName
-                    
-                    if (photoData.writeToFile(photoRealm.url, atomically: true)) {
-                        let myImage = UIImageView(image: image)
-                        myImage.center = CGPointMake(187.5, 333.5)
-                        self.view.addSubview(myImage)
-                    }
-                    else {
-                        print("error writing file: \(photoRealm.url)")
-                    }
-                    
                     realm.create(Photo.self, value: photoRealm)
+
+                    if(photoData.writeToFile(photoRealm.url, atomically: true)){
+                    print(realm.findAllObjects(Photo.self))
+                    }//写真の保存
                 }
             }
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
 }
