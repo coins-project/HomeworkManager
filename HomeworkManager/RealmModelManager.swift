@@ -7,7 +7,7 @@ class RealmModelManager {
     private let realm: Realm
     
     private init() {
-        try! realm = Realm()
+        try! self.realm = Realm()
     }
     
     internal func findAllObjects<T: Model>(type: T.Type) -> Results<T> {
