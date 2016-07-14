@@ -30,7 +30,6 @@
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                                    <color key="backgroundColor" red="0.82763493061065674" green="0.95760065317153931" blue="0.94587129354476929" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="35" minimumInteritemSpacing="35" id="ps6-u6-cAA">
                                                         <size key="itemSize" width="105" height="105"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -38,7 +37,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" semanticContentAttribute="spatial" preservesSuperviewLayoutMargins="YES" reuseIdentifier="cell1" id="GGk-6C-wNx">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" semanticContentAttribute="spatial" preservesSuperviewLayoutMargins="YES" reuseIdentifier="cell1" id="GGk-6C-wNx" customClass="TodayHomeworkCollectionViewCell" customModule="HomeworkManager" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -48,10 +47,14 @@
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教科名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-Fh-Rnl">
                                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="51" id="9bs-as-VOl"/>
-                                                                            <constraint firstAttribute="height" constant="21" id="eS8-z2-7Fj"/>
+                                                                            <constraint firstAttribute="width" constant="51" id="9bs-as-VOl">
+                                                                                <variation key="widthClass=regular" constant="60"/>
+                                                                            </constraint>
+                                                                            <constraint firstAttribute="height" constant="21" id="eS8-z2-7Fj">
+                                                                                <variation key="widthClass=regular" constant="25"/>
+                                                                            </constraint>
                                                                         </constraints>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <variation key="default">
@@ -70,13 +73,13 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             </view>
-                                                            <color key="backgroundColor" red="0.95505183935165405" green="0.31783527135848999" blue="0.088092662394046783" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="backgroundColor" red="0.84313732389999996" green="0.89019614459999996" blue="0.95294123890000004" alpha="1" colorSpace="deviceRGB"/>
                                                             <constraints>
                                                                 <constraint firstItem="1cf-Fh-Rnl" firstAttribute="centerX" secondItem="GGk-6C-wNx" secondAttribute="centerX" id="ZyU-Yz-trr">
-                                                                    <variation key="widthClass=regular" constant="25"/>
+                                                                    <variation key="widthClass=regular" constant="0.0"/>
                                                                 </constraint>
                                                                 <constraint firstItem="1cf-Fh-Rnl" firstAttribute="centerY" secondItem="GGk-6C-wNx" secondAttribute="centerY" id="kgu-hf-K8H">
-                                                                    <variation key="widthClass=regular" constant="25"/>
+                                                                    <variation key="widthClass=regular" constant="0.0"/>
                                                                 </constraint>
                                                             </constraints>
                                                             <variation key="default">
@@ -97,6 +100,9 @@
                                                                     <include reference="kgu-hf-K8H"/>
                                                                 </mask>
                                                             </variation>
+                                                            <connections>
+                                                                <outlet property="subjectNameLabel" destination="1cf-Fh-Rnl" id="9K1-p2-bek"/>
+                                                            </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                     <connections>
