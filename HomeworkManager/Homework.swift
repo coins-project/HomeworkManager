@@ -2,7 +2,7 @@ import UIKit
 import RealmSwift
 
 class Homework: Model {
-    let subjects: List<Subject> = List<Subject>()
+    var subjects: List<Subject> = List<Subject>()
     dynamic var createdAt: NSDate = NSDate()
     dynamic var closeAt: NSDate = NSDate()
     dynamic var finished: Bool = false
