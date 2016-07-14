@@ -3,6 +3,8 @@ import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    @IBOutlet weak var addButton: UIButton!
+    
     private let realm = RealmModelManager.sharedManager
     private var homeworks: [Homework] = []
     private var closeDates: [NSDate] = []
@@ -54,6 +56,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
         return cell
+    }
+    
+    
+    @IBAction func tapAddButton(sender: UIButton) {
+        let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
+        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
+        let cancelAction = UIAlertAction(title: "キャンセル", style: .Cancel) {
+                action in print("pushed cancel") }
+        
+        alertController.addAction(startCameraAction)
+        alertController.addAction(editItemAction)
+        alertController.addAction(cancelAction)
+        
+        if let popoverController = alertController.popoverPresentationController {
+            alertController.popoverPresentationController?.sourceView = sender as UIView;
+            alertController.popoverPresentationController?.sourceRect = CGRect(x: (sender.frame.width/2), y: sender.frame.height, width: 0, height: 0)        }
+        self.presentViewController(alertController, animated: true, completion: nil)
+        }//ポップバーじゃない?
+ 
+    func startCamera() {
+        print("start camera")
+        let myCameraViewController = CameraViewController()
+        myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
+        myCameraViewController.pickImageFromCamera()
+    }
+
+    func editItem() {
+        print("edit item")
+        let myInputTableViewController: UITableViewController = InputTableViewController()
+        myInputTableViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        self.presentViewController(myInputTableViewController, animated: true, completion: nil)
     }
 }
 

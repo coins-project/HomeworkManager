@@ -10,10 +10,6 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         .DocumentDirectory,
         .UserDomainMask, true)[0]
     
-    override func viewDidAppear(animated: Bool) {
-        self.pickImageFromCamera()
-    }
-
     func pickImageFromCamera() {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             let controller = UIImagePickerController()
@@ -61,5 +57,11 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             }
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        print("dismiss")
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
 }
