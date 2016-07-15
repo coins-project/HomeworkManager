@@ -2,16 +2,13 @@ import UIKit
 import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
     @IBOutlet weak var addButton: UIButton!
-    
     private let realm = RealmModelManager.sharedManager
     private var homeworks: [Homework] = []
     private var closeDates: [NSDate] = []
     private var section = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
             if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
