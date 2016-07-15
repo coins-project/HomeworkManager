@@ -96,7 +96,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
             self.photo = photo
             let imageViewController = ImageViewController()
-            self.navigationController?.pushViewController(imageViewController, animated: true)
+            let appearImage = UIImage(contentsOfFile: photo.url)
+            let imageView = UIImageView(image: appearImage)
+            imageView.userInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "disappearImageView:"))
+            self.view.addSubview(imageView)
         }
     }
     
@@ -111,6 +115,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             try! realm.realm.write { homework.finished = !homework.finished }
             tableView.reloadData()
         }
+    }
+    
+    func disappearImageView(sender: UIGestureRecognizer) {
+        sender.view!.removeFromSuperview()
     }
     
     @IBAction func tapAddButton(sender: UIButton) {
