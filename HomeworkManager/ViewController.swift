@@ -7,6 +7,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var keys = [NSDate]()
+    private var photo = Photo()
     override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
         homeworkDictionary = [:]
@@ -93,10 +94,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tapHomework(sender: UIGestureRecognizer) {
         let homework = (sender.view as! ListCollectionViewCell).homework
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
+            self.photo = photo
             let imageViewController = ImageViewController()
-            imageViewController.setPhoto(photo)
             self.navigationController?.pushViewController(imageViewController, animated: true)
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
+        imageViewController.image = self.photo
     }
     
     func pressLongHomework(sender: UIGestureRecognizer) {
