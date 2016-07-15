@@ -25,6 +25,7 @@
 		B1E632DCBC4FE8CE9E7602CD /* Pods_HomeworkManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */; };
 		B21A9FCF1D27AB4100B2CBF7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21A9FCE1D27AB4100B2CBF7 /* Model.swift */; };
 		B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2805F3F1D2CA02900016645 /* RealmModelManager.swift */; };
+		B2E91B3F1D38B234008E66BF /* default.realm in Resources */ = {isa = PBXBuildFile; fileRef = B2E91B3E1D38B234008E66BF /* default.realm */; };
 		C7F2AA645F66BBEB2F9BBC2D /* Pods_HomeworkManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */; };
 		D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */; };
 		E589F84E1D27A4DA00EC0BE8 /* Input.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E589F84D1D27A4DA00EC0BE8 /* Input.storyboard */; };
@@ -80,6 +81,7 @@
 		A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManagerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B21A9FCE1D27AB4100B2CBF7 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B2805F3F1D2CA02900016645 /* RealmModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModelManager.swift; sourceTree = "<group>"; };
+		B2E91B3E1D38B234008E66BF /* default.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = default.realm; sourceTree = "<group>"; };
 		BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		E4BF25799A1331E9CE2A5CE7 /* Pods-HomeworkManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerUITests/Pods-HomeworkManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 		6F264F551D274CCA006509D0 /* HomeworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				B2E91B3E1D38B234008E66BF /* default.realm */,
 				6F264F561D274CCA006509D0 /* AppDelegate.swift */,
 				6F264F581D274CCA006509D0 /* ViewController.swift */,
 				E5E8B1E41D276D8400E33644 /* Subject.swift */,
@@ -321,6 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2E91B3F1D38B234008E66BF /* default.realm in Resources */,
 				6F264F611D274CCA006509D0 /* LaunchScreen.storyboard in Resources */,
 				6F264F5E1D274CCA006509D0 /* Assets.xcassets in Resources */,
 				6F264F5C1D274CCA006509D0 /* Main.storyboard in Resources */,
