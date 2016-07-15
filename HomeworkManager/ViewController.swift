@@ -96,7 +96,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let imageViewController = ImageViewController()
             imageViewController.setPhoto(photo)
             self.navigationController?.pushViewController(imageViewController, animated: true)
-            presentViewController(imageViewController, animated: true, completion: nil)
         }
     }
     
