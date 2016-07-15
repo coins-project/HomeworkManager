@@ -2,12 +2,13 @@ import UIKit
 import RealmSwift
 
 class Homework: Model {
-    var subjects: List<Subject> = List<Subject>()
+    
     dynamic var createdAt: NSDate = NSDate()
     dynamic var closeAt: NSDate = NSDate()
     dynamic var finished: Bool = false
-    let photos: List<Photo> = List<Photo>()
     dynamic var reference: String = ""
+    dynamic var photo: Photo?
+    dynamic var subject: Subject?
     
     enum Reference: String {
         case paper = "プリント"
