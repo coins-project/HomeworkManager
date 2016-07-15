@@ -5,11 +5,10 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
 
     private let realm = RealmModelManager.sharedManager
     private var reference = "プリント"
-    private var closeAt = TimezoneConverter.convertToJST(NSDate())
+    private var closeAt = NSDate()
     private var subjects: Results<Subject>?
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
-    
 
     override func viewDidLoad() {
         let homeworks = realm.findAllObjects(Homework.self)
@@ -21,7 +20,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         for (i, subject) in subjects!.enumerate(){
             subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
         }
-        
+        closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
         subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
  
     }
