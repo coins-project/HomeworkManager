@@ -4,27 +4,35 @@ import RealmSwift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var addButton: UIButton!
     private let realm = RealmModelManager.sharedManager
+    private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var homeworks: [Homework] = []
     private var closeDates: [NSDate] = []
-    private var section = 0
+    @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidLoad() {
+        
+    }
     
     override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
             if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
-                homeworks.append(homework)
+                if homeworkDictionary[homework.closeAt] == nil {
+                    homeworkDictionary[homework.closeAt] = [homework]
+                }else {
+                    homeworkDictionary[homework.closeAt]?.append(homework)
+                }
+                print("Dictonary = \(homeworkDictionary)")
             }
         }
-        self.section = 0
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        for homework in homeworks {
-            if closeDates.indexOf(homework.closeAt) == nil {
-                closeDates.append(homework.closeAt)
-            }
-        }
-        return closeDates.count
+        return homeworkDictionary.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,13 +40,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        self.section = indexPath.section
         let cell = (tableView.dequeueReusableCellWithIdentifier("cell")! as! ListTableViewCell) ?? ListTableViewCell()
+        //cell.homeworkCollectionView.reloadData()
         return cell
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(closeDates[section])
+        return String(Array(homeworkDictionary.keys)[section])
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -46,16 +54,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.section = (self.section + 1) % (closeDates.count)
-        return (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section])).count
+        let tableViewCell = (collectionView.superview?.superview as! ListTableViewCell)
+        let tableView = (collectionView.superview?.superview?.superview?.superview) as! UITableView
+        let section = tableView.indexPathForCell(tableViewCell)?.section
+        let key = Array(homeworkDictionary.keys)[section!]
+        let homework = homeworkDictionary[key]!
+        print("numberOfItems in \(section) : \(homework.count)")
+        return homework.count
+//        return homeworkDictionary[key]![section].count
+//        print("self.section = \(self.section)")
+//        print("closeDates = \(closeDates)")
+//        self.section = (self.section + 1) % (closeDates.count)
+//        print("numberOfItems \((homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section])).count)")
+  //      return (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section])).count
+//        return 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let tableViewCell = (collectionView.superview?.superview as! ListTableViewCell)
+        let tableView = (collectionView.superview?.superview?.superview?.superview) as! UITableView
+        let section = tableView.indexPathForCell(tableViewCell)?.section
+        let key = Array(homeworkDictionary.keys)[section!]
+        let homework = homeworkDictionary[key]![indexPath.row]
+        print(key)
+        print(homework)
         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
-        let homeworksOfToday = (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section]))
-        cell.subjectNameLabel.text = (homeworksOfToday[indexPath.row] as! Homework).subject!.name
-        cell.referenceLabel.text = (homeworksOfToday[indexPath.row] as! Homework).reference
-        cell.createdAt = (homeworksOfToday[indexPath.row] as! Homework).createdAt
+        cell.subjectNameLabel.text = homework.subject!.name
+        cell.referenceLabel.text = homework.reference
+        cell.createdAt = homework.createdAt
+        cell.closeAt = key
         return cell
     }
     

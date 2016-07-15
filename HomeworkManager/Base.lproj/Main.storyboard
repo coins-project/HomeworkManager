@@ -330,6 +330,7 @@
                     <navigationItem key="navigationItem" id="kDp-hx-50U"/>
                     <connections>
                         <outlet property="addButton" destination="VcS-Bi-RAf" id="iRT-tc-HGF"/>
+                        <outlet property="tableView" destination="iOb-pJ-jcF" id="JNw-8F-xi8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
