@@ -8,13 +8,16 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     private var subjectColor = ""
     private var reference = "プリント"
     private var closeAt = NSDate()
-        
+    
+    @IBOutlet weak var deadlineDatePicker: UIDatePicker!
+    
     
     override func viewDidLoad() {
         let homeworks = realm.findAllObjects(Homework.self)
         print(TimezoneConverter.convertToJST(NSDate()))
         print(homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))
-        
+        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
+
     }
     
     
@@ -79,18 +82,16 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
          let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("cell1", forIndexPath: indexPath) as! TodayHomeworkCollectionViewCell) ?? TodayHomeworkCollectionViewCell()
         let homeworks = realm.findAllObjects(Homework.self)
-        cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subjects[0].name
+        cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.name
         return cell
     }
     
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        var subjects: List<Subject> = List<Subject>()
         var subject = Subject()
         var homework = Homework()
         subject.name = subjectName
         subject.hexColor = subjectColor
-        subjects.append(subject)
-        homework.subjects = subjects
+        homework.subject = subject
         homework.reference = reference
         homework.closeAt = closeAt
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))
