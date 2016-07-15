@@ -79,17 +79,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         print(key)
         print(homework)
         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
+        cell.homework = homework
         cell.subjectNameLabel.text = homework.subject!.name
         cell.referenceLabel.text = homework.reference
         cell.createdAt = homework.createdAt
         cell.closeAt = key
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
+        let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
+        cell.addGestureRecognizer(tapGesture)
+        cell.addGestureRecognizer(longGesture)
+        
+        cell.alpha = homework.finished ? 0.5 : 1.0
+        
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let createdAt = (collectionView.cellForItemAtIndexPath(indexPath) as! ListCollectionViewCell).createdAt
-        if realm.findAllObjects(Photo).count != 0 {
-            let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createdAt))
+    func tapHomework(sender: UIGestureRecognizer) {
+        let homework = (sender.view as! ListCollectionViewCell).homework
+        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
+            let appearImage = UIImage(contentsOfFile: photo.url)
+            let imageView = UIImageView(image: appearImage)
+            self.view.addSubview(imageView)
+        }
+    }
+    
+    func pressLongHomework(sender: UIGestureRecognizer) {
+        if sender.state == .Ended {
+            let homework = (sender.view as! ListCollectionViewCell).homework
+            try! realm.realm.write { homework.finished = !homework.finished }
+            tableView.reloadData()
         }
     }
     

@@ -4,7 +4,7 @@ class RealmModelManager {
     
     static let sharedManager = RealmModelManager()
     
-    private let realm: Realm
+    let realm: Realm
     
     private init() {
         try! self.realm = Realm()
@@ -22,8 +22,9 @@ class RealmModelManager {
         return self.realm.objectForPrimaryKey(type, key: id)
     }
     
-    internal func findBy<T: Model>(type: T.Type, filter: NSPredicate) -> T {
-        return self.realm.objects(type).filter(filter)[0]
+    internal func findBy<T: Model>(type: T.Type, filter: NSPredicate) -> T? {
+        let objects = self.realm.objects(type).filter(filter)
+        return objects.last
     }
     
     internal func create<T: Model>(type: T.Type, value: AnyObject) {
