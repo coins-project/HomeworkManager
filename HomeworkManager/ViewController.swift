@@ -78,13 +78,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.referenceLabel.text = homework.reference
         cell.createdAt = homework.createdAt
         cell.closeAt = key
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
         let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
         cell.addGestureRecognizer(tapGesture)
         cell.addGestureRecognizer(longGesture)
-        
+        var subjectColor = UIColor.hexStr(cell.homework.subject!.hexColor, alpha: 1)
+        cell.backgroundColor = subjectColor
         cell.alpha = homework.finished ? 0.5 : 1.0
+        
         
         return cell
     }
