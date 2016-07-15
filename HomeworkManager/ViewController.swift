@@ -93,9 +93,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tapHomework(sender: UIGestureRecognizer) {
         let homework = (sender.view as! ListCollectionViewCell).homework
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
-            let appearImage = UIImage(contentsOfFile: photo.url)
-            let imageView = UIImageView(image: appearImage)
-            self.view.addSubview(imageView)
+            let imageViewController = ImageViewController()
+            imageViewController.setPhoto(photo)
+            self.presentViewController(imageViewController, animated: true, completion: nil)
         }
     }
     
