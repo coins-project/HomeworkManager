@@ -21,17 +21,18 @@
                         <sections>
                             <tableViewSection headerTitle="入力済みの今日の課題" id="0CP-G5-TYC">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="11" rowHeight="107" id="cJ8-4E-Yeb">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="11" rowHeight="107" id="cJ8-4E-Yeb">
                                         <rect key="frame" x="0.0" y="49.5" width="600" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJ8-4E-Yeb" id="Sda-gF-9VV">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="106.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="35" minimumInteritemSpacing="35" id="ps6-u6-cAA">
-                                                        <size key="itemSize" width="105" height="105"/>
+                                                        <size key="itemSize" width="102" height="105"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -41,10 +42,10 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="102" height="105"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教科名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-Fh-Rnl">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教科名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-Fh-Rnl">
                                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="51" id="9bs-as-VOl">
@@ -75,6 +76,8 @@
                                                             </view>
                                                             <color key="backgroundColor" red="0.84313732389999996" green="0.89019614459999996" blue="0.95294123890000004" alpha="1" colorSpace="deviceRGB"/>
                                                             <constraints>
+                                                                <constraint firstItem="1cf-Fh-Rnl" firstAttribute="centerX" secondItem="GGk-6C-wNx" secondAttribute="centerX" id="IqV-OU-lK1"/>
+                                                                <constraint firstItem="1cf-Fh-Rnl" firstAttribute="centerY" secondItem="GGk-6C-wNx" secondAttribute="centerY" id="JUv-Vj-XaF"/>
                                                                 <constraint firstItem="1cf-Fh-Rnl" firstAttribute="centerX" secondItem="GGk-6C-wNx" secondAttribute="centerX" id="ZyU-Yz-trr">
                                                                     <variation key="widthClass=regular" constant="0.0"/>
                                                                 </constraint>
@@ -87,6 +90,8 @@
                                                                     <exclude reference="1cf-Fh-Rnl"/>
                                                                 </mask>
                                                                 <mask key="constraints">
+                                                                    <exclude reference="IqV-OU-lK1"/>
+                                                                    <exclude reference="JUv-Vj-XaF"/>
                                                                     <exclude reference="ZyU-Yz-trr"/>
                                                                     <exclude reference="kgu-hf-K8H"/>
                                                                 </mask>
@@ -96,8 +101,10 @@
                                                                     <include reference="1cf-Fh-Rnl"/>
                                                                 </mask>
                                                                 <mask key="constraints">
-                                                                    <include reference="ZyU-Yz-trr"/>
-                                                                    <include reference="kgu-hf-K8H"/>
+                                                                    <include reference="IqV-OU-lK1"/>
+                                                                    <include reference="JUv-Vj-XaF"/>
+                                                                    <exclude reference="ZyU-Yz-trr"/>
+                                                                    <exclude reference="kgu-hf-K8H"/>
                                                                 </mask>
                                                             </variation>
                                                             <connections>
@@ -140,12 +147,15 @@
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="追加する課題の教科" id="on7-OG-F42">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="93" id="EV4-uA-4Jf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="93" id="EV4-uA-4Jf">
                                         <rect key="frame" x="0.0" y="206.5" width="600" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EV4-uA-4Jf" id="CgG-cn-qep">
@@ -200,7 +210,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="追加する課題の種類と締め切り" id="6UP-5j-tOH">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="219" id="aW4-Cr-cgW">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="aW4-Cr-cgW">
                                         <rect key="frame" x="0.0" y="349.5" width="600" height="219"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aW4-Cr-cgW" id="pfZ-33-2jk">
@@ -356,7 +366,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle=" " id="O75-pV-Yau" userLabel="　">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="97" id="78b-aM-Ufr">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="97" id="78b-aM-Ufr">
                                         <rect key="frame" x="0.0" y="618.5" width="600" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="78b-aM-Ufr" id="g1p-Ol-bWA">
@@ -438,6 +448,9 @@
                             <outlet property="delegate" destination="MxV-5y-NY7" id="hay-p5-t1h"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="deadlineDatePicker" destination="p4M-pI-qtz" id="0XD-7p-h5h"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1R-Yv-m61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
