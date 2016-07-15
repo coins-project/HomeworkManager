@@ -23,7 +23,8 @@ class RealmModelManager {
     }
     
     internal func findBy<T: Model>(type: T.Type, filter: NSPredicate) -> T {
-        return self.realm.objects(type).filter(filter)[0]
+        let objects = self.realm.objects(type).filter(filter)
+        return objects[objects.count - 1]
     }
     
     internal func create<T: Model>(type: T.Type, value: AnyObject) {

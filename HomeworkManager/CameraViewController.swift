@@ -31,10 +31,12 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                     let fileManager = NSFileManager.defaultManager()
                     let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                    let imagePath = "\(dir)/image/"
+                    print("dir = \(dir)")
+                    let imagePath = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("images")
+                    print("imagePath = \(imagePath.path!)")
                     
                     do {
-                        try fileManager.createDirectoryAtPath(imagePath, withIntermediateDirectories: true, attributes: nil)
+                        try fileManager.createDirectoryAtPath(imagePath.path!, withIntermediateDirectories: true, attributes: nil)
                     } catch let error as NSError {
                         NSLog("Unable to create directory \(error.debugDescription)")
                     }
@@ -42,12 +44,16 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     CameraViewController.imageName = "\(TimezoneConverter.convertToJST(NSDate()).description).png"
                     
                     photoRealm.createdAt = TimezoneConverter.convertToJST(NSDate())
-                    photoRealm.url = imagePath + CameraViewController.imageName
+                    photoRealm.url = imagePath.URLByAppendingPathComponent(CameraViewController.imageName).path!
+                    print("photo realm = \(photoRealm.url)")
                     realm.create(Photo.self, value: photoRealm)
 
                     if(photoData.writeToFile(photoRealm.url, atomically: true)){
-                    print(realm.findAllObjects(Photo.self))
-                    }//写真の保存
+                        print("realm url = \(photoRealm.url)")
+//                        print(realm.findAllObjects(Photo.self))
+                    } else {
+                        print("error writing file: \(photoRealm.url)")
+                    }
                 }
             }
         }

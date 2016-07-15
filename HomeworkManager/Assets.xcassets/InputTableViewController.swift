@@ -79,7 +79,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
          let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("cell1", forIndexPath: indexPath) as! TodayHomeworkCollectionViewCell) ?? TodayHomeworkCollectionViewCell()
         let homeworks = realm.findAllObjects(Homework.self)
-        cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subjects[0].name
+        cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.name
         return cell
     }
     
@@ -90,7 +90,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         subject.name = subjectName
         subject.hexColor = subjectColor
         subjects.append(subject)
-        homework.subjects = subjects
+        homework.subject = subject
         homework.reference = reference
         homework.closeAt = closeAt
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))

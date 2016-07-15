@@ -62,7 +62,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let createdAt = (collectionView.cellForItemAtIndexPath(indexPath) as! ListCollectionViewCell).createdAt
         if realm.findAllObjects(Photo).count != 0 {
-            let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createdAt))
+                let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createdAt))
+            let appearImage = UIImage(contentsOfFile: photo.url)
+            let imageView = UIImageView(image: appearImage)
+            imageView.layer.position = CGPoint(x: self.view.bounds.width - self.view.bounds.width/4, y: 200.0)
+            self.view.addSubview(imageView)//画像の大きさが大きい
+//            let myLeftButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: imageView.removeFromSuperview() )
         }
     }
     
