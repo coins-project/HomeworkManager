@@ -20,13 +20,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if info[UIImagePickerControllerOriginalImage] != nil {
-            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-        }
-        
-        if info[UIImagePickerControllerOriginalImage] != nil {
+        if let _ = info[UIImagePickerControllerOriginalImage] {
             if let image: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                if let photoData = UIImagePNGRepresentation(image) {
+                let size = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
+                UIGraphicsBeginImageContext(size)
+                image.drawInRect(CGRectMake(0, 0, size.width, size.height))
+                let resizeImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                if let photoData = UIImagePNGRepresentation(resizeImage) {
                     let photoRealm = Photo()
                     
                     let fileManager = NSFileManager.defaultManager()
