@@ -45,7 +45,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     photoRealm.url = imagePath.URLByAppendingPathComponent(CameraViewController.imageName).path!
                     
                     if(photoData.writeToFile(photoRealm.url, atomically: true)){
-                        realm.create(Photo.self, value: photoRealm) 
+                        realm.create(Photo.self, value: photoRealm)
                         print("realm url = \(photoRealm.url)")
                     } else {
                         print("error writing file: \(photoRealm.url)")
