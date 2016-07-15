@@ -31,10 +31,10 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     
                     let fileManager = NSFileManager.defaultManager()
                     let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
-                    let imagePath = "\(dir)/image/"
+                    let imagePath = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("images")
                     
                     do {
-                        try fileManager.createDirectoryAtPath(imagePath, withIntermediateDirectories: true, attributes: nil)
+                        try fileManager.createDirectoryAtPath(imagePath.path!, withIntermediateDirectories: true, attributes: nil)
                     } catch let error as NSError {
                         NSLog("Unable to create directory \(error.debugDescription)")
                     }
@@ -42,13 +42,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
                     CameraViewController.imageName = "\(TimezoneConverter.convertToJST(NSDate()).description).png"
                     
                     photoRealm.createdAt = TimezoneConverter.convertToJST(NSDate())
-                    photoRealm.url = imagePath + CameraViewController.imageName
-                    realm.create(Photo.self, value: photoRealm)
-
+                    photoRealm.url = imagePath.URLByAppendingPathComponent(CameraViewController.imageName).path!
+                    
                     if(photoData.writeToFile(photoRealm.url, atomically: true)){
-                    print(realm.findAllObjects(Photo.self))
-                    }//写真の保存
-                }
+                        realm.create(Photo.self, value: photoRealm)
+                        print("realm url = \(photoRealm.url)")
+                    } else {
+                        print("error writing file: \(photoRealm.url)")
+                    }                }
             }
         }
         picker.dismissViewControllerAnimated(true, completion: nil)
