@@ -7,17 +7,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private var homeworks: [Homework] = []
     private var closeDates: [NSDate] = []
     private var section = 0
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
+        homeworks = []
+        closeDates = []
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
             if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
                 homeworks.append(homework)
+                print(homework)
             }
         }
         self.section = 0
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         for homework in homeworks {
             if closeDates.indexOf(homework.closeAt) == nil {
@@ -34,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         self.section = indexPath.section
         let cell = (tableView.dequeueReusableCellWithIdentifier("cell")! as! ListTableViewCell) ?? ListTableViewCell()
+        cell.homeworkCollectionView.reloadData()
         return cell
     }
     
@@ -46,16 +54,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("self.section = \(self.section)")
+        print("closeDates = \(closeDates)")
         self.section = (self.section + 1) % (closeDates.count)
+        print("numberOfItems \((homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section])).count)")
         return (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section])).count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        print("homeworks = \(homeworks)")
+        print("dates = \(closeDates)")
         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
         let homeworksOfToday = (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section]))
         cell.subjectNameLabel.text = (homeworksOfToday[indexPath.row] as! Homework).subject!.name
         cell.referenceLabel.text = (homeworksOfToday[indexPath.row] as! Homework).reference
         cell.createdAt = (homeworksOfToday[indexPath.row] as! Homework).createdAt
+        print((homeworksOfToday[indexPath.row] as! Homework).subject?.hexColor)
         return cell
     }
     
