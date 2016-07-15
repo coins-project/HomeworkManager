@@ -5,28 +5,33 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
 
     private let realm = RealmModelManager.sharedManager
     private var reference = "プリント"
-    private var closeAt = NSDate()
+    private var closeAt = TimezoneConverter.convertToJST(NSDate())
     private var subjects: Results<Subject>?
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
     
-    
-    
+
     override func viewDidLoad() {
         let homeworks = realm.findAllObjects(Homework.self)
         print(TimezoneConverter.convertToJST(NSDate()))
         print(homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))
         deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
         subjects = realm.findAllObjects(Subject)
-        for i in 0...subjects!.count-1{
-            subjectSegmentedControl.setTitle(subjects![i].name, forSegmentAtIndex: i)
+        
+        for (i, subject) in subjects!.enumerate(){
+            subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
         }
-        print(subjects)
+        
+        subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
+ 
     }
-    
+
     
     
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
+        var index = subjectSegmentedControl.selectedSegmentIndex
+        var selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
+        self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     
     @IBAction func referenceSegmentedControl(sender: UISegmentedControl) {
@@ -66,6 +71,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
          let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("cell1", forIndexPath: indexPath) as! TodayHomeworkCollectionViewCell) ?? TodayHomeworkCollectionViewCell()
         let homeworks = realm.findAllObjects(Homework.self)
         cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.name
+        cell.backgroundColor = UIColor.hexStr((homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.hexColor, alpha: 1)
         return cell
     }
     
