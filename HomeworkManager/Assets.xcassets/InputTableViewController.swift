@@ -4,12 +4,12 @@ import RealmSwift
 class InputTableViewController: UITableViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     private let realm = RealmModelManager.sharedManager
-    private var subjectName = "国語"
-    private var subjectColor = ""
     private var reference = "プリント"
     private var closeAt = NSDate()
-    
+    private var subjects: Results<Subject>?
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
+    @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
+    
     
     
     override func viewDidLoad() {
@@ -17,33 +17,16 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         print(TimezoneConverter.convertToJST(NSDate()))
         print(homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))
         deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
-
+        subjects = realm.findAllObjects(Subject)
+        for i in 0...subjects!.count-1{
+            subjectSegmentedControl.setTitle(subjects![i].name, forSegmentAtIndex: i)
+        }
+        print(subjects)
     }
     
     
     
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            subjectName = "国語"
-            subjectColor = ""
-        case 1:
-            subjectName = "数学"
-            subjectColor = ""
-        case 2:
-            subjectName = "理科"
-            subjectColor = ""
-        case 3:
-            subjectName = "社会"
-            subjectColor = ""
-        case 4:
-            subjectName = "英語"
-            subjectColor = ""
-        default:
-            subjectName = ""
-            subjectColor = ""
-        }
-        
     }
     
     @IBAction func referenceSegmentedControl(sender: UISegmentedControl) {
@@ -64,7 +47,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         dateFormatter.dateStyle = .ShortStyle
         dateFormatter.timeZone = NSTimeZone(abbreviation: "JST")
         let date = dateFormatter.dateFromString(dateFormatter.stringFromDate(sender.date))
-        closeAt = TimezoneConverter.convertToJST((NSDate()))
+        closeAt = TimezoneConverter.convertToJST(date!)
         }
     
     
@@ -87,10 +70,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     }
     
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        var subject = Subject()
+        var subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
         var homework = Homework()
-        subject.name = subjectName
-        subject.hexColor = subjectColor
         homework.subject = subject
         homework.reference = reference
         homework.closeAt = closeAt
