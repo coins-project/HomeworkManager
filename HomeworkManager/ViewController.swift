@@ -53,7 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
         let homeworksOfToday = (homeworks as NSArray).filteredArrayUsingPredicate(NSPredicate(format: "closeAt == %@", closeDates[self.section]))
-        cell.subjectNameLabel.text = (homeworksOfToday[indexPath.row] as! Homework).subjects[0].name
+        cell.subjectNameLabel.text = (homeworksOfToday[indexPath.row] as! Homework).subject!.name
         cell.referenceLabel.text = (homeworksOfToday[indexPath.row] as! Homework).reference
         cell.createdAt = (homeworksOfToday[indexPath.row] as! Homework).createdAt
         return cell
