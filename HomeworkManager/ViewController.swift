@@ -95,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
             let imageViewController = ImageViewController()
             imageViewController.setPhoto(photo)
-            self.presentViewController(imageViewController, animated: true, completion: nil)
+            self.navigationController?.pushViewController(imageViewController, animated: true)
         }
     }
     
