@@ -1,13 +1,15 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var keys = [NSDate]()
     private var photo = Photo()
+    
     override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
         homeworkDictionary = [:]
@@ -36,59 +38,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return homeworkDictionary[keys[section]]!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCellWithIdentifier("cell")! as! ListTableViewCell) ?? ListTableViewCell()
-        cell.homeworkCollectionView.reloadData()
+        let cell: CustomCell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomCell
+        let key = keys[indexPath.row]
+        let homework = homeworkDictionary[key]![indexPath.row]
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapHomework(_:)))
+//        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.pressLongHomework(_:)))
+//        cell.addGestureRecognizer(tapGesture)
+//        cell.addGestureRecognizer(longGesture)
+//        cell.alpha = homework.finished ? 0.5 : 1.0
+
+        cell.setCell(homework)
         return cell
     }
+    
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String((keys)[section])
-    }
-    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let tableViewCell = (collectionView.superview?.superview as! ListTableViewCell)
-        let tableView = (collectionView.superview?.superview?.superview?.superview) as! UITableView
-        let section = tableView.indexPathForCell(tableViewCell)?.section
-        let key = keys[section!]
-        let homework = homeworkDictionary[key]!
-        print("numberOfItems in \(section) : \(homework.count)")
-        return homework.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let tableViewCell = (collectionView.superview?.superview as! ListTableViewCell)
-        let tableView = (collectionView.superview?.superview?.superview?.superview) as! UITableView
-        let section = tableView.indexPathForCell(tableViewCell)?.section
-        let key = keys[section!]
-        print("key = \(key)")
-        print(homeworkDictionary[key])
-        let homework = homeworkDictionary[key]![indexPath.row]
-        print("key = \(key)")
-        print("homework = \(homework)")
-        let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
-        cell.homework = homework
-        cell.subjectNameLabel.text = homework.subject!.name
-        cell.referenceLabel.text = homework.reference
-        cell.createdAt = homework.createdAt
-        cell.closeAt = key
-        let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
-        let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
-        cell.addGestureRecognizer(tapGesture)
-        cell.addGestureRecognizer(longGesture)
-        var subjectColor = UIColor.hexStr(cell.homework.subject!.hexColor, alpha: 1)
-        cell.backgroundColor = subjectColor
-        cell.alpha = homework.finished ? 0.5 : 1.0
-        
-        
-        return cell
     }
     
     func tapHomework(sender: UIGestureRecognizer) {
