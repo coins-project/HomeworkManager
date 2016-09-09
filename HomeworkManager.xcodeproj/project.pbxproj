@@ -294,6 +294,7 @@
 				TargetAttributes = {
 					6F264F521D274CCA006509D0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 4T5SV6YHRV;
 					};
 					6F264F661D274CCA006509D0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -641,6 +642,7 @@
 			baseConfigurationReference = 3733F378FD71A892B6124BBD /* Pods-HomeworkManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/Realm",
@@ -649,7 +651,7 @@
 				INFOPLIST_FILE = HomeworkManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.ac.tsukuba.coins-p.HomeworkManager";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp-ac-tsukuba-cs-coins-p-HomeworkManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -660,6 +662,7 @@
 			baseConfigurationReference = 4114E5BC0384DE8B52C00B69 /* Pods-HomeworkManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/Realm",
@@ -668,7 +671,7 @@
 				INFOPLIST_FILE = HomeworkManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.ac.tsukuba.coins-p.HomeworkManager";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp-ac-tsukuba-cs-coins-p-HomeworkManager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
