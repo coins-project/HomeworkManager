@@ -128,12 +128,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
+        
         alertController.addAction(startCameraAction)
         alertController.addAction(editItemAction)
+
+        print(alertController)
+        print(alertController.popoverPresentationController)
         
         if alertController.popoverPresentationController != nil {
             alertController.popoverPresentationController!.sourceView = sender
             alertController.popoverPresentationController!.sourceRect = sender.bounds
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }else {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MxV-5y-NY7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MxV-5y-NY7">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -22,10 +22,10 @@
                             <tableViewSection headerTitle="入力済みの今日の課題" id="0CP-G5-TYC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="11" rowHeight="107" id="cJ8-4E-Yeb">
-                                        <rect key="frame" x="0.0" y="49.5" width="600" height="107"/>
+                                        <rect key="frame" x="0.0" y="50" width="600" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJ8-4E-Yeb" id="Sda-gF-9VV">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="106.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="106"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
@@ -42,7 +42,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                <rect key="frame" x="0.0" y="0.0" width="102" height="105"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教科名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-Fh-Rnl">
@@ -156,14 +156,14 @@
                             <tableViewSection headerTitle="追加する課題の教科" id="on7-OG-F42">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="93" id="EV4-uA-4Jf">
-                                        <rect key="frame" x="0.0" y="206.5" width="600" height="93"/>
+                                        <rect key="frame" x="0.0" y="208" width="600" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EV4-uA-4Jf" id="CgG-cn-qep">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="92.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
-                                                    <rect key="frame" x="-60" y="-14" width="121" height="29"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="77"/>
                                                     <segments>
                                                         <segment title="国語"/>
                                                         <segment title="数学"/>
@@ -178,14 +178,15 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="CQh-ys-9Y3" firstAttribute="leading" secondItem="CgG-cn-qep" secondAttribute="leadingMargin" id="8gX-GT-aQ2"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="CQh-ys-9Y3" secondAttribute="bottom" id="AFY-3T-YIx"/>
+                                                <constraint firstItem="CQh-ys-9Y3" firstAttribute="leading" secondItem="CgG-cn-qep" secondAttribute="leadingMargin" id="FoD-G5-6Su"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="CQh-ys-9Y3" secondAttribute="trailing" id="L6l-5O-4W3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="CQh-ys-9Y3" secondAttribute="trailing" id="Z3T-5S-CEK"/>
+                                                <constraint firstItem="CQh-ys-9Y3" firstAttribute="top" secondItem="CgG-cn-qep" secondAttribute="topMargin" id="Zdm-tF-qyl"/>
                                                 <constraint firstItem="CQh-ys-9Y3" firstAttribute="top" secondItem="CgG-cn-qep" secondAttribute="topMargin" id="bdh-EQ-XBo"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="CQh-ys-9Y3" secondAttribute="bottom" id="rgO-ww-zQj"/>
                                             </constraints>
                                             <variation key="default">
-                                                <mask key="subviews">
-                                                    <exclude reference="CQh-ys-9Y3"/>
-                                                </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="8gX-GT-aQ2"/>
                                                     <exclude reference="L6l-5O-4W3"/>
@@ -211,21 +212,55 @@
                             <tableViewSection headerTitle="追加する課題の種類と締め切り" id="6UP-5j-tOH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="aW4-Cr-cgW">
-                                        <rect key="frame" x="0.0" y="349.5" width="600" height="219"/>
+                                        <rect key="frame" x="0.0" y="352" width="600" height="219"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aW4-Cr-cgW" id="pfZ-33-2jk">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="218.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="218"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLb-Y8-QJE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <rect key="frame" x="8" y="8" width="292" height="202"/>
+                                                    <subviews>
+                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kgs-nO-jsj">
+                                                            <rect key="frame" x="8" y="8" width="276" height="187"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="60" id="84I-g1-Zis"/>
+                                                                <constraint firstAttribute="height" constant="50" id="pSG-Ji-Gqi"/>
+                                                            </constraints>
+                                                            <segments>
+                                                                <segment title="プリント"/>
+                                                                <segment title="教科書"/>
+                                                            </segments>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="84I-g1-Zis"/>
+                                                                    <exclude reference="pSG-Ji-Gqi"/>
+                                                                </mask>
+                                                            </variation>
+                                                            <variation key="widthClass=regular">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="84I-g1-Zis"/>
+                                                                    <exclude reference="pSG-Ji-Gqi"/>
+                                                                </mask>
+                                                            </variation>
+                                                            <connections>
+                                                                <action selector="referenceSegmentedControl:" destination="MxV-5y-NY7" eventType="valueChanged" id="vJz-pL-H63"/>
+                                                            </connections>
+                                                        </segmentedControl>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="kgs-nO-jsj" firstAttribute="top" secondItem="aLb-Y8-QJE" secondAttribute="topMargin" id="4Lp-EM-stg"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="kgs-nO-jsj" secondAttribute="bottom" id="6vl-Ec-1Za"/>
+                                                        <constraint firstItem="kgs-nO-jsj" firstAttribute="leading" secondItem="aLb-Y8-QJE" secondAttribute="leadingMargin" id="Jmv-ZY-qm8"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="kgs-nO-jsj" secondAttribute="trailing" id="uJo-Fa-kpK"/>
+                                                    </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WP0-S0-Eft">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <rect key="frame" x="300" y="8" width="292" height="202"/>
                                                     <subviews>
                                                         <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="fill" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4M-pI-qtz">
-                                                            <rect key="frame" x="-160" y="-108" width="320" height="216"/>
+                                                            <rect key="frame" x="8" y="8" width="276" height="186"/>
                                                             <date key="date" timeIntervalSinceReferenceDate="490796802.18232203">
                                                                 <!--2016-07-21 12:26:42 +0000-->
                                                             </date>
@@ -238,14 +273,15 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottomMargin" secondItem="p4M-pI-qtz" secondAttribute="bottom" id="9dj-Ar-Qlk"/>
+                                                        <constraint firstItem="p4M-pI-qtz" firstAttribute="top" secondItem="WP0-S0-Eft" secondAttribute="topMargin" id="HgH-Pr-YMg"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="p4M-pI-qtz" secondAttribute="trailing" id="K36-Mj-L2g"/>
                                                         <constraint firstItem="p4M-pI-qtz" firstAttribute="leading" secondItem="WP0-S0-Eft" secondAttribute="leadingMargin" id="Kp1-Vq-hdW"/>
                                                         <constraint firstItem="p4M-pI-qtz" firstAttribute="top" secondItem="WP0-S0-Eft" secondAttribute="topMargin" id="L3y-fc-pKy"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="p4M-pI-qtz" secondAttribute="bottom" id="Y4w-1Y-zF9"/>
+                                                        <constraint firstItem="p4M-pI-qtz" firstAttribute="leading" secondItem="WP0-S0-Eft" secondAttribute="leadingMargin" id="qph-K5-prL"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="p4M-pI-qtz" secondAttribute="trailing" id="rPw-fP-NK7"/>
                                                     </constraints>
                                                     <variation key="default">
-                                                        <mask key="subviews">
-                                                            <exclude reference="p4M-pI-qtz"/>
-                                                        </mask>
                                                         <mask key="constraints">
                                                             <exclude reference="9dj-Ar-Qlk"/>
                                                             <exclude reference="K36-Mj-L2g"/>
@@ -265,99 +301,58 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kgs-nO-jsj">
-                                                    <rect key="frame" x="-60" y="-14" width="121" height="29"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="84I-g1-Zis"/>
-                                                        <constraint firstAttribute="height" constant="50" id="pSG-Ji-Gqi"/>
-                                                    </constraints>
-                                                    <segments>
-                                                        <segment title="プリント"/>
-                                                        <segment title="教科書"/>
-                                                    </segments>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="84I-g1-Zis"/>
-                                                            <exclude reference="pSG-Ji-Gqi"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="widthClass=regular">
-                                                        <mask key="constraints">
-                                                            <exclude reference="84I-g1-Zis"/>
-                                                            <exclude reference="pSG-Ji-Gqi"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <connections>
-                                                        <action selector="referenceSegmentedControl:" destination="MxV-5y-NY7" eventType="valueChanged" id="vJz-pL-H63"/>
-                                                    </connections>
-                                                </segmentedControl>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="WP0-S0-Eft" firstAttribute="leading" secondItem="aLb-Y8-QJE" secondAttribute="trailing" id="8s6-oR-Gso"/>
+                                                <constraint firstItem="aLb-Y8-QJE" firstAttribute="leading" secondItem="pfZ-33-2jk" secondAttribute="leadingMargin" id="8u2-WE-l2U"/>
                                                 <constraint firstItem="WP0-S0-Eft" firstAttribute="leading" secondItem="aLb-Y8-QJE" secondAttribute="trailing" id="9R2-O2-ypO"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="kgs-nO-jsj" secondAttribute="bottom" id="9f3-cP-9eS"/>
+                                                <constraint firstItem="aLb-Y8-QJE" firstAttribute="bottom" secondItem="pfZ-33-2jk" secondAttribute="bottomMargin" id="BQK-XK-o8T"/>
+                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="width" secondItem="aLb-Y8-QJE" secondAttribute="width" id="Iat-sr-2Ep"/>
                                                 <constraint firstAttribute="bottom" secondItem="WP0-S0-Eft" secondAttribute="bottom" id="Lis-d9-lUQ"/>
-                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="leading" secondItem="kgs-nO-jsj" secondAttribute="trailing" id="MBe-mU-NO4"/>
+                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="bottom" secondItem="pfZ-33-2jk" secondAttribute="bottomMargin" id="MRa-c6-b7Q"/>
                                                 <constraint firstAttribute="bottom" secondItem="aLb-Y8-QJE" secondAttribute="bottom" id="Nf4-5B-xYk"/>
-                                                <constraint firstItem="kgs-nO-jsj" firstAttribute="leading" secondItem="pfZ-33-2jk" secondAttribute="leadingMargin" constant="119" id="PHZ-xe-aw6"/>
-                                                <constraint firstItem="kgs-nO-jsj" firstAttribute="top" secondItem="pfZ-33-2jk" secondAttribute="topMargin" constant="87" id="WRC-gW-Alq"/>
                                                 <constraint firstAttribute="trailing" secondItem="WP0-S0-Eft" secondAttribute="trailing" id="WTj-u5-CG7"/>
                                                 <constraint firstItem="aLb-Y8-QJE" firstAttribute="leading" secondItem="pfZ-33-2jk" secondAttribute="leading" id="ble-gA-UZf"/>
                                                 <constraint firstItem="WP0-S0-Eft" firstAttribute="leading" secondItem="aLb-Y8-QJE" secondAttribute="trailing" id="eNf-cY-7Lk"/>
-                                                <constraint firstItem="kgs-nO-jsj" firstAttribute="top" secondItem="pfZ-33-2jk" secondAttribute="topMargin" id="kd9-Fj-MnF"/>
+                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="top" secondItem="pfZ-33-2jk" secondAttribute="topMargin" id="euh-Jv-D2b"/>
+                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="trailing" secondItem="pfZ-33-2jk" secondAttribute="trailingMargin" id="ifG-Iq-5vT"/>
+                                                <constraint firstItem="aLb-Y8-QJE" firstAttribute="top" secondItem="pfZ-33-2jk" secondAttribute="topMargin" id="kVz-hD-3HG"/>
                                                 <constraint firstItem="WP0-S0-Eft" firstAttribute="top" secondItem="pfZ-33-2jk" secondAttribute="top" id="mOS-RF-DwA"/>
-                                                <constraint firstItem="kgs-nO-jsj" firstAttribute="leading" secondItem="pfZ-33-2jk" secondAttribute="leadingMargin" id="r3B-gS-wJd"/>
                                                 <constraint firstItem="WP0-S0-Eft" firstAttribute="width" secondItem="aLb-Y8-QJE" secondAttribute="width" id="s2D-h4-cDl"/>
                                                 <constraint firstItem="aLb-Y8-QJE" firstAttribute="top" secondItem="pfZ-33-2jk" secondAttribute="top" id="s7J-yf-FFf"/>
+                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="leading" secondItem="aLb-Y8-QJE" secondAttribute="trailing" id="sag-BE-UbO"/>
+                                                <constraint firstItem="WP0-S0-Eft" firstAttribute="leading" secondItem="aLb-Y8-QJE" secondAttribute="trailing" id="zRN-3l-PJY"/>
                                             </constraints>
                                             <variation key="default">
-                                                <mask key="subviews">
-                                                    <exclude reference="aLb-Y8-QJE"/>
-                                                    <exclude reference="WP0-S0-Eft"/>
-                                                    <exclude reference="kgs-nO-jsj"/>
-                                                </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="9f3-cP-9eS"/>
-                                                    <exclude reference="PHZ-xe-aw6"/>
-                                                    <exclude reference="WRC-gW-Alq"/>
-                                                    <exclude reference="kd9-Fj-MnF"/>
-                                                    <exclude reference="r3B-gS-wJd"/>
+                                                    <exclude reference="Nf4-5B-xYk"/>
+                                                    <exclude reference="ble-gA-UZf"/>
+                                                    <exclude reference="s7J-yf-FFf"/>
                                                     <exclude reference="8s6-oR-Gso"/>
                                                     <exclude reference="9R2-O2-ypO"/>
                                                     <exclude reference="Lis-d9-lUQ"/>
-                                                    <exclude reference="MBe-mU-NO4"/>
                                                     <exclude reference="WTj-u5-CG7"/>
                                                     <exclude reference="eNf-cY-7Lk"/>
                                                     <exclude reference="mOS-RF-DwA"/>
                                                     <exclude reference="s2D-h4-cDl"/>
-                                                    <exclude reference="Nf4-5B-xYk"/>
-                                                    <exclude reference="ble-gA-UZf"/>
-                                                    <exclude reference="s7J-yf-FFf"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=regular">
                                                 <mask key="subviews">
                                                     <include reference="aLb-Y8-QJE"/>
                                                     <include reference="WP0-S0-Eft"/>
-                                                    <include reference="kgs-nO-jsj"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="9f3-cP-9eS"/>
-                                                    <exclude reference="PHZ-xe-aw6"/>
-                                                    <exclude reference="WRC-gW-Alq"/>
-                                                    <include reference="kd9-Fj-MnF"/>
-                                                    <include reference="r3B-gS-wJd"/>
+                                                    <include reference="Nf4-5B-xYk"/>
+                                                    <include reference="ble-gA-UZf"/>
+                                                    <include reference="s7J-yf-FFf"/>
                                                     <exclude reference="8s6-oR-Gso"/>
                                                     <include reference="9R2-O2-ypO"/>
                                                     <include reference="Lis-d9-lUQ"/>
-                                                    <include reference="MBe-mU-NO4"/>
                                                     <include reference="WTj-u5-CG7"/>
                                                     <include reference="eNf-cY-7Lk"/>
                                                     <include reference="mOS-RF-DwA"/>
                                                     <include reference="s2D-h4-cDl"/>
-                                                    <include reference="Nf4-5B-xYk"/>
-                                                    <include reference="ble-gA-UZf"/>
-                                                    <include reference="s7J-yf-FFf"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -367,23 +362,14 @@
                             <tableViewSection headerTitle=" " id="O75-pV-Yau" userLabel="　">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="97" id="78b-aM-Ufr">
-                                        <rect key="frame" x="0.0" y="618.5" width="600" height="97"/>
+                                        <rect key="frame" x="0.0" y="622" width="600" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="78b-aM-Ufr" id="g1p-Ol-bWA">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="96.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-uy-ZMO">
-                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                                    <color key="backgroundColor" red="0.95197886228561401" green="0.80939644575119019" blue="0.90375465154647827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                    <state key="normal" title="取消"/>
-                                                    <connections>
-                                                        <action selector="cancelUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="MUn-bZ-CFm"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqm-dW-gtn">
-                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <rect key="frame" x="208" y="8" width="384" height="80"/>
                                                     <color key="backgroundColor" red="0.68221765756607056" green="0.93034571409225464" blue="0.92758327722549438" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                     <state key="normal" title="決定">
@@ -393,10 +379,28 @@
                                                         <action selector="saveUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="PjG-j3-eXZ"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-uy-ZMO">
+                                                    <rect key="frame" x="8" y="8" width="200" height="80"/>
+                                                    <color key="backgroundColor" red="0.95197886228561401" green="0.80939644575119019" blue="0.90375465154647827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="RCt-aS-xGg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <state key="normal" title="取消"/>
+                                                    <connections>
+                                                        <action selector="cancelUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="MUn-bZ-CFm"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="vqm-dW-gtn" secondAttribute="bottom" id="2NB-dw-ll5"/>
                                                 <constraint firstItem="vqm-dW-gtn" firstAttribute="top" secondItem="g1p-Ol-bWA" secondAttribute="topMargin" id="FU0-T2-Fmn"/>
+                                                <constraint firstItem="h4e-uy-ZMO" firstAttribute="bottom" secondItem="g1p-Ol-bWA" secondAttribute="bottomMargin" id="LTg-nb-ykO"/>
+                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="leading" secondItem="h4e-uy-ZMO" secondAttribute="trailing" id="V2R-jk-VsH"/>
+                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="bottom" secondItem="g1p-Ol-bWA" secondAttribute="bottomMargin" id="Vki-8e-RiJ"/>
+                                                <constraint firstItem="h4e-uy-ZMO" firstAttribute="leading" secondItem="g1p-Ol-bWA" secondAttribute="leadingMargin" id="azs-Dr-Ewb"/>
+                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="trailing" secondItem="g1p-Ol-bWA" secondAttribute="trailingMargin" id="b0D-y1-ocJ"/>
+                                                <constraint firstItem="h4e-uy-ZMO" firstAttribute="top" secondItem="g1p-Ol-bWA" secondAttribute="topMargin" id="cIM-eB-cwT"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="h4e-uy-ZMO" secondAttribute="bottom" id="evc-GG-onK"/>
                                                 <constraint firstItem="vqm-dW-gtn" firstAttribute="leading" secondItem="g1p-Ol-bWA" secondAttribute="leadingMargin" id="imN-yl-fPf">
                                                     <variation key="widthClass=regular" constant="200"/>
@@ -404,13 +408,10 @@
                                                 <constraint firstItem="h4e-uy-ZMO" firstAttribute="top" secondItem="g1p-Ol-bWA" secondAttribute="topMargin" id="jmF-Bf-8xf"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="vqm-dW-gtn" secondAttribute="trailing" id="n4p-fA-DX3"/>
                                                 <constraint firstItem="h4e-uy-ZMO" firstAttribute="leading" secondItem="g1p-Ol-bWA" secondAttribute="leadingMargin" id="nKR-He-t95"/>
+                                                <constraint firstItem="vqm-dW-gtn" firstAttribute="top" secondItem="g1p-Ol-bWA" secondAttribute="topMargin" id="nfg-sh-f3F"/>
                                                 <constraint firstItem="vqm-dW-gtn" firstAttribute="leading" secondItem="h4e-uy-ZMO" secondAttribute="trailing" id="nrH-nC-aVe"/>
                                             </constraints>
                                             <variation key="default">
-                                                <mask key="subviews">
-                                                    <exclude reference="h4e-uy-ZMO"/>
-                                                    <exclude reference="vqm-dW-gtn"/>
-                                                </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="evc-GG-onK"/>
                                                     <exclude reference="jmF-Bf-8xf"/>
@@ -424,8 +425,8 @@
                                             </variation>
                                             <variation key="widthClass=regular">
                                                 <mask key="subviews">
-                                                    <include reference="h4e-uy-ZMO"/>
                                                     <include reference="vqm-dW-gtn"/>
+                                                    <include reference="h4e-uy-ZMO"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <include reference="evc-GG-onK"/>
@@ -455,7 +456,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1R-Yv-m61" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1045.5" y="43"/>
+            <point key="canvasLocation" x="886" y="-109"/>
         </scene>
     </scenes>
 </document>
