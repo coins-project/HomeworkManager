@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tapHomework(sender: UIGestureRecognizer) {
-        let homework = (sender.view as! ListCollectionViewCell).homework
+        let homework = (sender.view as! CustomTableViewCell).homework
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
             self.photo = photo
             let imageViewController = ImageViewController()
@@ -80,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func pressLongHomework(sender: UIGestureRecognizer) {
         if sender.state == .Ended {
-            let homework = (sender.view as! ListCollectionViewCell).homework
+            let homework = (sender.view as! CustomTableViewCell).homework
             try! realm.realm.write { homework.finished = !homework.finished }
             tableView.reloadData()
         }
