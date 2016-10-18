@@ -43,13 +43,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomCell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomCell
-        let key = keys[indexPath.row]
-        let homework = homeworkDictionary[key]![indexPath.row]
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.tapHomework(_:)))
-//        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.pressLongHomework(_:)))
-//        cell.addGestureRecognizer(tapGesture)
-//        cell.addGestureRecognizer(longGesture)
-//        cell.alpha = homework.finished ? 0.5 : 1.0
+        
+        let homework = homeworkDictionary[keys[indexPath.row]]![indexPath.row]
+        
+        cell.close.text = DateFormatter.stringFromDate(homework.closeAt)
+        cell.reference.text = homework.reference
+        cell.subject.text = homework.subject?.name
+        cell.backgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
+        
+        
 
         cell.setCell(homework)
         return cell
@@ -59,6 +61,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String((keys)[section])
     }
+    
     
     func tapHomework(sender: UIGestureRecognizer) {
         let homework = (sender.view as! CustomTableViewCell).homework

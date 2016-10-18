@@ -13,6 +13,10 @@ class CustomTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         contentView.frame = bounds
         super.layoutSubviews()
+        
+        
     }
     
 }
+
+ 
