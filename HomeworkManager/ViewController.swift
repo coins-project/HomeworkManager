@@ -20,11 +20,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
-                print("time = \(homework.closeAt)")
-                print("")
             }
         }
-        
+        print("***********\(homeworkDictionary)")
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
     }
@@ -37,31 +35,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return homeworkDictionary.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return homeworkDictionary[keys[section]]!.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: CustomCell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomCell
-        
-        let homework = homeworkDictionary[keys[indexPath.row]]![indexPath.row]
-        
-        cell.close.text = DateFormatter.stringFromDate(homework.closeAt)
-        cell.reference.text = homework.reference
-        cell.subject.text = homework.subject?.name
-        cell.backgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
-        
-        
 
-        cell.setCell(homework)
-        return cell
-    }
-    
-    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String((keys)[section])
     }
     
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homeworkDictionary[keys[section]]!.count
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
+        cell.setCell(homework)
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
+        let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
+        cell.addGestureRecognizer(tapGesture)
+        cell.addGestureRecognizer(longGesture)
+    }
     
     func tapHomework(sender: UIGestureRecognizer) {
         let homework = (sender.view as! CustomTableViewCell).homework
@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.view.addSubview(imageView)
         }
     }
-    
+    //セクションをつける
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
         imageViewController.image = self.photo
