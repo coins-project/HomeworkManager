@@ -25,7 +25,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
-        print("***********\(homeworkDictionary)")
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
     }
@@ -78,7 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.view.addSubview(imageView)
         }
     }
-    //セクションをつける
+ 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
         imageViewController.image = self.photo
