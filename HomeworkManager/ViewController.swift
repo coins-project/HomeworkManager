@@ -126,7 +126,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
         let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.pickImageFromLibrary() })
+                handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
         let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
@@ -153,13 +153,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myCameraViewController.pickImageFromCamera()
     }
     
-    func pickImageFromLibrary() {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
-            let controller = UIImagePickerController()
-            controller.delegate = self
-            controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            self.presentViewController(controller, animated: true, completion: nil)
-        }
+    func startImagePicker() {
+        let myCameraViewController = CameraViewController()
+        myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
+        myCameraViewController.pickImageFromLibrary()
     }
 
     func editItem() {
@@ -169,7 +167,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func shouldAutorotate() -> Bool {
-        return false
+        return true
     }
     
     override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
