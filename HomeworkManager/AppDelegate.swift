@@ -11,6 +11,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         openDefaultRealm()
         return true
     }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Pad){
+            return UIInterfaceOrientationMask.All
+        }
+        else  /* iphone */{
+            return UIInterfaceOrientationMask.AllButUpsideDown
+        }
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

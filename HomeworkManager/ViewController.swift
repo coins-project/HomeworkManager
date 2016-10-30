@@ -1,7 +1,7 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     private let realm = RealmModelManager.sharedManager
@@ -125,11 +125,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
         let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.pickImageFromLibrary() })
         let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
-        
         alertController.addAction(startCameraAction)
+        alertController.addAction(pickImageFromLibraryAction)
         alertController.addAction(editItemAction)
 
         print(alertController)
@@ -150,10 +152,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
         myCameraViewController.pickImageFromCamera()
     }
+    
+    func pickImageFromLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary) {
+            let controller = UIImagePickerController()
+            controller.delegate = self
+            controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
 
     func editItem() {
         let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
         let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
         self.presentViewController(inputTableViewController, animated: true, completion: nil)
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.PortraitUpsideDown
+    }
+    
 }
