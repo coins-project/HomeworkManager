@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -84,7 +84,9 @@
                                 <color key="backgroundColor" red="1" green="0.26500580309999999" blue="0.13953423470000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="3MQ-nX-Aom"/>
+                                    <constraint firstAttribute="height" constant="100" id="EWd-tJ-uOp"/>
                                     <constraint firstAttribute="width" constant="100" id="XcE-ye-RPo"/>
+                                    <constraint firstAttribute="width" constant="100" id="bhJ-wd-0um"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                 <state key="normal" title="＋">
@@ -124,6 +126,8 @@
                             <constraint firstItem="68K-x5-aJv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="44" id="aFi-qu-OUp"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="VcS-Bi-RAf" secondAttribute="bottom" constant="20" id="i5a-mY-mIM"/>
                             <constraint firstAttribute="trailing" secondItem="VcS-Bi-RAf" secondAttribute="trailing" constant="20" id="iOF-f5-rpS"/>
+                            <constraint firstAttribute="trailing" secondItem="iOb-pJ-jcF" secondAttribute="trailing" id="pi6-V0-vWU"/>
+                            <constraint firstItem="iOb-pJ-jcF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wfG-p2-taz"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
