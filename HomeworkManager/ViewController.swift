@@ -17,6 +17,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
                 if homeworkDictionary[homework.closeAt] == nil {
                     homeworkDictionary[homework.closeAt] = [homework]
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
