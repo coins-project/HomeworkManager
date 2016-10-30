@@ -4,6 +4,7 @@ import RealmSwift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
 
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
@@ -54,14 +55,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
+        
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
-        cell.setCell(homework)
+        
+        cell.subject.text = homework.subject?.name
+        //cell.setCell(homework)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
         let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
         cell.addGestureRecognizer(tapGesture)
@@ -69,7 +73,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tapHomework(sender: UIGestureRecognizer) {
-        let homework = (sender.view as! CustomTableViewCell).homework
+        let homework = (sender.view as! TableViewCell).homework
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
             self.photo = photo
             let imageViewController = ImageViewController()
@@ -88,7 +92,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func pressLongHomework(sender: UIGestureRecognizer) {
         if sender.state == .Ended {
-            let homework = (sender.view as! CustomTableViewCell).homework
+            let homework = (sender.view as! TableViewCell).homework
             try! realm.realm.write { homework.finished = !homework.finished }
             tableView.reloadData()
         }

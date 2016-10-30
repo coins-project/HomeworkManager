@@ -1,20 +1,28 @@
+//
+//  TableViewCell.swift
+//  HomeworkManager
+//
+//  Created by 古川 和輝 on 2016/10/30.
+//  Copyright © 2016年 takayuki abe. All rights reserved.
+//
+
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class TableViewCell: UITableViewCell {
 
-    @IBOutlet weak var close: UILabel!
     @IBOutlet weak var subject: UILabel!
-    @IBOutlet weak var reference: UILabel!
- 
+    
     var homework = Homework()
     
-    override func layoutSubviews() {
-        contentView.frame = bounds
-        super.layoutSubviews()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
     }
     
     func setCell(homework :Homework) {
@@ -23,6 +31,5 @@ class CustomTableViewCell: UITableViewCell {
         self.subject.text = homework.subject?.name
         self.backgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
     }
-}
 
- 
+}
