@@ -10,6 +10,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private var keys = [NSDate]()
     private var photo = Photo()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+    
     override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
         homeworkDictionary = [:]
@@ -37,17 +44,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return homeworkDictionary.count
     }
     
-
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String((keys)[section])
     }
     
-    
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return homeworkDictionary[keys[section]]!.count
     }
-    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         

@@ -1,11 +1,3 @@
-//
-//  DateFormatter.swift
-//  HomeworkManager
-//
-//  Created by 古川 和輝 on 2016/09/09.
-//  Copyright © 2016年 takayuki abe. All rights reserved.
-//
-
 import Foundation
 
 class DateFormatter {
