@@ -28,6 +28,8 @@
 		C7F2AA645F66BBEB2F9BBC2D /* Pods_HomeworkManagerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A211366FD469AAF9C4F045D0 /* Pods_HomeworkManagerUITests.framework */; };
 		D411DC9F1D81BD0500BB0367 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D411DC9E1D81BD0500BB0367 /* DateFormatter.swift */; };
 		D478F5BA1DC60427004D9B9A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D478F5B91DC60427004D9B9A /* TableViewCell.swift */; };
+		D478F5BE1DC60E17004D9B9A /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BC1DC60E17004D9B9A /* checked.png */; };
+		D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BD1DC60E17004D9B9A /* unchecked.png */; };
 		D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */; };
 		E52C1C6E1D38D82A0051B509 /* HexColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52C1C6D1D38D82A0051B509 /* HexColorExtention.swift */; };
 		E589F84E1D27A4DA00EC0BE8 /* Input.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E589F84D1D27A4DA00EC0BE8 /* Input.storyboard */; };
@@ -86,6 +88,8 @@
 		BDA04172D020EBEA84E4F9F2 /* Pods_HomeworkManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeworkManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D411DC9E1D81BD0500BB0367 /* DateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		D478F5B91DC60427004D9B9A /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		D478F5BC1DC60E17004D9B9A /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
+		D478F5BD1DC60E17004D9B9A /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		E4BF25799A1331E9CE2A5CE7 /* Pods-HomeworkManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerUITests/Pods-HomeworkManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E52C1C6D1D38D82A0051B509 /* HexColorExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorExtention.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 		6F264F551D274CCA006509D0 /* HomeworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				D478F5BC1DC60E17004D9B9A /* checked.png */,
+				D478F5BD1DC60E17004D9B9A /* unchecked.png */,
 				B2E91B3E1D38B234008E66BF /* default.realm */,
 				6F264F561D274CCA006509D0 /* AppDelegate.swift */,
 				6F264F581D274CCA006509D0 /* ViewController.swift */,
@@ -336,8 +342,10 @@
 				B2E91B3F1D38B234008E66BF /* default.realm in Resources */,
 				6F264F611D274CCA006509D0 /* LaunchScreen.storyboard in Resources */,
 				6F264F5E1D274CCA006509D0 /* Assets.xcassets in Resources */,
+				D478F5BE1DC60E17004D9B9A /* checked.png in Resources */,
 				6F264F5C1D274CCA006509D0 /* Main.storyboard in Resources */,
 				E589F84E1D27A4DA00EC0BE8 /* Input.storyboard in Resources */,
+				D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

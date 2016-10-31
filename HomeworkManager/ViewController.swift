@@ -59,8 +59,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
         
-        cell.subject.text = homework.subject?.name
-        //cell.setCell(homework)
+        cell.setCell(homework)
+        
         return cell
     }
     
@@ -101,18 +101,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func disappearImageView(sender: UIGestureRecognizer) {
         sender.view!.removeFromSuperview()
     }
-    
+
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
         let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+                                              handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
         let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
-        
+                                           handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
         alertController.addAction(startCameraAction)
         alertController.addAction(editItemAction)
-
+        
         print(alertController)
         print(alertController.popoverPresentationController)
         
@@ -123,8 +122,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }else {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+
     }
- 
+   
     func startCamera() {
         let myCameraViewController = CameraViewController()
         myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
