@@ -54,14 +54,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
-        
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
-        
         cell.setCell(homework)
-        
         return cell
+    }
+    
+    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        default:
+            return
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -104,22 +114,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
-                                              handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
-                                           handler:{(action:UIAlertAction!) -> Void in self.editItem() })
+        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let editItemAction = UIAlertAction(title: "課題入力", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
         alertController.addAction(startCameraAction)
         alertController.addAction(editItemAction)
-        
-        print(alertController)
-        print(alertController.popoverPresentationController)
         
         if alertController.popoverPresentationController != nil {
             alertController.popoverPresentationController!.sourceView = sender
             alertController.popoverPresentationController!.sourceRect = sender.bounds
             self.presentViewController(alertController, animated: true, completion: nil)
-        }else {
+        } else {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
 

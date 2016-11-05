@@ -1,11 +1,3 @@
-//
-//  TableViewCell.swift
-//  HomeworkManager
-//
-//  Created by 古川 和輝 on 2016/10/30.
-//  Copyright © 2016年 takayuki abe. All rights reserved.
-//
-
 import UIKit
 
 class TableViewCell: UITableViewCell {
@@ -16,14 +8,6 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var reference: UILabel!
     
     var homework = Homework()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     func setCell(homework :Homework) {
         self.close.text = DateFormatter.stringFromDate(homework.closeAt)
@@ -38,7 +22,4 @@ class TableViewCell: UITableViewCell {
     internal func tapCheckButton(sender: UIButton){
         check.selected = !check.selected
     }
-    
-    
-
 }

@@ -32,17 +32,17 @@
                         <viewControllerLayoutGuide type="bottom" id="8Fu-FE-baa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="egm-9t-WaV">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fHw-tb-efR">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myCell" rowHeight="100" id="FQP-KV-Qhd" customClass="TableViewCell" customModule="HomeworkManager" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="92" width="768" height="100"/>
+                                        <rect key="frame" x="0.0" y="92" width="1024" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQP-KV-Qhd" id="vdd-PB-fo7">
-                                            <frame key="frameInset" width="768" height="99"/>
+                                            <frame key="frameInset" width="1024" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ls9-p7-hFs">
