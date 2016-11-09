@@ -1,13 +1,22 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var keys = [NSDate]()
     private var photo = Photo()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+    
     override func viewWillAppear(animated: Bool) {
         let today = TimezoneConverter.convertToJST(NSDate())
         homeworkDictionary = [:]
@@ -15,14 +24,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
                 if homeworkDictionary[homework.closeAt] == nil {
                     homeworkDictionary[homework.closeAt] = [homework]
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
-                print("time = \(homework.closeAt)")
-                print("")
             }
         }
-        
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
     }
@@ -35,64 +44,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return homeworkDictionary.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCellWithIdentifier("cell")! as! ListTableViewCell) ?? ListTableViewCell()
-        cell.homeworkCollectionView.reloadData()
-        return cell
-    }
-    
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return String((keys)[section])
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homeworkDictionary[keys[section]]!.count
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let tableViewCell = (collectionView.superview?.superview as! ListTableViewCell)
-        let tableView = (collectionView.superview?.superview?.superview?.superview) as! UITableView
-        let section = tableView.indexPathForCell(tableViewCell)?.section
-        let key = keys[section!]
-        let homework = homeworkDictionary[key]!
-        print("numberOfItems in \(section) : \(homework.count)")
-        return homework.count
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
+        cell.setCell(homework)
+        return cell
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let tableViewCell = (collectionView.superview?.superview as! ListTableViewCell)
-        let tableView = (collectionView.superview?.superview?.superview?.superview) as! UITableView
-        let section = tableView.indexPathForCell(tableViewCell)?.section
-        let key = keys[section!]
-        print("key = \(key)")
-        print(homeworkDictionary[key])
-        let homework = homeworkDictionary[key]![indexPath.row]
-        print("key = \(key)")
-        print("homework = \(homework)")
-        let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("item", forIndexPath: indexPath) as! ListCollectionViewCell) ?? ListCollectionViewCell()
-        cell.homework = homework
-        cell.subjectNameLabel.text = homework.subject!.name
-        cell.referenceLabel.text = homework.reference
-        cell.createdAt = homework.createdAt
-        cell.closeAt = key
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
         let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
         cell.addGestureRecognizer(tapGesture)
         cell.addGestureRecognizer(longGesture)
-        var subjectColor = UIColor.hexStr(cell.homework.subject!.hexColor, alpha: 1)
-        cell.backgroundColor = subjectColor
-        cell.alpha = homework.finished ? 0.5 : 1.0
-        
-        
-        return cell
     }
     
     func tapHomework(sender: UIGestureRecognizer) {
-        let homework = (sender.view as! ListCollectionViewCell).homework
+        let homework = (sender.view as! CustomTableViewCell).homework
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
             self.photo = photo
             let imageViewController = ImageViewController()
@@ -103,7 +80,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.view.addSubview(imageView)
         }
     }
-    
+ 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
         imageViewController.image = self.photo
@@ -111,7 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func pressLongHomework(sender: UIGestureRecognizer) {
         if sender.state == .Ended {
-            let homework = (sender.view as! ListCollectionViewCell).homework
+            let homework = (sender.view as! CustomTableViewCell).homework
             try! realm.realm.write { homework.finished = !homework.finished }
             tableView.reloadData()
         }
@@ -128,12 +105,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
                 handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
+        
         alertController.addAction(startCameraAction)
         alertController.addAction(editItemAction)
+
+        print(alertController)
+        print(alertController.popoverPresentationController)
         
         if alertController.popoverPresentationController != nil {
             alertController.popoverPresentationController!.sourceView = sender
             alertController.popoverPresentationController!.sourceRect = sender.bounds
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }else {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
