@@ -74,6 +74,17 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         return cell
     }
     
+    @IBAction func minusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+        deadlineDatePicker.date = NSDate(timeInterval: -24*60*60, sinceDate: deadlineDatePicker.date)
+    }
+    
+    @IBAction func plusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60, sinceDate: deadlineDatePicker.date)
+    }
+    
+    
+    
+    
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
         var subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
         var homework = Homework()
