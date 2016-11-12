@@ -4,6 +4,7 @@ import RealmSwift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
 
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
@@ -53,15 +54,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
         cell.setCell(homework)
         return cell
     }
     
+    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        default:
+            return
+        }
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CustomCell", forIndexPath: indexPath) as! CustomTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
         let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
         cell.addGestureRecognizer(tapGesture)
@@ -69,7 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tapHomework(sender: UIGestureRecognizer) {
-        let homework = (sender.view as! CustomTableViewCell).homework
+        let homework = (sender.view as! TableViewCell).homework
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
             self.photo = photo
             let imageViewController = ImageViewController()
@@ -88,7 +102,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func pressLongHomework(sender: UIGestureRecognizer) {
         if sender.state == .Ended {
-            let homework = (sender.view as! CustomTableViewCell).homework
+            let homework = (sender.view as! TableViewCell).homework
             try! realm.realm.write { homework.finished = !homework.finished }
             tableView.reloadData()
         }
@@ -97,30 +111,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func disappearImageView(sender: UIGestureRecognizer) {
         sender.view!.removeFromSuperview()
     }
-    
+
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
-        
+        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let editItemAction = UIAlertAction(title: "課題入力", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
         alertController.addAction(startCameraAction)
         alertController.addAction(editItemAction)
-
-        print(alertController)
-        print(alertController.popoverPresentationController)
         
         if alertController.popoverPresentationController != nil {
             alertController.popoverPresentationController!.sourceView = sender
             alertController.popoverPresentationController!.sourceRect = sender.bounds
             self.presentViewController(alertController, animated: true, completion: nil)
-        }else {
+        } else {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+
     }
- 
+   
     func startCamera() {
         let myCameraViewController = CameraViewController()
         myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
