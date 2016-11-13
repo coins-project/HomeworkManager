@@ -70,4 +70,12 @@ class RealmModelManager {
             print("Update model error: RealmModelManager#update<T: Model>(model: T, value: [String: AnyObject])")
         }
     }
+
+    internal func delete<T: Model>(model: T) {
+        do {
+            try realm.write { realm.delete(model) }
+        } catch {
+            print("Delete model error: RealmModelManager#delete<T: Model>(model: T)")
+	    }
+	}
 }
