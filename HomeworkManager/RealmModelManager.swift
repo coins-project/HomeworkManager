@@ -59,15 +59,6 @@ class RealmModelManager {
         }
     }
     
-    internal func delete<T: Model>(model: T) {
-        do {
-            try realm.write { realm.delete(model) }
-        } catch {
-            print("Delete model error: RealmModelManager#delete<T: Model>(model: T)")
-	    }
-	}
-     }
-	
     internal func update<T: Model>(model: T, value: [String: AnyObject]) {
         do {
             try realm.write {
@@ -76,7 +67,15 @@ class RealmModelManager {
                 }
             }
         } catch {
-            
+            print("Update model error: RealmModelManager#update<T: Model>(model: T, value: [String: AnyObject])")
         }
     }
+
+    internal func delete<T: Model>(model: T) {
+        do {
+            try realm.write { realm.delete(model) }
+        } catch {
+            print("Delete model error: RealmModelManager#delete<T: Model>(model: T)")
+	    }
+	}
 }
