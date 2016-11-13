@@ -19,6 +19,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewWillAppear(animated: Bool) {
+        loadDictionary()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
+    func loadDictionary() {
         let today = TimezoneConverter.convertToJST(NSDate())
         homeworkDictionary = [:]
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
@@ -35,10 +43,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.tableView.reloadData()
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -68,7 +72,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
+            realm.delete(cell.homework)
+            loadDictionary()
+            self.tableView.reloadData()
         default:
             return
         }
