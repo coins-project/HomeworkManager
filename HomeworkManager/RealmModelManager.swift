@@ -64,6 +64,19 @@ class RealmModelManager {
             try realm.write { realm.delete(model) }
         } catch {
             print("Delete model error: RealmModelManager#delete<T: Model>(model: T)")
+	    }
+	}
+     }
+	
+    internal func update<T: Model>(model: T, value: [String: AnyObject]) {
+        do {
+            try realm.write {
+                for(k, v) in value {
+                    model.setValue(v, forKey: k)
+                }
+            }
+        } catch {
+            
         }
     }
 }
