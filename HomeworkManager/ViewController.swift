@@ -76,8 +76,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
-        let tapGesture = UITapGestureRecognizer(target: self, action: "tapHomework:")
-        let longGesture = UILongPressGestureRecognizer(target: self, action: "pressLongHomework:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHomework(_:)))
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongHomework(_:)))
         cell.addGestureRecognizer(tapGesture)
         cell.addGestureRecognizer(longGesture)
     }
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let appearImage = UIImage(contentsOfFile: photo.url)
             let imageView = UIImageView(image: appearImage)
             imageView.userInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "disappearImageView:"))
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
             self.view.addSubview(imageView)
         }
     }
