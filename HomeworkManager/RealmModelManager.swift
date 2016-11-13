@@ -67,7 +67,7 @@ class RealmModelManager {
                 }
             }
         } catch {
-            
+            print("Update model error: RealmModelManager#update<T: Model>(model: T, value: [String: AnyObject])")
         }
     }
 }
