@@ -8,7 +8,7 @@ class RealmModelManager {
     
     private init() {
         let fileName = "default.realm"
-        let path = NSBundle.mainBundle().URLForResource("default", withExtension: "realm")!
+        let path = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil)!
         let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         let realmPath = NSURL(fileURLWithPath: documentDirectory).URLByAppendingPathComponent(fileName)!
         
