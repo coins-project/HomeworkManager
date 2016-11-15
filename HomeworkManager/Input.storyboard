@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MxV-5y-NY7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MxV-5y-NY7">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,9 +13,9 @@
         <!--Input Table View Controller-->
         <scene sceneID="q1m-wO-fU9">
             <objects>
-                <tableViewController restorationIdentifier="InputScreen" storyboardIdentifier="InputScreen" id="MxV-5y-NY7" customClass="InputTableViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="InputScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MxV-5y-NY7" customClass="InputTableViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ORj-sk-XBb">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -22,14 +25,14 @@
                             <tableViewSection headerTitle="入力済みの今日の課題" id="0CP-G5-TYC">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" indentationWidth="11" rowHeight="107" id="cJ8-4E-Yeb">
-                                        <rect key="frame" x="0.0" y="56" width="768" height="107"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="1024" height="107"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cJ8-4E-Yeb" id="Sda-gF-9VV">
-                                            <frame key="frameInset" width="768" height="106"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="106.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
-                                                    <frame key="frameInset" width="240" height="128"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rxs-Qb-lzu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="106.5"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="35" minimumInteritemSpacing="35" id="ps6-u6-cAA">
                                                         <size key="itemSize" width="102" height="105"/>
@@ -45,8 +48,8 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="102" height="105"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="教科名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-Fh-Rnl">
-                                                                        <frame key="frameInset" minX="-42" minY="-21" width="42" height="21"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教科名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cf-Fh-Rnl">
+                                                                        <rect key="frame" x="21" y="40" width="60" height="25"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="51" id="9bs-as-VOl">
                                                                                 <variation key="widthClass=regular" constant="60"/>
@@ -155,14 +158,14 @@
                             <tableViewSection headerTitle="追加する課題の教科" id="on7-OG-F42">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="93" id="EV4-uA-4Jf">
-                                        <rect key="frame" x="0.0" y="219" width="768" height="93"/>
+                                        <rect key="frame" x="0.0" y="218.5" width="1024" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EV4-uA-4Jf" id="CgG-cn-qep">
-                                            <frame key="frameInset" width="768" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
-                                                    <frame key="frameInset" minX="8" minY="8" width="584" height="77"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="77"/>
                                                     <segments>
                                                         <segment title="国語"/>
                                                         <segment title="数学"/>
@@ -211,17 +214,17 @@
                             <tableViewSection headerTitle="追加する課題の種類と締め切り" id="6UP-5j-tOH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="aW4-Cr-cgW">
-                                        <rect key="frame" x="0.0" y="368" width="768" height="219"/>
+                                        <rect key="frame" x="0.0" y="367.5" width="1024" height="219"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aW4-Cr-cgW" id="pfZ-33-2jk">
-                                            <frame key="frameInset" width="768" height="218"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="218.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLb-Y8-QJE">
-                                                    <frame key="frameInset" minX="8" minY="8" width="292" height="202"/>
+                                                    <rect key="frame" x="8" y="8" width="292" height="202"/>
                                                     <subviews>
                                                         <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kgs-nO-jsj">
-                                                            <frame key="frameInset" minX="8" minY="8" width="276" height="187"/>
+                                                            <rect key="frame" x="8" y="8" width="276" height="187"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="60" id="84I-g1-Zis"/>
                                                                 <constraint firstAttribute="height" constant="50" id="pSG-Ji-Gqi"/>
@@ -256,10 +259,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WP0-S0-Eft">
-                                                    <frame key="frameInset" minX="300" minY="8" width="292" height="202"/>
+                                                    <rect key="frame" x="300" y="8" width="292" height="202"/>
                                                     <subviews>
                                                         <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="fill" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4M-pI-qtz">
-                                                            <frame key="frameInset" minX="8" minY="8" width="276" height="186"/>
+                                                            <rect key="frame" x="8" y="8" width="276" height="186"/>
                                                             <date key="date" timeIntervalSinceReferenceDate="490796802.18232203">
                                                                 <!--2016-07-21 12:26:42 +0000-->
                                                             </date>
@@ -361,14 +364,14 @@
                             <tableViewSection headerTitle=" " id="O75-pV-Yau" userLabel="　">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="97" id="78b-aM-Ufr">
-                                        <rect key="frame" x="0.0" y="643" width="768" height="97"/>
+                                        <rect key="frame" x="0.0" y="642.5" width="1024" height="97"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="78b-aM-Ufr" id="g1p-Ol-bWA">
-                                            <frame key="frameInset" width="768" height="96"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="96.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vqm-dW-gtn">
-                                                    <frame key="frameInset" minX="208" minY="8" width="384" height="80"/>
+                                                    <rect key="frame" x="208" y="8" width="384" height="80"/>
                                                     <color key="backgroundColor" red="0.62877935171127319" green="0.91812551021575928" blue="0.90911495685577393" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="31"/>
                                                     <state key="normal" title="決定">
@@ -379,6 +382,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4e-uy-ZMO">
+                                                    <rect key="frame" x="8" y="8" width="200" height="80.5"/>
                                                     <color key="backgroundColor" red="0.93552166223526001" green="0.75873935222625732" blue="0.88017898797988892" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="RCt-aS-xGg"/>
@@ -449,6 +453,7 @@
                     </tableView>
                     <connections>
                         <outlet property="deadlineDatePicker" destination="p4M-pI-qtz" id="0XD-7p-h5h"/>
+                        <outlet property="referenceSegmentedControl" destination="kgs-nO-jsj" id="c5L-aS-Fmn"/>
                         <outlet property="subjectSegmentedControl" destination="CQh-ys-9Y3" id="VFa-ZC-LVw"/>
                     </connections>
                 </tableViewController>

@@ -1,32 +1,52 @@
 import UIKit
 import RealmSwift
 
-class InputTableViewController: UITableViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class InputTableViewController: UITableViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
+    var homework = Homework()
     private let realm = RealmModelManager.sharedManager
-    private var reference = "プリント"
+    private var reference: String?
     private var closeAt = NSDate()
     private var subjects: Results<Subject>?
+
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
-
+    @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
+    
     override func viewDidLoad() {
         let homeworks = realm.findAllObjects(Homework.self)
         print(TimezoneConverter.convertToJST(NSDate()))
         print(homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))
-        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
+        
         subjects = realm.findAllObjects(Subject)
+
+        if(homework.subject?.name != nil) {
+            deadlineDatePicker.date = homework.closeAt
+            for (i, subject) in subjects!.enumerate(){
+                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+                if (subject ==  homework.subject) {
+                    subjectSegmentedControl.selectedSegmentIndex = i
+                    subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![i].hexColor, alpha: 1)
+                }
+            }
+            if(homework.reference == "教科書") {
+              referenceSegmentedControl.selectedSegmentIndex = 1
+            }
+        }//保存の方法を変更
+        else {
+
+        reference = "プリント"
+        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
         
         for (i, subject) in subjects!.enumerate(){
             subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
         }
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
         subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
- 
     }
+    }
+    
 
-    
-    
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
         let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
@@ -54,9 +74,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         closeAt = TimezoneConverter.convertToJST(date!)
         }
     
-    
-    
-    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -78,7 +95,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
         let homework = Homework()
         homework.subject = subject
-        homework.reference = reference
+        homework.reference = reference!
         homework.closeAt = closeAt
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))
         
