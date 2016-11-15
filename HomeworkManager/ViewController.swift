@@ -27,10 +27,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func loadDictionary() {
-        let today = TimezoneConverter.convertToJST(NSDate())
         homeworkDictionary = [:]
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
-            if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
                 if homeworkDictionary[homework.closeAt] == nil {
                     homeworkDictionary[homework.closeAt] = [homework]
                     dispatch_async(dispatch_get_main_queue()) {
@@ -39,7 +37,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
-            }
         }
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
