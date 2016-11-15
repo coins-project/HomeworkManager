@@ -28,8 +28,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     
     
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
-        var index = subjectSegmentedControl.selectedSegmentIndex
-        var selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
+        let index = subjectSegmentedControl.selectedSegmentIndex
+        let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
         self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     
@@ -74,9 +74,20 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         return cell
     }
     
+    @IBAction func minusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+        deadlineDatePicker.date = NSDate(timeInterval: -24*60*60, sinceDate: deadlineDatePicker.date)
+    }
+    
+    @IBAction func plusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60, sinceDate: deadlineDatePicker.date)
+    }
+    
+    
+    
+    
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        var subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
-        var homework = Homework()
+        let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
+        let homework = Homework()
         homework.subject = subject
         homework.reference = reference
         homework.closeAt = closeAt
