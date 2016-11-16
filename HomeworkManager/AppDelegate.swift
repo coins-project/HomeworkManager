@@ -8,8 +8,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        openDefaultRealm()
         return true
+    }
+    
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.Pad){
+            return UIInterfaceOrientationMask.All
+        }
+        else  /* iphone */{
+            return UIInterfaceOrientationMask.AllButUpsideDown
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -33,20 +41,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    private func openDefaultRealm() {
-        let defaultPath = Realm.Configuration.defaultConfiguration.fileURL!.path!
-        let bundleRealmPath = NSBundle.mainBundle().pathForResource("default", ofType: "realm")
-        
-        if RealmModelManager.sharedManager.findAllObjects(Subject.self).count == 0 {
-            do {
-                try NSFileManager.defaultManager().removeItemAtPath(defaultPath)
-                try NSFileManager.defaultManager().copyItemAtPath(bundleRealmPath!, toPath: defaultPath)
-            } catch let error as NSError {
-                print("Cannot copy default realm object \(error)")
-            }
-        }
-    }
-
 }
 

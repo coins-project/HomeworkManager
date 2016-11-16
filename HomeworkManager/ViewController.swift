@@ -81,14 +81,50 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
         inputView.homework = cell.homework
         self.presentViewController(inputView, animated: true, completion: nil)
+        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHomework(_:)))
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongHomework(_:)))
+        cell.addGestureRecognizer(tapGesture)
+        cell.addGestureRecognizer(longGesture)
+    }
+    
+    func tapHomework(sender: UIGestureRecognizer) {
+        let homework = (sender.view as! TableViewCell).homework
+        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
+            self.photo = photo
+            let imageViewController = ImageViewController()
+            let appearImage = UIImage(contentsOfFile: photo.url)
+            let imageView = UIImageView(image: appearImage)
+            imageView.userInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
+            self.view.addSubview(imageView)
+        }
+    }
+ 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
+        imageViewController.image = self.photo
+    }
+    
+    func pressLongHomework(sender: UIGestureRecognizer) {
+        if sender.state == .Ended {
+            let homework = (sender.view as! TableViewCell).homework
+            try! realm.realm.write { homework.finished = !homework.finished }
+            tableView.reloadData()
+        }
     }
     
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-        let editItemAction = UIAlertAction(title: "課題入力", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.newItem() })
+        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
+        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
         alertController.addAction(startCameraAction)
+        alertController.addAction(pickImageFromLibraryAction)
         alertController.addAction(editItemAction)
         
         if alertController.popoverPresentationController != nil {
@@ -96,8 +132,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             alertController.popoverPresentationController!.sourceRect = sender.bounds
             self.presentViewController(alertController, animated: true, completion: nil)
         } else {
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.presentViewController(alertController, animated: true, completion: {
+                alertController.view.superview?.subviews[1].userInteractionEnabled = true
+                alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertView)))
+            })
         }
+    }
+    
+    func dismissAlertView() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func dismissAlertView() {
@@ -111,10 +154,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         myCameraViewController.pickImageFromCamera()
     }
     
-    func newItem() {
+    func startImagePicker() {
+        let myCameraViewController = CameraViewController()
+        myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
+        myCameraViewController.pickImageFromLibrary()
+    }
+
+    func editItem() {
         let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
         let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
         self.presentViewController(inputTableViewController, animated: true, completion: nil)
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.PortraitUpsideDown
     }
     
 }

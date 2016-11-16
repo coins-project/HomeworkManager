@@ -7,7 +7,20 @@ class RealmModelManager {
     let realm: Realm
     
     private init() {
-        try! self.realm = Realm()
+        let fileName = "default.realm"
+        let path = NSBundle.mainBundle().URLForResource(fileName, withExtension: nil)!
+        let documentDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        let realmPath = NSURL(fileURLWithPath: documentDirectory).URLByAppendingPathComponent(fileName)!
+        
+        let fileManager = NSFileManager()
+        if !fileManager.fileExistsAtPath(realmPath.path!) {
+            try! fileManager.copyItemAtURL(path, toURL: realmPath)
+        }
+        
+        var config = Realm.Configuration.defaultConfiguration
+        config.fileURL = realmPath
+        
+        try! self.realm = Realm(configuration: config)
     }
     
     internal func findAllObjects<T: Model>(type: T.Type) -> Results<T> {
@@ -58,4 +71,24 @@ class RealmModelManager {
             print("Update model error: RealmModelManager#update<T: Model>(model: T)")
         }
     }
+    
+    internal func update<T: Model>(model: T, value: [String: AnyObject]) {
+        do {
+            try realm.write {
+                for(k, v) in value {
+                    model.setValue(v, forKey: k)
+                }
+            }
+        } catch {
+            print("Update model error: RealmModelManager#update<T: Model>(model: T, value: [String: AnyObject])")
+        }
+    }
+
+    internal func delete<T: Model>(model: T) {
+        do {
+            try realm.write { realm.delete(model) }
+        } catch {
+            print("Delete model error: RealmModelManager#delete<T: Model>(model: T)")
+	    }
+	}
 }
