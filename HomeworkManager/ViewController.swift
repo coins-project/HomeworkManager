@@ -81,7 +81,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
         inputView.homework = cell.homework
         self.presentViewController(inputView, animated: true, completion: nil)
-        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHomework(_:)))
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongHomework(_:)))
         cell.addGestureRecognizer(tapGesture)
@@ -104,6 +103,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
         imageViewController.image = self.photo
+    }
+    
+    func disappearImageView(sender: UIGestureRecognizer) {
+        sender.view!.removeFromSuperview()
     }
     
     func pressLongHomework(sender: UIGestureRecognizer) {
@@ -137,10 +140,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertView)))
             })
         }
-    }
-    
-    func dismissAlertView() {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func dismissAlertView() {
