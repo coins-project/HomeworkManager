@@ -8,20 +8,23 @@ class InputTableViewController: UITableViewController, UICollectionViewDelegate,
     private var reference: String?
     private var closeAt = NSDate()
     private var subjects: Results<Subject>?
+    private var update = false
 
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
     @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
-        let homeworks = realm.findAllObjects(Homework.self)
-        print(TimezoneConverter.convertToJST(NSDate()))
-        print(homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))
-        
         subjects = realm.findAllObjects(Subject)
-
+        
+        print(homework)
+        
         if(homework.subject?.name != nil) {
+            update = true
+        }
+        if(update) {
             deadlineDatePicker.date = homework.closeAt
+            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             for (i, subject) in subjects!.enumerate(){
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
                 if (subject ==  homework.subject) {
@@ -30,20 +33,23 @@ class InputTableViewController: UITableViewController, UICollectionViewDelegate,
                 }
             }
             if(homework.reference == "教科書") {
-              referenceSegmentedControl.selectedSegmentIndex = 1
+                reference = "教科書"
+                referenceSegmentedControl.selectedSegmentIndex = 1
             }
-        }//保存の方法を変更
-        else {
-
-        reference = "プリント"
-        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
-        
-        for (i, subject) in subjects!.enumerate(){
-            subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+            else {
+                reference = "プリント"
+                referenceSegmentedControl.selectedSegmentIndex = 0
+            }
         }
-        closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
-        subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
-    }
+        else {
+            reference = "プリント"
+            deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
+            for (i, subject) in subjects!.enumerate(){
+                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+            }
+            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+            subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
+        }
     }
     
 
@@ -110,7 +116,12 @@ class InputTableViewController: UITableViewController, UICollectionViewDelegate,
         homework.closeAt = closeAt
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))
         
-        realm.create(Homework.self, value: homework)
+        if(update) {
+            realm.update(self.homework, value: ["subject": homework.subject as! AnyObject, "reference": homework.reference, "closeAt": homework.closeAt])
+        }
+        else {
+            realm.create(Homework.self, value: homework)
+        }
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.dismissViewControllerAnimated(true, completion: nil)
