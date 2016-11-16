@@ -118,10 +118,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-        let editItemAction = UIAlertAction(title: "課題入力", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.editItem() })
+        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
+        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
+                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
         
         alertController.addAction(startCameraAction)
+        alertController.addAction(pickImageFromLibraryAction)
         alertController.addAction(editItemAction)
         
         if alertController.popoverPresentationController != nil {
@@ -146,10 +151,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
         myCameraViewController.pickImageFromCamera()
     }
+    
+    func startImagePicker() {
+        let myCameraViewController = CameraViewController()
+        myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
+        self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
+        myCameraViewController.pickImageFromLibrary()
+    }
 
     func editItem() {
         let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
         let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
         self.presentViewController(inputTableViewController, animated: true, completion: nil)
     }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+    override func preferredInterfaceOrientationForPresentation() -> UIInterfaceOrientation {
+        return UIInterfaceOrientation.PortraitUpsideDown
+    }
+    
 }
