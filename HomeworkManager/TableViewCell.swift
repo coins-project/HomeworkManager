@@ -12,7 +12,7 @@ class TableViewCell: UITableViewCell {
     var realm = RealmModelManager.sharedManager
     
     func setCell(homework :Homework) {
-        self.close.text = DateFormatter.stringFromDate(homework.closeAt)
+        self.close.text = DateFormatter.stringFromDate(homework.createdAt)//change labelname
         self.reference.text = homework.reference
         self.subject.text = homework.subject?.name
         self.check.addTarget(self, action: #selector(TableViewCell.tapCheckButton(_:)), forControlEvents: .TouchUpInside)
@@ -31,7 +31,7 @@ class TableViewCell: UITableViewCell {
     
     func changeCheckButton(homework: Homework) {
         if(homework.finished) {
-            self.check.setImage(UIImage(named: "checked.png"), forState: UIControlState.Selected)
+            self.check.setImage(UIImage(named: "checked.png"), forState: UIControlState.Normal)
         } else {
             self.check.setImage(UIImage(named: "unchecked.png"), forState: UIControlState.Normal)
         }
