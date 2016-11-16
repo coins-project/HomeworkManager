@@ -4,6 +4,7 @@ import RealmSwift
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     
 
     private let realm = RealmModelManager.sharedManager
@@ -86,9 +87,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.addGestureRecognizer(longGesture)
     }
     
+    @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
+        let today = TimezoneConverter.convertToJST(NSDate())
+        displayPhoto(today)
+    }
+    
     func tapHomework(sender: UIGestureRecognizer) {
         let homework = (sender.view as! TableViewCell).homework
-        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
+        displayPhoto(homework.createdAt)
+    }
+    
+    func displayPhoto(date: NSDate) {
+        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
+            cameraButton.enabled = false
             self.photo = photo
             let imageViewController = ImageViewController()
             let appearImage = UIImage(contentsOfFile: photo.url)
@@ -114,6 +125,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func disappearImageView(sender: UIGestureRecognizer) {
         sender.view!.removeFromSuperview()
+        cameraButton.enabled = true
     }
 
     @IBAction func tapAddButton(sender: UIButton) {
