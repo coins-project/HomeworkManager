@@ -5,14 +5,16 @@ class TableViewCell: UITableViewCell {
 
     @IBOutlet weak var check: UIButton!
     @IBOutlet weak var subject: UILabel!
-    @IBOutlet weak var close: UILabel!
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var reference: UILabel!
     
     var homework = Homework()
     var realm = RealmModelManager.sharedManager
     
     func setCell(homework :Homework) {
-        self.close.text = DateFormatter.stringFromDate(homework.createdAt)//change labelname
+        var createDate = DateFormatter.stringFromDate(homework.createdAt)
+        createDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
+        self.date.text = createDate
         self.reference.text = homework.reference
         self.subject.text = homework.subject?.name
         self.check.addTarget(self, action: #selector(TableViewCell.tapCheckButton(_:)), forControlEvents: .TouchUpInside)
