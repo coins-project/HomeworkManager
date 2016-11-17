@@ -7,6 +7,7 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var subject: UILabel!
     @IBOutlet weak var toPhoto: UIButton!
     @IBOutlet weak var reference: UILabel!
+    @IBOutlet weak var createAt: UILabel!
     
     var homework = Homework()
     var realm = RealmModelManager.sharedManager
@@ -15,20 +16,13 @@ class TableViewCell: UITableViewCell {
         let createDate = DateFormatter.stringFromDate(homework.createdAt)
         let formattedCreateDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
         
-        let buttonBackgroundColor = UIColor(white: 1, alpha: 0.4)
-        let backgroundImage = self.createColorImage(buttonBackgroundColor)
-        self.toPhoto.setBackgroundImage(backgroundImage, forState: .Normal)
+        self.createAt.text = formattedCreateDate
         
-        self.toPhoto.setTitle(formattedCreateDate, forState: .Disabled)
         if (homework.photo != nil) {
-            self.toPhoto.setTitle(formattedCreateDate, forState: .Normal)
-            print(formattedCreateDate)
-            self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 1), forState: .Normal)
+            self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 0.6), forState: .Normal)
         }
         else {
-            self.toPhoto.setTitle(formattedCreateDate, forState: .Disabled)
-            print(formattedCreateDate)
-            self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 0.5), forState: .Disabled)
+            self.toPhoto.alpha = 0
             self.toPhoto.enabled = false
         }
         
@@ -42,18 +36,6 @@ class TableViewCell: UITableViewCell {
         self.homework = homework
         changeCheckButton(homework)
     }
-    
-    private func createColorImage(color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context!, color.CGColor)
-        CGContextFillRect(context!, rect)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
-
     
     func tapCheckButton(sender: UIButton){
         check.selected = !check.selected

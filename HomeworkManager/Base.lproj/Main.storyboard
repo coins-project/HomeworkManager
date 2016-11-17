@@ -46,7 +46,7 @@
                                         <rect key="frame" x="0.0" y="28" width="1024" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQP-KV-Qhd" id="vdd-PB-fo7">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ls9-p7-hFs">
@@ -84,19 +84,30 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="69" id="oUJ-TT-c0C"/>
                                                     </constraints>
-                                                    <state key="normal" title="closeAt"/>
                                                     <connections>
                                                         <action selector="tapToPhoto:" destination="FQP-KV-Qhd" eventType="touchUpInside" id="cWw-cW-3DB"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdg-T0-B27">
+                                                    <rect key="frame" x="178" y="32" width="133" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="133" id="Xh4-h1-4OC"/>
+                                                        <constraint firstAttribute="height" constant="36" id="qOl-nE-owL"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Qvc-n4-KJi" secondAttribute="trailing" constant="25" id="0WV-7f-sgn"/>
                                                 <constraint firstItem="ls9-p7-hFs" firstAttribute="centerY" secondItem="vdd-PB-fo7" secondAttribute="centerY" id="2Wa-2h-Rbh"/>
+                                                <constraint firstItem="bdg-T0-B27" firstAttribute="leading" secondItem="ls9-p7-hFs" secondAttribute="trailing" constant="96" id="2qV-Yh-IZS"/>
                                                 <constraint firstItem="Orr-gw-Eyt" firstAttribute="centerY" secondItem="vdd-PB-fo7" secondAttribute="centerY" id="3pm-eh-ZsW"/>
                                                 <constraint firstItem="ls9-p7-hFs" firstAttribute="leading" secondItem="vdd-PB-fo7" secondAttribute="leadingMargin" constant="24" id="CQk-mR-cu4"/>
                                                 <constraint firstItem="Lqa-nG-6B8" firstAttribute="centerY" secondItem="vdd-PB-fo7" secondAttribute="centerY" id="EX6-2I-Qid"/>
                                                 <constraint firstItem="Orr-gw-Eyt" firstAttribute="leading" secondItem="ls9-p7-hFs" secondAttribute="trailing" constant="20" id="gKN-RD-Q6v"/>
+                                                <constraint firstItem="bdg-T0-B27" firstAttribute="centerY" secondItem="vdd-PB-fo7" secondAttribute="centerY" id="hdH-2V-qoX"/>
                                                 <constraint firstItem="Qvc-n4-KJi" firstAttribute="centerY" secondItem="vdd-PB-fo7" secondAttribute="centerY" id="nX4-rI-w4D"/>
                                                 <constraint firstItem="Lqa-nG-6B8" firstAttribute="leading" secondItem="Orr-gw-Eyt" secondAttribute="trailing" constant="95" id="skP-rB-zpF"/>
                                                 <constraint firstItem="Qvc-n4-KJi" firstAttribute="leading" secondItem="Lqa-nG-6B8" secondAttribute="trailing" constant="135" id="v1B-ju-ZSB"/>
@@ -104,6 +115,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="check" destination="ls9-p7-hFs" id="3tN-92-Soc"/>
+                                            <outlet property="createAt" destination="bdg-T0-B27" id="Ivc-sY-L7L"/>
                                             <outlet property="reference" destination="Qvc-n4-KJi" id="2dR-2Y-3xa"/>
                                             <outlet property="subject" destination="Lqa-nG-6B8" id="JgA-t5-TuA"/>
                                             <outlet property="toPhoto" destination="Orr-gw-Eyt" id="uWb-JV-fwz"/>
