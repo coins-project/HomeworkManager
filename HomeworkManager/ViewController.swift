@@ -82,40 +82,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
         inputView.homework = cell.homework
         self.presentViewController(inputView, animated: true, completion: nil)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHomework(_:)))
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongHomework(_:)))
-        cell.addGestureRecognizer(tapGesture)
-        cell.addGestureRecognizer(longGesture)
-    }
-    
-    func tapHomework(sender: UIGestureRecognizer) {
-        let homework = (sender.view as! TableViewCell).homework
-        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", homework.createdAt)) {
-            self.photo = photo
-            let imageViewController = ImageViewController()
-            let appearImage = UIImage(contentsOfFile: photo.url)
-            let imageView = UIImageView(image: appearImage)
-            imageView.userInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
-            self.view.addSubview(imageView)
-        }
-    }
- 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
-        imageViewController.image = self.photo
-    }
-    
-    func pressLongHomework(sender: UIGestureRecognizer) {
-        if sender.state == .Ended {
-            let homework = (sender.view as! TableViewCell).homework
-            try! realm.realm.write { homework.finished = !homework.finished }
-            tableView.reloadData()
-        }
-    }
-    
-    func disappearImageView(sender: UIGestureRecognizer) {
-        sender.view!.removeFromSuperview()
     }
 
     @IBAction func tapAddButton(sender: UIButton) {
