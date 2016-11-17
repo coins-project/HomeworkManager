@@ -143,9 +143,16 @@
                             <constraint firstItem="8Fu-FE-baa" firstAttribute="top" secondItem="ejW-Dp-pCC" secondAttribute="bottom" constant="20" id="rWW-jW-jJW"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gKA-zc-JAB"/>
+                    <navigationItem key="navigationItem" id="gKA-zc-JAB">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="camera" id="7x3-Ff-g5x">
+                            <connections>
+                                <action selector="cameraButtonDidTap:" destination="DTn-FK-vu4" id="ryn-WE-F6T"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="ejW-Dp-pCC" id="NMQ-3c-pbt"/>
+                        <outlet property="cameraButton" destination="7x3-Ff-g5x" id="8PI-Ok-nxe"/>
                         <outlet property="tableView" destination="fHw-tb-efR" id="5Qo-vu-U0o"/>
                     </connections>
                 </viewController>
