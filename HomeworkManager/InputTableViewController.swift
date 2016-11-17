@@ -16,9 +16,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     
     override func viewDidLoad() {
         subjects = realm.findAllObjects(Subject)
-        
-        print(homework)
-        
         if(homework.subject?.name != nil) {
             update = true
         }

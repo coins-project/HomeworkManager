@@ -27,8 +27,6 @@ class TableViewCell: UITableViewCell {
         check.selected = !check.selected
         realm.update(homework, value: ["finished": check.selected])
         changeCheckButton(homework)
-        print(homework.subject?.name)
-        print(homework.finished)
     }
     
     func changeCheckButton(homework: Homework) {
