@@ -60,7 +60,7 @@ class TableViewCell: UITableViewCell {
             let imageView = UIImageView(image: appearImage)
             imageView.userInteractionEnabled = true
             imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
-            ViewController().view.addSubview(imageView)
+                ViewController().view.addSubview(imageView)
         }
     }
     
