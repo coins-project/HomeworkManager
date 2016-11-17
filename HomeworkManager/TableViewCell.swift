@@ -24,13 +24,14 @@ class TableViewCell: UITableViewCell {
             self.toPhoto.setTitle(formattedCreateDate, forState: .Normal)
             print(formattedCreateDate)
             self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 1), forState: .Normal)
-            self.toPhoto.enabled = false
         }
         else {
             self.toPhoto.setTitle(formattedCreateDate, forState: .Disabled)
             print(formattedCreateDate)
             self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 0.5), forState: .Disabled)
+            self.toPhoto.enabled = false
         }
+        
         
         let cellBackgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
         self.reference.text = homework.reference
