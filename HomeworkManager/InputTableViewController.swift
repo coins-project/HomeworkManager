@@ -32,13 +32,11 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             if(homework.reference == "教科書") {
                 reference = "教科書"
                 referenceSegmentedControl.selectedSegmentIndex = 1
-            }
-            else {
+            } else {
                 reference = "プリント"
                 referenceSegmentedControl.selectedSegmentIndex = 0
             }
-        }
-        else {
+        } else {
             reference = "プリント"
             deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
             for (i, subject) in subjects!.enumerate(){
@@ -49,8 +47,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         }
     }
 
-
-    
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
         let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
@@ -116,8 +112,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         
         if(update) {
             realm.update(self.homework, value: ["subject": homework.subject as! AnyObject, "reference": homework.reference, "closeAt": homework.closeAt])
-        }
-        else {
+        } else {
             realm.create(Homework.self, value: homework)
         }
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
