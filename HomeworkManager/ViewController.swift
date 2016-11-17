@@ -46,9 +46,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var closeDate = String((keys)[section])
-        closeDate = closeDate[closeDate.startIndex..<closeDate.endIndex.advancedBy(-14)]
-        return closeDate
+        let closeDate = String((keys)[section])
+        let formattedCloseDate = closeDate[closeDate.startIndex..<closeDate.endIndex.advancedBy(-14)]
+        return formattedCloseDate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

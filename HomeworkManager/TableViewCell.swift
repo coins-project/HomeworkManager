@@ -12,9 +12,9 @@ class TableViewCell: UITableViewCell {
     var realm = RealmModelManager.sharedManager
     
     func setCell(homework :Homework) {
-        var createDate = DateFormatter.stringFromDate(homework.createdAt)
-        createDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
-        self.date.text = createDate
+        let createDate = DateFormatter.stringFromDate(homework.createdAt)
+        let formattedCreateDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
+        self.date.text = formattedCreateDate
         self.reference.text = homework.reference
         self.subject.text = homework.subject?.name
         self.check.addTarget(self, action: #selector(TableViewCell.tapCheckButton(_:)), forControlEvents: .TouchUpInside)
