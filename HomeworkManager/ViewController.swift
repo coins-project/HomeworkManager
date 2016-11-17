@@ -48,7 +48,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String((keys)[section])
+        let closeDate = String((keys)[section])
+        let formattedCloseDate = closeDate[closeDate.startIndex..<closeDate.endIndex.advancedBy(-14)]
+        return formattedCloseDate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,52 +82,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHomework(_:)))
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongHomework(_:)))
-        cell.addGestureRecognizer(tapGesture)
-        cell.addGestureRecognizer(longGesture)
-    }
-    
-    @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
-        let today = TimezoneConverter.convertToJST(NSDate())
-        displayPhoto(today)
-    }
-    
-    func tapHomework(sender: UIGestureRecognizer) {
-        let homework = (sender.view as! TableViewCell).homework
-        displayPhoto(homework.createdAt)
-    }
-    
-    func displayPhoto(date: NSDate) {
-        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
-            cameraButton.enabled = false
-            self.photo = photo
-            let imageViewController = ImageViewController()
-            let appearImage = UIImage(contentsOfFile: photo.url)
-            let imageView = UIImageView(image: appearImage)
-            imageView.userInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
-            self.view.addSubview(imageView)
-        }
-    }
- 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
-        imageViewController.image = self.photo
-    }
-    
-    func pressLongHomework(sender: UIGestureRecognizer) {
-        if sender.state == .Ended {
-            let homework = (sender.view as! TableViewCell).homework
-            try! realm.realm.write { homework.finished = !homework.finished }
-            tableView.reloadData()
-        }
-    }
-    
-    func disappearImageView(sender: UIGestureRecognizer) {
-        sender.view!.removeFromSuperview()
-        cameraButton.enabled = true
+        let inputScreen: UIStoryboard = UIStoryboard(name: "Input", bundle: nil)
+        let inputView: InputTableViewController = inputScreen.instantiateInitialViewController() as! InputTableViewController
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
+        inputView.homework = cell.homework
+        self.presentViewController(inputView, animated: true, completion: nil)
     }
 
     @IBAction func tapAddButton(sender: UIButton) {
