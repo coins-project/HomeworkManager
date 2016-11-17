@@ -1,7 +1,7 @@
 import UIKit
 import RealmSwift
 
-class InputTableViewController: UITableViewController, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class InputTableViewController: UITableViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     var homework = Homework()
     private let realm = RealmModelManager.sharedManager
@@ -9,9 +9,9 @@ class InputTableViewController: UITableViewController, UICollectionViewDelegate,
     private var closeAt = NSDate()
     private var subjects: Results<Subject>?
     private var update = false
-
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
+    
     @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
@@ -51,8 +51,9 @@ class InputTableViewController: UITableViewController, UICollectionViewDelegate,
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
     }
-    
 
+
+    
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
         let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)

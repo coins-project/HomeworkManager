@@ -28,8 +28,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     homeworkDictionary[homework.closeAt] = [homework]
                     dispatch_async(dispatch_get_main_queue()) {
                         self.tableView.reloadData()
-                    }
-                } else {
+                   }
+                }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
             }
@@ -145,7 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func dismissAlertView() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+   
     func startCamera() {
         let myCameraViewController = CameraViewController()
         myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical
