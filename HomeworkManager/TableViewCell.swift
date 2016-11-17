@@ -17,6 +17,7 @@ class TableViewCell: UITableViewCell {
         self.check.setImage(UIImage(named: "checked.png"), forState: UIControlState.Selected)
         self.check.setImage(UIImage(named: "unchecked.png"), forState: UIControlState.Normal)
         self.backgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
+        self.homework = homework
     }
     
     internal func tapCheckButton(sender: UIButton){
