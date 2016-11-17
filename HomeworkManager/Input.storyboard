@@ -15,7 +15,7 @@
         <!--Input Table View Controller-->
         <scene sceneID="q1m-wO-fU9">
             <objects>
-               <tableViewController restorationIdentifier="InputScreen" storyboardIdentifier="InputScreen" id="MxV-5y-NY7" customClass="InputTableViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="InputScreen" storyboardIdentifier="InputScreen" id="MxV-5y-NY7" customClass="InputTableViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ORj-sk-XBb">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -11,7 +11,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     private var keys = [NSDate]()
     private var photo = Photo()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
          
@@ -28,7 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     homeworkDictionary[homework.closeAt] = [homework]
                     dispatch_async(dispatch_get_main_queue()) {
                         self.tableView.reloadData()
-                   }
+                    }
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
@@ -107,10 +106,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         imageViewController.image = self.photo
     }
     
-    func disappearImageView(sender: UIGestureRecognizer) {
-        sender.view!.removeFromSuperview()
-    }
-    
     func pressLongHomework(sender: UIGestureRecognizer) {
         if sender.state == .Ended {
             let homework = (sender.view as! TableViewCell).homework
@@ -119,6 +114,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func disappearImageView(sender: UIGestureRecognizer) {
+        sender.view!.removeFromSuperview()
+    }
+
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
         let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
