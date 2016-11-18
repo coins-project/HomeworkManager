@@ -9,7 +9,9 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     private var subjects: Results<Subject>?
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
-
+    @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var plusButton: UIButton!
+    
     override func viewDidLoad() {
         let homeworks = realm.findAllObjects(Homework.self)
         print(TimezoneConverter.convertToJST(NSDate()))
@@ -22,10 +24,15 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         }
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
         subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
- 
+        configurePlusMinusButton()
     }
 
-    
+    func configurePlusMinusButton() {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            minusButton.hidden = true
+            plusButton.hidden = true
+        }
+    }
     
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
