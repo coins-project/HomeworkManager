@@ -1,11 +1,10 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ToPhotoDelegate  {
     
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var tableView: UITableView!    
 
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
@@ -60,11 +59,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
         cell.setCell(homework)
+        cell.delegate = self
         return cell
     }
     
     func deliverCreateAt(createAt: NSDate) {
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createAt)) {
+            let imageViewController = ImageViewController()
             let appearImage = UIImage(contentsOfFile: photo.url)
             let imageView = UIImageView(image: appearImage)
             imageView.userInteractionEnabled = true

@@ -7,7 +7,6 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var subject: UILabel!
     @IBOutlet weak var toPhoto: UIButton!
     @IBOutlet weak var reference: UILabel!
-    @IBOutlet weak var createAt: UILabel!
     
     var homework = Homework()
     var realm = RealmModelManager.sharedManager
@@ -16,22 +15,15 @@ class TableViewCell: UITableViewCell {
     func setCell(homework :Homework) {
         let createDate = DateFormatter.stringFromDate(homework.createdAt)
         let formattedCreateDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
-        createAt.text = formattedCreateDate
-
         if (homework.photo != nil) {
-            self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 0.6), forState: .Normal)
             self.toPhoto.enabled = true
-        } else {
-            self.toPhoto.alpha =  0
-            self.toPhoto.enabled = false
         }
-        
         let cellBackgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
         self.reference.text = homework.reference
         self.subject.text = homework.subject?.name
         self.check.addTarget(self, action: #selector(TableViewCell.tapCheckButton(_:)), forControlEvents: .TouchUpInside)
         self.backgroundColor = cellBackgroundColor
-        
+        self.toPhoto.setTitle(formattedCreateDate, forState: .Normal)
         self.homework = homework
         changeCheckButton(homework)
     }
