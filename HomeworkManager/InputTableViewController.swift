@@ -3,24 +3,49 @@ import RealmSwift
 
 class InputTableViewController: UITableViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
+    var homework = Homework()
     private let realm = RealmModelManager.sharedManager
-    private var reference = "プリント"
+    private var reference: String?
     private var closeAt = NSDate()
     private var subjects: Results<Subject>?
+    private var update = false
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
+    
+    @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
     
     override func viewDidLoad() {
-        let homeworks = realm.findAllObjects(Homework.self)
-        print(TimezoneConverter.convertToJST(NSDate()))
-        print(homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))
-        deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
         subjects = realm.findAllObjects(Subject)
-        
-        for (i, subject) in subjects!.enumerate(){
-            subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+        if(homework.subject?.name != nil) {
+            update = true
+        }
+        if(update) {
+            deadlineDatePicker.date = homework.closeAt
+            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+            for (i, subject) in subjects!.enumerate(){
+                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+                if (subject ==  homework.subject) {
+                    subjectSegmentedControl.selectedSegmentIndex = i
+                    subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![i].hexColor, alpha: 1)
+                }
+            }
+            if(homework.reference == "教科書") {
+                reference = "教科書"
+                referenceSegmentedControl.selectedSegmentIndex = 1
+            } else {
+                reference = "プリント"
+                referenceSegmentedControl.selectedSegmentIndex = 0
+            }
+        } else {
+            reference = "プリント"
+            deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
+            for (i, subject) in subjects!.enumerate(){
+                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+            }
+            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+            subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
         subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
@@ -61,9 +86,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         closeAt = TimezoneConverter.convertToJST(date!)
         }
     
-    
-    
-    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -96,11 +118,15 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
         let homework = Homework()
         homework.subject = subject
-        homework.reference = reference
+        homework.reference = reference!
         homework.closeAt = closeAt
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))
         
-        realm.create(Homework.self, value: homework)
+        if(update) {
+            realm.update(self.homework, value: ["subject": homework.subject as! AnyObject, "reference": homework.reference, "closeAt": homework.closeAt])
+        } else {
+            realm.create(Homework.self, value: homework)
+        }
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.dismissViewControllerAnimated(true, completion: nil)

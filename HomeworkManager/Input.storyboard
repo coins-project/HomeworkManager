@@ -16,7 +16,7 @@
             <objects>
                 <tableViewController restorationIdentifier="InputScreen" storyboardIdentifier="InputScreen" id="MxV-5y-NY7" customClass="InputTableViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ORj-sk-XBb">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -391,6 +391,7 @@
                     </tableView>
                     <connections>
                         <outlet property="deadlineDatePicker" destination="p4M-pI-qtz" id="0XD-7p-h5h"/>
+                        <outlet property="referenceSegmentedControl" destination="kgs-nO-jsj" id="c5L-aS-Fmn"/>
                         <outlet property="minusButton" destination="NxI-Ud-Zfv" id="6Ta-ek-iO8"/>
                         <outlet property="plusButton" destination="iTh-D3-AVo" id="ewD-MP-jOT"/>
                         <outlet property="subjectSegmentedControl" destination="CQh-ys-9Y3" id="VFa-ZC-LVw"/>
