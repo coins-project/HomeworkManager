@@ -11,6 +11,7 @@ class TableViewCell: UITableViewCell {
     
     var homework = Homework()
     var realm = RealmModelManager.sharedManager
+    var delegate: ToPhotoDelegate?
     
     func setCell(homework :Homework) {
         let createDate = DateFormatter.stringFromDate(homework.createdAt)
@@ -50,22 +51,6 @@ class TableViewCell: UITableViewCell {
     }
     
     @IBAction func tapToPhoto(sender: UIButton) {
-        self.displayPhoto(homework.createdAt)
+        delegate?.deliverCreateAt(homework.createdAt)
     }
-    
-    func displayPhoto(date: NSDate) {
-        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
-            //self.photo = photo
-            let appearImage = UIImage(contentsOfFile: photo.url)
-            let imageView = UIImageView(image: appearImage)
-            imageView.userInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
-                ViewController().view.addSubview(imageView)
-        }
-    }
-    
-    func disappearImageView(sender: UIGestureRecognizer) {
-        sender.view!.removeFromSuperview()
-    }
-    
 }

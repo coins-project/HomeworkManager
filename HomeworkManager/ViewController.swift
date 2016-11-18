@@ -2,6 +2,7 @@ import UIKit
 import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+    
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
@@ -60,6 +61,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
         cell.setCell(homework)
         return cell
+    }
+    
+    func deliverCreateAt(createAt: NSDate) {
+        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createAt)) {
+            let appearImage = UIImage(contentsOfFile: photo.url)
+            let imageView = UIImageView(image: appearImage)
+            imageView.userInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
+            self.view.addSubview(imageView)
+        }
+    }
+    
+    func disappearImageView(sender: UIGestureRecognizer) {
+        sender.view!.removeFromSuperview()
     }
     
     func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
@@ -142,3 +157,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 }
+
+protocol ToPhotoDelegate {
+    func deliverCreateAt(createAt: NSDate)
+}
+
