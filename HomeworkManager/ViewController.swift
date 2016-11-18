@@ -97,11 +97,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         displayPhoto(today)
     }
     
-    @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
-        let today = TimezoneConverter.convertToJST(NSDate())
-        displayPhoto(today)
-    }
-    
     func tapHomework(sender: UIGestureRecognizer) {
         let homework = (sender.view as! TableViewCell).homework
         displayPhoto(homework.createdAt)
