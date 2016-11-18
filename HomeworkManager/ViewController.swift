@@ -2,9 +2,9 @@ import UIKit
 import RealmSwift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ToPhotoDelegate  {
-    
     @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
 
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
@@ -19,10 +19,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func viewWillAppear(animated: Bool) {
-        let today = TimezoneConverter.convertToJST(NSDate())
+        loadDictionary()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
+    func loadDictionary() {
         homeworkDictionary = [:]
         for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
-            if homework.closeAt.timeIntervalSinceDate(today) >= 0 {
                 if homeworkDictionary[homework.closeAt] == nil {
                     homeworkDictionary[homework.closeAt] = [homework]
                     dispatch_async(dispatch_get_main_queue()) {
@@ -31,14 +37,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
-            }
         }
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.tableView.reloadData()
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -74,19 +75,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func disappearImageView(sender: UIGestureRecognizer) {
-        sender.view!.removeFromSuperview()
-    }
-    
-    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-    {
+    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
+            realm.delete(cell.homework)
+            loadDictionary()
+            self.tableView.reloadData()
         default:
             return
         }
@@ -98,6 +97,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
         inputView.homework = cell.homework
         self.presentViewController(inputView, animated: true, completion: nil)
+    }
+    
+    @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
+        let today = TimezoneConverter.convertToJST(NSDate())
+        displayPhoto(today)
+    }
+    
+    func tapHomework(sender: UIGestureRecognizer) {
+        let homework = (sender.view as! TableViewCell).homework
+        displayPhoto(homework.createdAt)
+    }
+    
+    func displayPhoto(date: NSDate) {
+        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
+            cameraButton.enabled = false
+            self.photo = photo
+            let imageViewController = ImageViewController()
+            let appearImage = UIImage(contentsOfFile: photo.url)
+            let imageView = UIImageView(image: appearImage)
+            imageView.userInteractionEnabled = true
+            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
+            self.view.addSubview(imageView)
+        }
+    }
+ 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let imageViewController: ImageViewController = segue.destinationViewController as! ImageViewController
+        imageViewController.image = self.photo
+    }
+    
+    func pressLongHomework(sender: UIGestureRecognizer) {
+        if sender.state == .Ended {
+            let homework = (sender.view as! TableViewCell).homework
+            try! realm.realm.write { homework.finished = !homework.finished }
+            tableView.reloadData()
+        }
+    }
+    
+    func disappearImageView(sender: UIGestureRecognizer) {
+        sender.view!.removeFromSuperview()
+        cameraButton.enabled = true
     }
 
     @IBAction func tapAddButton(sender: UIButton) {
