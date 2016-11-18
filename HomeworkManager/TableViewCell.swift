@@ -15,9 +15,6 @@ class TableViewCell: UITableViewCell {
     func setCell(homework :Homework) {
         let createDate = DateFormatter.stringFromDate(homework.createdAt)
         let formattedCreateDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
-        if (homework.photo != nil) {
-            self.toPhoto.enabled = true
-        }
         let cellBackgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
         self.reference.text = homework.reference
         self.subject.text = homework.subject?.name
@@ -25,6 +22,7 @@ class TableViewCell: UITableViewCell {
         self.backgroundColor = cellBackgroundColor
         self.toPhoto.setTitle(formattedCreateDate, forState: .Normal)
         self.homework = homework
+        toPhoto.setTitleColor(UIColor.blackColor(), forState: .Normal)
         changeCheckButton(homework)
     }
     

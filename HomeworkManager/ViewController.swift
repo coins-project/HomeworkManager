@@ -65,14 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func deliverCreateAt(createAt: NSDate) {
-        if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", createAt)) {
-            let imageViewController = ImageViewController()
-            let appearImage = UIImage(contentsOfFile: photo.url)
-            let imageView = UIImageView(image: appearImage)
-            imageView.userInteractionEnabled = true
-            imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
-            self.view.addSubview(imageView)
-        }
+        displayPhoto(createAt)
     }
     
     func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -119,6 +112,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             imageView.userInteractionEnabled = true
             imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
             self.view.addSubview(imageView)
+            self.tableView.reloadData()
         }
     }
  
