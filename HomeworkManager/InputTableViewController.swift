@@ -13,6 +13,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
     
     @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var plusButton: UIButton!
     
     override func viewDidLoad() {
         subjects = realm.findAllObjects(Subject)
@@ -45,8 +47,18 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
+        closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+        subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
+        configurePlusMinusButton()
     }
 
+    func configurePlusMinusButton() {
+        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+            minusButton.hidden = true
+            plusButton.hidden = true
+        }
+    }
+    
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
         let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
