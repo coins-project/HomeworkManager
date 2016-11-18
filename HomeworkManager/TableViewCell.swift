@@ -19,8 +19,8 @@ class TableViewCell: UITableViewCell {
 
         if (homework.photo != nil) {
             self.toPhoto.setTitleColor(UIColor(white: 0, alpha: 0.6), forState: .Normal)
-        }
-        else {
+            self.toPhoto.enabled = true
+        } else {
             self.toPhoto.alpha =  0
             self.toPhoto.enabled = false
         }
