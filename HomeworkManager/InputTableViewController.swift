@@ -50,6 +50,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
         subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         configurePlusMinusButton()
+        subjectSegmentedControl(subjectSegmentedControl)
     }
 
     func configurePlusMinusButton() {
