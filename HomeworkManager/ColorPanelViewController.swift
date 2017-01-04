@@ -23,7 +23,16 @@ class ColorPanelViewController: UIViewController {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = colorPanel.dequeueReusableCellWithReuseIdentifier("color", forIndexPath: indexPath)
         cell.backgroundColor = colorFromPos(indexPath.section,  posS: indexPath.row)
+        print(colorFromPos(indexPath.section,  posS: indexPath.row))
         return cell
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return yCount
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return xCount
     }
 
     var blockSize: CGSize! = nil

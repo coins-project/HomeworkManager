@@ -5,7 +5,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-
+    
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var keys = [NSDate]()
@@ -106,7 +106,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
             cameraButton.enabled = false
             self.photo = photo
-            let imageViewController = ImageViewController()
             let appearImage = UIImage(contentsOfFile: photo.url)
             let imageView = UIImageView(image: appearImage)
             imageView.userInteractionEnabled = true
@@ -132,6 +131,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func disappearImageView(sender: UIGestureRecognizer) {
         sender.view!.removeFromSuperview()
         cameraButton.enabled = true
+    }
+    
+    //設定し直す
+    @IBAction func settingButton(sender: UIBarButtonItem) {
+        let colorPanelStoryboard = UIStoryboard(name: "ColorPanel", bundle: nil)
+        let colorPanelViewController = colorPanelStoryboard.instantiateViewControllerWithIdentifier("Color") as! ColorPanelViewController
+        self.presentViewController(colorPanelViewController, animated: true, completion: nil)
     }
 
     @IBAction func tapAddButton(sender: UIButton) {
@@ -178,6 +184,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func editItem() {
+
         let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
         let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
         self.presentViewController(inputTableViewController, animated: true, completion: nil)

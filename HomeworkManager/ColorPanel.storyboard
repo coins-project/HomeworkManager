@@ -6,13 +6,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Color Panel View Controller-->
         <scene sceneID="nTG-DP-bfo">
             <objects>
-                <viewController storyboardIdentifier="ColorPanel" id="TK6-tZ-yFA" customClass="ColorPanelViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Color" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TK6-tZ-yFA" customClass="ColorPanelViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CI0-Nf-ayi"/>
                         <viewControllerLayoutGuide type="bottom" id="m7F-LY-HSL"/>
@@ -50,9 +51,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0g-9d-u68">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0g-9d-u68">
                                 <rect key="frame" x="383" y="671" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5Tu-ae-PUy"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zks-Qb-XJR">
@@ -65,10 +68,12 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="puf-eq-A5U">
-                                <rect key="frame" x="270" y="339" width="498" height="306"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="color" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="puf-eq-A5U">
+                                <rect key="frame" x="270" y="339" width="484" height="306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="306" id="7hj-ie-5ga"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jg5-Ns-6AS">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -88,6 +93,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X0g-9d-u68" firstAttribute="top" secondItem="puf-eq-A5U" secondAttribute="bottom" constant="26" id="eGF-OC-IWj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="puf-eq-A5U" secondAttribute="trailing" constant="250" id="jKv-Ob-d6A"/>
+                            <constraint firstItem="m7F-LY-HSL" firstAttribute="top" secondItem="X0g-9d-u68" secondAttribute="bottom" constant="67" id="nHF-A7-8B6"/>
+                            <constraint firstItem="puf-eq-A5U" firstAttribute="leading" secondItem="O9y-0G-NdE" secondAttribute="leadingMargin" constant="250" id="w9X-gn-hqP"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="colorPanel" destination="puf-eq-A5U" id="haQ-pn-kHH"/>
