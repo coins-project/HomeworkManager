@@ -1,29 +1,36 @@
 import UIKit
 
-class ColorPanelViewController: UIViewController {
+class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var colorPanel: UICollectionView!
     
-    var xCount = 15
-    var yCount = 20
+    let xCount = 15
+    let yCount = 20
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let layout = UICollectionViewFlowLayout()
-        let cellWidth = floor(colorPanel.bounds.width / 15)
-        layout.itemSize = CGSizeMake(cellWidth, cellWidth)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+    
+//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+//    {
+//        //コレクションビューから識別子「TestCell」のセルを取得する。
+//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("color", forIndexPath: indexPath) as UICollectionViewCell
+//        
+//        //セルの背景色をランダムに設定する。
+//        cell.backgroundColor = UIColor(red: CGFloat(drand48()),
+//                                       green: CGFloat(drand48()),
+//                                       blue: CGFloat(drand48()),
+//                                       alpha: 1.0)
+//        return cell
+//    }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = colorPanel.dequeueReusableCellWithReuseIdentifier("color", forIndexPath: indexPath)
         cell.backgroundColor = colorFromPos(indexPath.section,  posS: indexPath.row)
-        print(colorFromPos(indexPath.section,  posS: indexPath.row))
         return cell
     }
     
@@ -52,5 +59,4 @@ class ColorPanelViewController: UIViewController {
             return UIColor(hue: CGFloat(posH-1)/CGFloat(yCount-1), saturation: CGFloat(posS+1)/CGFloat(xCount), brightness: 1.0, alpha: 1.0)
         }
     }
-    
 }
