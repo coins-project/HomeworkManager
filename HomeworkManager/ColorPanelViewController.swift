@@ -1,35 +1,47 @@
-//
-//  ColorPanelViewController.swift
-//  HomeworkManager
-//
-//  Created by 古川 和輝 on 2016/12/21.
-//  Copyright © 2016年 takayuki abe. All rights reserved.
-//
-
 import UIKit
 
 class ColorPanelViewController: UIViewController {
 
+    @IBOutlet weak var colorPanel: UICollectionView!
+    
+    var xCount = 15
+    var yCount = 20
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let layout = UICollectionViewFlowLayout()
+        let cellWidth = floor(colorPanel.bounds.width / 15)
+        layout.itemSize = CGSizeMake(cellWidth, cellWidth)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = colorPanel.dequeueReusableCellWithReuseIdentifier("color", forIndexPath: indexPath)
+        cell.backgroundColor = colorFromPos(indexPath.section,  posS: indexPath.row)
+        return cell
     }
-    */
 
+    var blockSize: CGSize! = nil
+    var size: CGSize! = nil
+
+    func colorFromPoint(point: CGPoint) -> UIColor {
+        let posX = Int(point.x * CGFloat(xCount) / size.width)
+        let posY = Int(point.y * CGFloat(yCount) / size.height)
+        return colorFromPos(posY, posS: posX)
+    }
+    
+    func colorFromPos(posH: Int, posS: Int) -> UIColor {
+        // 白〜黒のやつ
+        if posH == 0 {
+            return UIColor(hue: 0, saturation: 0, brightness: 1.0-CGFloat(posS)/CGFloat(xCount-1), alpha: 1.0)
+        } else {
+            return UIColor(hue: CGFloat(posH-1)/CGFloat(yCount-1), saturation: CGFloat(posS+1)/CGFloat(xCount), brightness: 1.0, alpha: 1.0)
+        }
+    }
+    
 }
