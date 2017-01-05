@@ -9,24 +9,28 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let layout = UICollectionViewFlowLayout()
+        let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
+        layout.itemSize = CGSizeMake(width, width)
+        layout.minimumInteritemSpacing = 0.0
+        layout.minimumLineSpacing = 0.0
+        colorPanel.collectionViewLayout = layout
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let layout = UICollectionViewFlowLayout()
+        let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
+        layout.itemSize = CGSizeMake(width, width)
+        layout.minimumInteritemSpacing = 0.0
+        layout.minimumLineSpacing = 0.0
+        colorPanel.collectionViewLayout = layout
+        colorPanel.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-//    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
-//    {
-//        //コレクションビューから識別子「TestCell」のセルを取得する。
-//        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("color", forIndexPath: indexPath) as UICollectionViewCell
-//        
-//        //セルの背景色をランダムに設定する。
-//        cell.backgroundColor = UIColor(red: CGFloat(drand48()),
-//                                       green: CGFloat(drand48()),
-//                                       blue: CGFloat(drand48()),
-//                                       alpha: 1.0)
-//        return cell
-//    }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = colorPanel.dequeueReusableCellWithReuseIdentifier("color", forIndexPath: indexPath)
@@ -41,6 +45,8 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return xCount
     }
+    
+    
 
     var blockSize: CGSize! = nil
     var size: CGSize! = nil
@@ -52,7 +58,6 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     }
     
     func colorFromPos(posH: Int, posS: Int) -> UIColor {
-        // 白〜黒のやつ
         if posH == 0 {
             return UIColor(hue: 0, saturation: 0, brightness: 1.0-CGFloat(posS)/CGFloat(xCount-1), alpha: 1.0)
         } else {
