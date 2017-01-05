@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
@@ -46,7 +47,13 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         return xCount
     }
     
-    
+//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//        let testCell = collectionView.cellForItemAtIndexPath(indexPath) as! TestCollectionViewCell
+//        let resultIndex = indexPath.row % 4
+//        
+//        //セルの中のラベルの値を変更する。
+//        testCell.testLabel.text = member[resultIndex]
+//    }
 
     var blockSize: CGSize! = nil
     var size: CGSize! = nil
