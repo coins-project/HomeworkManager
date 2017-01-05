@@ -53,7 +53,8 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
 //        
 //        //セルの中のラベルの値を変更する。
 //        testCell.testLabel.text = member[resultIndex]
-//    }
+//    colorFromPos(indexPath.section,  posS: indexPath.row)
+//}
 
     var blockSize: CGSize! = nil
     var size: CGSize! = nil

@@ -34,6 +34,7 @@
 		D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BD1DC60E17004D9B9A /* unchecked.png */; };
 		D4B7FE551E1CDB7800FBFB52 /* ColorPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */; };
 		D4B7FE571E1CEC9400FBFB52 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */; };
+		D4BF71091E1E099000F629AF /* SubjectArr.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF71081E1E099000F629AF /* SubjectArr.swift */; };
 		D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */; };
 		D4E016BE1DF44A5B00E7B35C /* ColorPanel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E016BD1DF44A5B00E7B35C /* ColorPanel.storyboard */; };
 		E52C1C6E1D38D82A0051B509 /* HexColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52C1C6D1D38D82A0051B509 /* HexColorExtention.swift */; };
@@ -97,6 +98,7 @@
 		D478F5BD1DC60E17004D9B9A /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPanelViewController.swift; sourceTree = "<group>"; };
 		D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		D4BF71081E1E099000F629AF /* SubjectArr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectArr.swift; sourceTree = "<group>"; };
 		D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		D4E016BD1DF44A5B00E7B35C /* ColorPanel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorPanel.storyboard; sourceTree = "<group>"; };
 		E4BF25799A1331E9CE2A5CE7 /* Pods-HomeworkManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerUITests/Pods-HomeworkManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				6F264F581D274CCA006509D0 /* ViewController.swift */,
 				6FCD26741D3935DC001690D1 /* ImageViewController.swift */,
 				E5E8B1E41D276D8400E33644 /* Subject.swift */,
+				D4BF71081E1E099000F629AF /* SubjectArr.swift */,
 				D45FC68F1DDB68E700029B94 /* Input.storyboard */,
 				6F264F8C1D277153006509D0 /* Photo.swift */,
 				6F264F8E1D2782AC006509D0 /* Homework.swift */,
@@ -510,6 +513,7 @@
 				D45FC6921DDC40B400029B94 /* InputTableViewController.swift in Sources */,
 				D4B7FE551E1CDB7800FBFB52 /* ColorPanelViewController.swift in Sources */,
 				D411DC9F1D81BD0500BB0367 /* DateFormatter.swift in Sources */,
+				D4BF71091E1E099000F629AF /* SubjectArr.swift in Sources */,
 				D478F5BA1DC60427004D9B9A /* TableViewCell.swift in Sources */,
 				6F90FB7A1D37CA100051420B /* TimezoneConverter.swift in Sources */,
 				E58B15BA1D37D0CD00104865 /* TodayHomeworkCollectionViewCell.swift in Sources */,
