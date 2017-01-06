@@ -10,6 +10,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Edit Subject View Controller-->
+        <scene sceneID="NmP-t8-aop">
+            <objects>
+                <tableViewController id="byM-A6-twi" customClass="EditSubjectViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="eyj-RO-ByG">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="33" id="fj3-SP-Ye9" customClass="EditSubjectViewCell" customModule="HomeworkManager" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="1024" height="33"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fj3-SP-Ye9" id="wc8-Wh-EKX">
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="32"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="TK6-tZ-yFA" kind="show" identifier="editDetail" id="v9O-WJ-OEQ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="byM-A6-twi" id="s3m-Mp-i7I"/>
+                            <outlet property="delegate" destination="byM-A6-twi" id="p2v-ws-ZWz"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vdi-sz-cBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-367.3828125" y="129.6875"/>
+        </scene>
         <!--Color Panel View Controller-->
         <scene sceneID="nTG-DP-bfo">
             <objects>
@@ -97,6 +128,7 @@
                     </view>
                     <connections>
                         <outlet property="colorPanel" destination="puf-eq-A5U" id="haQ-pn-kHH"/>
+                        <outlet property="subjectName" destination="l3Q-Ss-Ltw" id="oXX-Eu-ZJS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fN8-e2-SzP" userLabel="First Responder" sceneMemberID="firstResponder"/>

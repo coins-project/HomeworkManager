@@ -4,12 +4,13 @@ import RealmSwift
 class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var colorPanel: UICollectionView!
-    
+    @IBOutlet weak var subjectName: UITextField!
+
     let xCount = 15
     let yCount = 20
-    
-    override func viewDidLoad() {
+       override func viewDidLoad() {
         super.viewDidLoad()
+        //subjectName.text =
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
@@ -50,8 +51,7 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
 //    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
 //        let testCell = collectionView.cellForItemAtIndexPath(indexPath) as! TestCollectionViewCell
 //        let resultIndex = indexPath.row % 4
-//        
-//        //セルの中のラベルの値を変更する。
+//
 //        testCell.testLabel.text = member[resultIndex]
 //    colorFromPos(indexPath.section,  posS: indexPath.row)
 //}
