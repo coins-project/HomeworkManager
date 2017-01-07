@@ -136,7 +136,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //設定し直す
     @IBAction func settingButton(sender: UIBarButtonItem) {
         let colorPanelStoryboard = UIStoryboard(name: "ColorPanel", bundle: nil)
-        let colorPanelViewController = colorPanelStoryboard.instantiateViewControllerWithIdentifier("Color") as! ColorPanelViewController
+        let colorPanelViewController = colorPanelStoryboard.instantiateViewControllerWithIdentifier("Subject") as! EditSubjectViewController
         self.presentViewController(colorPanelViewController, animated: true, completion: nil)
     }
 
