@@ -77,6 +77,9 @@
                             <constraint firstItem="N1j-wy-rJY" firstAttribute="leading" secondItem="Iqu-3u-jet" secondAttribute="leading" id="td4-9p-3hj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="nzn-Bk-WXA" id="RWC-KO-EHM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K23-ik-Ho2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
