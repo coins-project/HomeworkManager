@@ -27,7 +27,11 @@
                                 <items>
                                     <navigationItem title="Title" id="JPd-Jk-LlW">
                                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Y7Y-4S-buq"/>
-                                        <barButtonItem key="rightBarButtonItem" title="New" id="R8r-1b-Hhr"/>
+                                        <barButtonItem key="rightBarButtonItem" title="New" id="R8r-1b-Hhr">
+                                            <connections>
+                                                <segue destination="TK6-tZ-yFA" kind="show" id="8T7-dp-AKD"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -87,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K23-ik-Ho2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-345.1171875" y="128.90625"/>
+            <point key="canvasLocation" x="270" y="219"/>
         </scene>
         <!--Color Panel View Controller-->
         <scene sceneID="nTG-DP-bfo">
@@ -191,4 +195,7 @@
             <point key="canvasLocation" x="959" y="219"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="8T7-dp-AKD"/>
+    </inferredMetricsTieBreakers>
 </document>

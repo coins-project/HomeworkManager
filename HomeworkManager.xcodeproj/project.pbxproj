@@ -34,9 +34,10 @@
 		D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BD1DC60E17004D9B9A /* unchecked.png */; };
 		D4B7FE551E1CDB7800FBFB52 /* ColorPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */; };
 		D4B7FE571E1CEC9400FBFB52 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */; };
-		D4BF71091E1E099000F629AF /* SubjectArr.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF71081E1E099000F629AF /* SubjectArr.swift */; };
+		D4BF710B1E1F594F00F629AF /* EditSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */; };
+		D4BF710D1E1F59F000F629AF /* EditSubjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF710C1E1F59F000F629AF /* EditSubjectViewCell.swift */; };
+		D4BF710F1E20D6E800F629AF /* ColorPanel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4BF710E1E20D6E800F629AF /* ColorPanel.storyboard */; };
 		D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */; };
-		D4E016BE1DF44A5B00E7B35C /* ColorPanel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E016BD1DF44A5B00E7B35C /* ColorPanel.storyboard */; };
 		E52C1C6E1D38D82A0051B509 /* HexColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52C1C6D1D38D82A0051B509 /* HexColorExtention.swift */; };
 		E58B15BA1D37D0CD00104865 /* TodayHomeworkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58B15B81D37D0CD00104865 /* TodayHomeworkCollectionViewCell.swift */; };
 		E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E8B1E41D276D8400E33644 /* Subject.swift */; };
@@ -98,9 +99,10 @@
 		D478F5BD1DC60E17004D9B9A /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPanelViewController.swift; sourceTree = "<group>"; };
 		D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
-		D4BF71081E1E099000F629AF /* SubjectArr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectArr.swift; sourceTree = "<group>"; };
+		D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSubjectViewController.swift; sourceTree = "<group>"; };
+		D4BF710C1E1F59F000F629AF /* EditSubjectViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSubjectViewCell.swift; sourceTree = "<group>"; };
+		D4BF710E1E20D6E800F629AF /* ColorPanel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorPanel.storyboard; sourceTree = "<group>"; };
 		D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		D4E016BD1DF44A5B00E7B35C /* ColorPanel.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ColorPanel.storyboard; sourceTree = "<group>"; };
 		E4BF25799A1331E9CE2A5CE7 /* Pods-HomeworkManagerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeworkManagerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeworkManagerUITests/Pods-HomeworkManagerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		E52C1C6D1D38D82A0051B509 /* HexColorExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorExtention.swift; sourceTree = "<group>"; };
 		E58B15B81D37D0CD00104865 /* TodayHomeworkCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayHomeworkCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -175,13 +177,12 @@
 			isa = PBXGroup;
 			children = (
 				D478F5BC1DC60E17004D9B9A /* checked.png */,
-				D478F5BD1DC60E17004D9B9A /* unchecked.png */,
 				B2E91B3E1D38B234008E66BF /* default.realm */,
+				D478F5BD1DC60E17004D9B9A /* unchecked.png */,
 				6F264F561D274CCA006509D0 /* AppDelegate.swift */,
 				6F264F581D274CCA006509D0 /* ViewController.swift */,
 				6FCD26741D3935DC001690D1 /* ImageViewController.swift */,
 				E5E8B1E41D276D8400E33644 /* Subject.swift */,
-				D4BF71081E1E099000F629AF /* SubjectArr.swift */,
 				D45FC68F1DDB68E700029B94 /* Input.storyboard */,
 				6F264F8C1D277153006509D0 /* Photo.swift */,
 				6F264F8E1D2782AC006509D0 /* Homework.swift */,
@@ -198,9 +199,11 @@
 				E52C1C6D1D38D82A0051B509 /* HexColorExtention.swift */,
 				D411DC9E1D81BD0500BB0367 /* DateFormatter.swift */,
 				D478F5B91DC60427004D9B9A /* TableViewCell.swift */,
-				D4E016BD1DF44A5B00E7B35C /* ColorPanel.storyboard */,
+				D4BF710E1E20D6E800F629AF /* ColorPanel.storyboard */,
 				D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */,
 				D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */,
+				D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */,
+				D4BF710C1E1F59F000F629AF /* EditSubjectViewCell.swift */,
 			);
 			path = HomeworkManager;
 			sourceTree = "<group>";
@@ -357,9 +360,9 @@
 				B2E91B3F1D38B234008E66BF /* default.realm in Resources */,
 				6F264F611D274CCA006509D0 /* LaunchScreen.storyboard in Resources */,
 				6F264F5E1D274CCA006509D0 /* Assets.xcassets in Resources */,
+				D4BF710F1E20D6E800F629AF /* ColorPanel.storyboard in Resources */,
 				D478F5BE1DC60E17004D9B9A /* checked.png in Resources */,
 				D45FC6901DDB68E700029B94 /* Input.storyboard in Resources */,
-				D4E016BE1DF44A5B00E7B35C /* ColorPanel.storyboard in Resources */,
 				6F264F5C1D274CCA006509D0 /* Main.storyboard in Resources */,
 				D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */,
 			);
@@ -513,7 +516,7 @@
 				D45FC6921DDC40B400029B94 /* InputTableViewController.swift in Sources */,
 				D4B7FE551E1CDB7800FBFB52 /* ColorPanelViewController.swift in Sources */,
 				D411DC9F1D81BD0500BB0367 /* DateFormatter.swift in Sources */,
-				D4BF71091E1E099000F629AF /* SubjectArr.swift in Sources */,
+				D4BF710D1E1F59F000F629AF /* EditSubjectViewCell.swift in Sources */,
 				D478F5BA1DC60427004D9B9A /* TableViewCell.swift in Sources */,
 				6F90FB7A1D37CA100051420B /* TimezoneConverter.swift in Sources */,
 				E58B15BA1D37D0CD00104865 /* TodayHomeworkCollectionViewCell.swift in Sources */,
@@ -527,6 +530,7 @@
 				6F264F571D274CCA006509D0 /* AppDelegate.swift in Sources */,
 				D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */,
 				B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */,
+				D4BF710B1E1F594F00F629AF /* EditSubjectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

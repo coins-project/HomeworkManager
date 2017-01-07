@@ -55,7 +55,7 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        color = colorFromPos(indexPath.section,  posS: indexPath.row)
+        color = colorFromPos(indexPath.section, posS: indexPath.row)
         colorView.backgroundColor = color
     }
 

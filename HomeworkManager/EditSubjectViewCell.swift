@@ -11,6 +11,8 @@ import UIKit
 class EditSubjectViewCell: UITableViewCell {
     
     @IBOutlet weak var subject: UILabel!
+    var delegate: ToColorPanelDelegate?
+    
     override func awakeFromNib() {
      
         // Initialization code
