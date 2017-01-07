@@ -7,7 +7,8 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     private var subjects :Results<Subject>?
     private let realm = RealmModelManager.sharedManager
     private var update = false
-    var subjectName :String
+    var subjectName = ""
+    var subjectColor = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,18 +48,26 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
         subjectName = subjects![indexPath.row].name
-        performSegueWithIdentifier("editSubject",sender: nil)
+        subjectColor = subjects![indexPath.row].hexColor
+        performSegueWithIdentifier("editSubject", sender: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if (segue.identifier == "editSubject") {
-            let colorPanel: ColorPanelViewController = (segue.destinationViewController as? ColorPanelViewController)!
-            colorPanel.subjectName.text = subjectName
-            //colorPanel.
+            let colorPanelView: ColorPanelViewController = (segue.destinationViewController as? ColorPanelViewController)!
+            colorPanelView.subjectName.text = subjectName
+            colorPanelView.hexColor = subjectColor
+        }
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            realm.delete(subjects![indexPath.row])
+            self.tableView.reloadData()
+        default:
+            return
         }
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
 }

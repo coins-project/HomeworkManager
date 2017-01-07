@@ -25,7 +25,10 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1j-wy-rJY">
                                 <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="HGF-SH-S2T"/>
+                                    <navigationItem title="Title" id="JPd-Jk-LlW">
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Y7Y-4S-buq"/>
+                                        <barButtonItem key="rightBarButtonItem" title="New" id="R8r-1b-Hhr"/>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="68" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nzn-Bk-WXA">
@@ -57,6 +60,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="subject" destination="lYd-GA-ppq" id="L2i-IM-d4y"/>
+                                            <segue destination="TK6-tZ-yFA" kind="show" identifier="editSubject" id="6rx-56-1a2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -111,6 +115,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="etq-b4-grG">
                                 <rect key="frame" x="627" y="671" width="31" height="30"/>
                                 <state key="normal" title="完了"/>
+                                <connections>
+                                    <action selector="finished:" destination="TK6-tZ-yFA" eventType="touchUpInside" id="KsY-gl-NPZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0g-9d-u68">
                                 <rect key="frame" x="344" y="671" width="77" height="30"/>
@@ -120,6 +127,9 @@
                                     <constraint firstAttribute="height" constant="30" id="izg-eh-5cf"/>
                                 </constraints>
                                 <state key="normal" title="キャンセル"/>
+                                <connections>
+                                    <segue destination="5Dd-Gf-xNM" kind="show" id="6BF-93-0dy"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="color" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="puf-eq-A5U">
                                 <rect key="frame" x="91" y="180" width="842" height="465"/>
@@ -172,12 +182,13 @@
                     </view>
                     <connections>
                         <outlet property="colorPanel" destination="puf-eq-A5U" id="haQ-pn-kHH"/>
+                        <outlet property="colorView" destination="Ogt-gb-sWb" id="e9d-aZ-fJH"/>
                         <outlet property="subjectName" destination="l3Q-Ss-Ltw" id="oXX-Eu-ZJS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fN8-e2-SzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="301.7578125" y="128.90625"/>
+            <point key="canvasLocation" x="959" y="219"/>
         </scene>
     </scenes>
 </document>

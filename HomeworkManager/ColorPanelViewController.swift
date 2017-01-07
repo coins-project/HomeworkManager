@@ -2,15 +2,21 @@ import UIKit
 import RealmSwift
 
 class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
-
+    
+    private let realm = RealmModelManager.sharedManager
+    private var subjects :Results<Subject>?
+    var subject = Subject() //よくわからない
     @IBOutlet weak var colorPanel: UICollectionView!
     @IBOutlet weak var subjectName: UITextField!
+    @IBOutlet weak var colorView: UIView!
 
+    var color = UIColor.grayColor()
+    var hexColor = ""
     let xCount = 15
     let yCount = 20
-       override func viewDidLoad() {
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
-        //subjectName.text =
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
@@ -48,14 +54,26 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         return xCount
     }
     
-//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let testCell = collectionView.cellForItemAtIndexPath(indexPath) as! TestCollectionViewCell
-//        let resultIndex = indexPath.row % 4
-//
-//        testCell.testLabel.text = member[resultIndex]
-//    colorFromPos(indexPath.section,  posS: indexPath.row)
-//}
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        color = colorFromPos(indexPath.section,  posS: indexPath.row)
+        colorView.backgroundColor = color
+    }
 
+    @IBAction func finished(sender: UIButton) {
+        let newSubject = Subject()
+        newSubject.name = subjectName.text!//空白のときは？
+        newSubject.hexColor = self.color.strHex()
+        if(newSubject.name != "") {
+            realm.update(self.subject, value: ["name": newSubject.name as AnyObject, "hexColor": newSubject.hexColor as AnyObject]) //よくわからない
+        } else {
+            realm.create(Subject.self, value: subjects!)
+        }
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
     var blockSize: CGSize! = nil
     var size: CGSize! = nil
 
