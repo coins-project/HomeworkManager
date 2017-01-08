@@ -184,7 +184,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func editItem() {
-
         let inputScreenStoryboard = UIStoryboard(name: "Input", bundle: nil)
         let inputTableViewController = inputScreenStoryboard.instantiateViewControllerWithIdentifier("InputScreen") as! InputTableViewController
         self.presentViewController(inputTableViewController, animated: true, completion: nil)
@@ -199,8 +198,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 }
-
-protocol ToPhotoDelegate {
-    func deliverCreateAt(createAt: NSDate)
-}
-
