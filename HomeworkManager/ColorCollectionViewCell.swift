@@ -9,5 +9,4 @@
 import UIKit
 
 class ColorCollectionViewCell: UICollectionViewCell {
-     var delegate: ToColorPanelDelegate?
 }
