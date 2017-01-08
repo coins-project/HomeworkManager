@@ -8,6 +8,8 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     let xCount = 15
     let yCount = 20
     
+    var hexColor = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let layout = UICollectionViewFlowLayout()
@@ -47,14 +49,13 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         return xCount
     }
     
-//    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-//        let testCell = collectionView.cellForItemAtIndexPath(indexPath) as! TestCollectionViewCell
-//        let resultIndex = indexPath.row % 4
-//        
-//        //セルの中のラベルの値を変更する。
-//        testCell.testLabel.text = member[resultIndex]
-//    colorFromPos(indexPath.section,  posS: indexPath.row)
-//}
+    //選択時
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let color = colorFromPos(indexPath.section, posS: indexPath.row)
+        self.hexColor = UIColor.strHex(color)
+        self.colorView.backgroundColor = color
+    }
+    
 
     var blockSize: CGSize! = nil
     var size: CGSize! = nil
