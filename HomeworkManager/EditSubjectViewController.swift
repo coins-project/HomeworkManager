@@ -15,18 +15,12 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        do{
-            let realm = try Realm()
-            subjects = realm.objects(Subject)
-            tableView.reloadData()
-        }catch{
-            print("error")
-        }
+        subjects = realm.findAllObjects(Subject)
+        tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -34,14 +28,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var subject:Subject? = nil
-        do{
-            let realm = try Realm()
-            subject = realm.objects(Subject)[indexPath.row]
-        }catch{
-            print("エラー")
-        }//書き方がわからない
-        
+        let subject:Subject? = subjects![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("Subject", forIndexPath: indexPath) as! EditSubjectViewCell
         cell.subject.text = subject!.name
         cell.backgroundColor = UIColor.hexStr(subject!.hexColor, alpha: 1)
