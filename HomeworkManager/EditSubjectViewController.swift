@@ -10,6 +10,8 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     var subjectName = ""
     var subjectColor = ""
     
+    let colorPanel = ColorPanelViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         do{
@@ -37,25 +39,21 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
             subject = realm.objects(Subject)[indexPath.row]
         }catch{
             print("エラー")
-        }
+        }//書き方がわからない
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Subject", forIndexPath: indexPath) as! EditSubjectViewCell
         cell.subject.text = subject!.name
         cell.backgroundColor = UIColor.hexStr(subject!.hexColor, alpha: 1)
-        cell.delegate = self
-        
-        
         
         return cell
     }
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        subjectName = subjects![indexPath.row].name
-        subjectColor = subjects![indexPath.row].hexColor
+        self.colorPanel.setSubjectNameAndColor(subjects![indexPath.row].name)
         performSegueWithIdentifier("editSubject", sender: nil)
     }
     
-//##########################################
+/*##########################################
     class User: MailServerDelegate {
         
         let mailServer: MailServer
@@ -113,7 +111,8 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
     }
- //##########################################
+ */
+    
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
@@ -123,7 +122,6 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
             return
         }
     }
-
 }
 
     protocol ToColorPanelDelegate {

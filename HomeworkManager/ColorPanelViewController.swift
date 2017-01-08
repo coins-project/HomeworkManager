@@ -12,6 +12,7 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
 
     var color = UIColor.grayColor()
     var hexColor = ""
+    var deliverName = ""
     let xCount = 15
     let yCount = 20
     
@@ -34,6 +35,10 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         layout.minimumLineSpacing = 0.0
         colorPanel.collectionViewLayout = layout
         colorPanel.reloadData()
+    }
+    
+    @IBAction func cancel(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +79,8 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         }
     }
     
+    
+    
     var blockSize: CGSize! = nil
     var size: CGSize! = nil
 
@@ -89,5 +96,10 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         } else {
             return UIColor(hue: CGFloat(posH-1)/CGFloat(yCount-1), saturation: CGFloat(posS+1)/CGFloat(xCount), brightness: 1.0, alpha: 1.0)
         }
+    }
+    
+    func setSubjectNameAndColor(subjectName: String) {
+        self.deliverName = subjectName
+        self.hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", self.deliverName))?.hexColor)!
     }
 }
