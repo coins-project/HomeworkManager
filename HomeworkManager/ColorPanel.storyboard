@@ -26,7 +26,11 @@
                                 <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="JPd-Jk-LlW">
-                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Y7Y-4S-buq"/>
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="Y7Y-4S-buq">
+                                            <connections>
+                                                <action selector="cancel:" destination="5Dd-Gf-xNM" id="yMs-Ru-8yg"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="New" id="R8r-1b-Hhr">
                                             <connections>
                                                 <segue destination="TK6-tZ-yFA" kind="show" id="8T7-dp-AKD"/>
@@ -156,6 +160,7 @@
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="TK6-tZ-yFA" id="y48-UX-6vF"/>
+                                    <outlet property="delegate" destination="TK6-tZ-yFA" id="Fgx-9x-eJS"/>
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ogt-gb-sWb">

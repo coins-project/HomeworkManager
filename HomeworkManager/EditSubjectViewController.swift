@@ -2,16 +2,11 @@ import UIKit
 import RealmSwift
 
 class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     private var subjects :Results<Subject>?
     private let realm = RealmModelManager.sharedManager
-    private var update = false
-    var subjectName = ""
-    var subjectColor = ""
-    
-    let colorPanel = ColorPanelViewController()
-    var delegate: ToColorPanelDelegate!
+    var delegate: ToColorPanelDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +16,10 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    @IBAction func cancel(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -32,12 +31,12 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier("Subject", forIndexPath: indexPath) as! EditSubjectViewCell
         cell.subject.text = subject!.name
         cell.backgroundColor = UIColor.hexStr(subject!.hexColor, alpha: 1)
-        
         return cell
     }
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        self.delegate.setSubjectNameAndColor(subjects![indexPath.row].name)
+        let subjectName = subjects![indexPath.row].name
+        self.delegate?.setSubjectNameAndColor(subjectName)
         performSegueWithIdentifier("editSubject", sender: nil)
     }
     
@@ -52,6 +51,6 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
 }
 
-    protocol ToColorPanelDelegate {
-        func setSubjectNameAndColor(subjectName: String)
-    }
+//protocol ToColorPanelDelegate {
+//    func setSubjectNameAndColor(subjectName: String)
+//}

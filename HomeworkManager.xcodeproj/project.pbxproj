@@ -32,6 +32,7 @@
 		D478F5BA1DC60427004D9B9A /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D478F5B91DC60427004D9B9A /* TableViewCell.swift */; };
 		D478F5BE1DC60E17004D9B9A /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BC1DC60E17004D9B9A /* checked.png */; };
 		D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BD1DC60E17004D9B9A /* unchecked.png */; };
+		D48CC1EB1E228B5100420EC1 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CC1EA1E228B5100420EC1 /* Protocol.swift */; };
 		D4B7FE551E1CDB7800FBFB52 /* ColorPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */; };
 		D4B7FE571E1CEC9400FBFB52 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */; };
 		D4BF710B1E1F594F00F629AF /* EditSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */; };
@@ -97,6 +98,7 @@
 		D478F5B91DC60427004D9B9A /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		D478F5BC1DC60E17004D9B9A /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		D478F5BD1DC60E17004D9B9A /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
+		D48CC1EA1E228B5100420EC1 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPanelViewController.swift; sourceTree = "<group>"; };
 		D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSubjectViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */,
 				D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */,
 				D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */,
+				D48CC1EA1E228B5100420EC1 /* Protocol.swift */,
 				D4BF710C1E1F59F000F629AF /* EditSubjectViewCell.swift */,
 			);
 			path = HomeworkManager;
@@ -531,6 +534,7 @@
 				D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */,
 				B2805F401D2CA02900016645 /* RealmModelManager.swift in Sources */,
 				D4BF710B1E1F594F00F629AF /* EditSubjectViewController.swift in Sources */,
+				D48CC1EB1E228B5100420EC1 /* Protocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

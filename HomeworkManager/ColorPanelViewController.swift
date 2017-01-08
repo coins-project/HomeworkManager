@@ -1,7 +1,7 @@
 import UIKit
 import RealmSwift
 
-class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout ,ToColorPanelDelegate {
+class ColorPanelViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ToColorPanelDelegate {
     
     private let realm = RealmModelManager.sharedManager
     private var subjects :Results<Subject>?
@@ -18,14 +18,17 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        editSubject = EditSubjectViewController()
-        editSubject!.delegate = self
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
         colorPanel.collectionViewLayout = layout
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        editSubject = EditSubjectViewController()
+        editSubject!.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
@@ -37,10 +40,6 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         layout.minimumLineSpacing = 0.0
         colorPanel.collectionViewLayout = layout
         colorPanel.reloadData()
-    }
-    
-    @IBAction func cancel(sender: UIButton) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,12 +60,22 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         return xCount
     }
 
+    func collectionView(collectionView: UICollectionView, didSelectItemAt indexPath: NSIndexPath) {
+        let color = colorFromPos(indexPath.section, posS: indexPath.row)
+        self.hexColor = color.strHex()
+        self.colorView.backgroundColor = color
+    }
+    
+    @IBAction func cancel(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func finished(sender: UIButton) {
         let newSubject = Subject()
-        newSubject.name = subjectName.text!//空白のときは？
+        newSubject.name = subjectName.text!
         newSubject.hexColor = self.color.strHex()
         if(newSubject.name != "") {
-            realm.update(newSubject, value: ["name": newSubject.name as AnyObject, "hexColor": newSubject.hexColor as AnyObject]) //よくわからない
+            realm.update(newSubject, value: ["name": newSubject.name as AnyObject, "hexColor": newSubject.hexColor as AnyObject])
         } else {
             realm.create(Subject.self, value: subjects!)
         }
@@ -76,21 +85,6 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         }
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAt indexPath: NSIndexPath) {
-        let color = colorFromPos(indexPath.section, posS: indexPath.row)
-        self.hexColor = color.strHex()
-        self.colorView.backgroundColor = color
-    }
-
-    var blockSize: CGSize! = nil
-    var size: CGSize! = nil
-
-    func colorFromPoint(point: CGPoint) -> UIColor {
-        let posX = Int(point.x * CGFloat(xCount) / size.width)
-        let posY = Int(point.y * CGFloat(yCount) / size.height)
-        return colorFromPos(posY, posS: posX)
-    }
-    
     func colorFromPos(posH: Int, posS: Int) -> UIColor {
         if posH == 0 {
             return UIColor(hue: 0, saturation: 0, brightness: 1.0-CGFloat(posS)/CGFloat(xCount-1), alpha: 1.0)
