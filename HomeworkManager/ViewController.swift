@@ -1,11 +1,10 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ToPhotoDelegate  {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    
 
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
@@ -48,7 +47,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String((keys)[section])
+        let closeDate = String((keys)[section])
+        let formattedCloseDate = closeDate[closeDate.startIndex..<closeDate.endIndex.advancedBy(-14)]
+        return formattedCloseDate
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,11 +60,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
         cell.setCell(homework)
+        cell.delegate = self
         return cell
     }
     
-    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
-    {
+    func deliverCreateAt(createAt: NSDate) {
+        displayPhoto(createAt)
+    }
+    
+    func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
@@ -80,11 +85,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapHomework(_:)))
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.pressLongHomework(_:)))
-        cell.addGestureRecognizer(tapGesture)
-        cell.addGestureRecognizer(longGesture)
+        let inputScreen: UIStoryboard = UIStoryboard(name: "Input", bundle: nil)
+        let inputView: InputTableViewController = inputScreen.instantiateInitialViewController() as! InputTableViewController
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
+        inputView.homework = cell.homework
+        self.presentViewController(inputView, animated: true, completion: nil)
     }
     
     @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
@@ -107,6 +112,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             imageView.userInteractionEnabled = true
             imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
             self.view.addSubview(imageView)
+            self.tableView.reloadData()
         }
     }
  
@@ -186,3 +192,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 }
+
+protocol ToPhotoDelegate {
+    func deliverCreateAt(createAt: NSDate)
+}
+
