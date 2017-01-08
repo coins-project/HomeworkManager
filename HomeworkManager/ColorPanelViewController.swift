@@ -5,7 +5,6 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     
     private let realm = RealmModelManager.sharedManager
     private var subjects :Results<Subject>?
-    var subject = Subject() //よくわからない
     @IBOutlet weak var colorPanel: UICollectionView!
     @IBOutlet weak var subjectName: UITextField!
     @IBOutlet weak var colorView: UIView!
@@ -15,11 +14,12 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     var deliverName = ""
     let xCount = 15
     let yCount = 20
-    let editSubject = EditSubjectViewController()
+    var editSubject:EditSubjectViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        editSubject.delegate = self
+        editSubject = EditSubjectViewController()
+        editSubject!.delegate = self
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
@@ -60,18 +60,13 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return xCount
     }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        color = colorFromPos(indexPath.section, posS: indexPath.row)
-        colorView.backgroundColor = color
-    }
 
     @IBAction func finished(sender: UIButton) {
         let newSubject = Subject()
         newSubject.name = subjectName.text!//空白のときは？
         newSubject.hexColor = self.color.strHex()
         if(newSubject.name != "") {
-            realm.update(self.subject, value: ["name": newSubject.name as AnyObject, "hexColor": newSubject.hexColor as AnyObject]) //よくわからない
+            realm.update(newSubject, value: ["name": newSubject.name as AnyObject, "hexColor": newSubject.hexColor as AnyObject]) //よくわからない
         } else {
             realm.create(Subject.self, value: subjects!)
         }
@@ -79,6 +74,12 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
         dispatch_after(delayTime, dispatch_get_main_queue()) {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAt indexPath: NSIndexPath) {
+        let color = colorFromPos(indexPath.section, posS: indexPath.row)
+        self.hexColor = color.strHex()
+        self.colorView.backgroundColor = color
     }
 
     var blockSize: CGSize! = nil

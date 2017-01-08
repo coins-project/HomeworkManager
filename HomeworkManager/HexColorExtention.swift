@@ -15,7 +15,6 @@ extension UIColor {
             return UIColor.whiteColor();
         }
     }
-
     func strHex() -> String {
         var r:CGFloat = 0
         var g:CGFloat = 0
@@ -26,5 +25,3 @@ extension UIColor {
         return String(format:"#%06x", rgb)
     }
 }
-
-
