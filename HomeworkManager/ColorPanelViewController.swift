@@ -1,7 +1,7 @@
 import UIKit
 import RealmSwift
 
-class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout ,ToColorPanelDelegate {
     
     private let realm = RealmModelManager.sharedManager
     private var subjects :Results<Subject>?
@@ -15,9 +15,11 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     var deliverName = ""
     let xCount = 15
     let yCount = 20
+    let editSubject = EditSubjectViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        editSubject.delegate = self
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
@@ -78,9 +80,7 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    
-    
-    
+
     var blockSize: CGSize! = nil
     var size: CGSize! = nil
 
@@ -99,7 +99,8 @@ class ColorPanelViewController: UIViewController,UICollectionViewDataSource,UICo
     }
     
     func setSubjectNameAndColor(subjectName: String) {
-        self.deliverName = subjectName
-        self.hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", self.deliverName))?.hexColor)!
+        self.subjectName.text = subjectName
+        let hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", subjectName))?.hexColor)!
+        self.colorView.backgroundColor = UIColor.hexStr(hexColor, alpha: CGFloat(0.0))
     }
 }

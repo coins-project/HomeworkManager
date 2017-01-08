@@ -11,6 +11,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     var subjectColor = ""
     
     let colorPanel = ColorPanelViewController()
+    var delegate: ToColorPanelDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,69 +50,9 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        self.colorPanel.setSubjectNameAndColor(subjects![indexPath.row].name)
+        self.delegate.setSubjectNameAndColor(subjects![indexPath.row].name)
         performSegueWithIdentifier("editSubject", sender: nil)
     }
-    
-/*##########################################
-    class User: MailServerDelegate {
-        
-        let mailServer: MailServer
-        
-        init(){
-            self.mailServer = MailServer()
-            self.mailServer.delegate = self
-        }
-        
-        /*
-         * ボタンが押された時の処理
-         */
-        func sendButtonPushed(message: String){
-            // メールを送信する。送信の結果は、delegate経由で受け取る。
-            self.mailServer.sendMail(message)
-        }
-        
-        // 送信結果。mailServerからコールされる
-        func onSuccessSendMail() -> Void {
-            print("success!")
-        }
-        func onFailureSendMail() -> Void {
-            print("failure..")
-        }
-    }
-    
-    protocol MailServerDelegate {
-        
-        /*
-         * 送信した時のイベント
-         * 「メール送信成功しました！」
-         * 「メール送信失敗しました...」
-         */
-        func onSuccessSendMail() -> Void
-        func onFailureSendMail() -> Void
-    }
-    
-    // メールを送信して、delegateに対して結果を知らせます。
-    class MailServer {
-        
-        // イベントを通知する先
-        weak var delegate: MailServerDelegate?
-        
-        /*
-         * メールを送信する処理
-         * 「あ、このメッセージを送るんですね、わかりました。メール送信します。
-         *   完了したらdelegateに知らせますね。」
-         */
-        func sendMail(message: String) -> Void{
-            // 非同期メール送信処理を書く
-            if 成功 {
-                self.delegate?.onSuccessSendMail()
-            } else {
-                self.delegate?.onFailureSendMail()
-            }
-        }
-    }
- */
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
@@ -125,5 +66,5 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
     protocol ToColorPanelDelegate {
-        func deliverName(subjectName: String)
+        func setSubjectNameAndColor(subjectName: String)
     }
