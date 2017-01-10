@@ -12,7 +12,7 @@ extension UIColor {
             return UIColor(red:r,green:g,blue:b,alpha:alpha)
         } else {
             print("invalid hex string")
-            return UIColor.whiteColor();
+            return UIColor.whiteColor()
         }
     }
     func strHex() -> String {
