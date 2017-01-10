@@ -7,14 +7,14 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     private let realm = RealmModelManager.sharedManager
     private var reference: String?
     private var closeAt = NSDate()
+    var subjectIndex: Int?
     private var subjects: Results<Subject>?
     private var update = false
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
-    @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    @IBOutlet weak var subjectList: UICollectionView!
     
     override func viewDidLoad() {
         subjects = realm.findAllObjects(Subject)
@@ -24,13 +24,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         if(update) {
             deadlineDatePicker.date = homework.closeAt
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
-            for (i, subject) in subjects!.enumerate(){
-                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
-                if (subject ==  homework.subject) {
-                    subjectSegmentedControl.selectedSegmentIndex = i
-                    subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![i].hexColor, alpha: 1)
-                }
-            }
             if(homework.reference == "教科書") {
                 reference = "教科書"
                 referenceSegmentedControl.selectedSegmentIndex = 1
@@ -41,14 +34,9 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         } else {
             reference = "プリント"
             deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
-            for (i, subject) in subjects!.enumerate(){
-                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
-            }
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
-            subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
-        subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         configurePlusMinusButton()
     }
 
@@ -57,12 +45,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             minusButton.hidden = true
             plusButton.hidden = true
         }
-    }
-    
-    @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
-        let index = subjectSegmentedControl.selectedSegmentIndex
-        let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
-        self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     
     @IBAction func referenceSegmentedControl(sender: UISegmentedControl) {
@@ -91,16 +73,27 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if (collectionView.tag == 0) {
         let homeworks = realm.findAllObjects(Homework.self)
         return (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate())))).count
+        } else {
+            return subjects!.count
+        }
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-         let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("cell1", forIndexPath: indexPath) as! TodayHomeworkCollectionViewCell) ?? TodayHomeworkCollectionViewCell()
-        let homeworks = realm.findAllObjects(Homework.self)
-        cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.name
-        cell.backgroundColor = UIColor.hexStr((homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.hexColor, alpha: 1)
-        return cell
+        if (collectionView.tag == 0) {
+            let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("cell1", forIndexPath: indexPath) as! TodayHomeworkCollectionViewCell) ?? TodayHomeworkCollectionViewCell()
+            let homeworks = realm.findAllObjects(Homework.self)
+            cell.subjectNameLabel.text = (homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.name
+            cell.backgroundColor = UIColor.hexStr((homeworks.filter(NSPredicate(format: "createdAt == %@", TimezoneConverter.convertToJST(NSDate()))))[indexPath.row].subject!.hexColor, alpha: 1)
+            return cell
+        } else {
+            let cell = (collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! InputViewSubjectListCell) ?? InputViewSubjectListCell()
+            cell.subjectName.text = subjects![indexPath.row].name
+            cell.backgroundColor = UIColor.hexStr(subjects![indexPath.row].hexColor, alpha: 1.0)
+            return cell
+        }
     }
     
     @IBAction func minusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
@@ -111,17 +104,12 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         deadlineDatePicker.date = NSDate(timeInterval: 24*60*60, sinceDate: deadlineDatePicker.date)
     }
     
-    
-    
-    
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
         let homework = Homework()
-        homework.subject = subject
+        homework.subject? = subjects![subjectIndex!]
         homework.reference = reference!
         homework.closeAt = closeAt
         homework.createdAt = TimezoneConverter.convertToJST((NSDate()))
-        
         if(update) {
             realm.update(self.homework, value: ["subject": homework.subject as! AnyObject, "reference": homework.reference, "closeAt": homework.closeAt])
         } else {

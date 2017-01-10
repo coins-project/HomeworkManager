@@ -33,6 +33,7 @@
 		D478F5BE1DC60E17004D9B9A /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BC1DC60E17004D9B9A /* checked.png */; };
 		D478F5BF1DC60E17004D9B9A /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = D478F5BD1DC60E17004D9B9A /* unchecked.png */; };
 		D48CC1EB1E228B5100420EC1 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CC1EA1E228B5100420EC1 /* Protocol.swift */; };
+		D48CC1ED1E24C52700420EC1 /* InputViewSubjectListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48CC1EC1E24C52700420EC1 /* InputViewSubjectListCell.swift */; };
 		D4B7FE551E1CDB7800FBFB52 /* ColorPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */; };
 		D4B7FE571E1CEC9400FBFB52 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */; };
 		D4BF710B1E1F594F00F629AF /* EditSubjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */; };
@@ -99,6 +100,7 @@
 		D478F5BC1DC60E17004D9B9A /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = checked.png; sourceTree = "<group>"; };
 		D478F5BD1DC60E17004D9B9A /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unchecked.png; sourceTree = "<group>"; };
 		D48CC1EA1E228B5100420EC1 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		D48CC1EC1E24C52700420EC1 /* InputViewSubjectListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputViewSubjectListCell.swift; sourceTree = "<group>"; };
 		D4B7FE541E1CDB7800FBFB52 /* ColorPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPanelViewController.swift; sourceTree = "<group>"; };
 		D4B7FE561E1CEC9400FBFB52 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		D4BF710A1E1F594F00F629AF /* EditSubjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditSubjectViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				6F264F5A1D274CCA006509D0 /* Main.storyboard */,
 				E58B15B81D37D0CD00104865 /* TodayHomeworkCollectionViewCell.swift */,
 				D45FC6911DDC40B400029B94 /* InputTableViewController.swift */,
+				D48CC1EC1E24C52700420EC1 /* InputViewSubjectListCell.swift */,
 				D4D8473C1D2CCDAE007F0D14 /* CameraViewController.swift */,
 				6F264F5D1D274CCA006509D0 /* Assets.xcassets */,
 				6F264F5F1D274CCA006509D0 /* LaunchScreen.storyboard */,
@@ -529,6 +532,7 @@
 				6F264F591D274CCA006509D0 /* ViewController.swift in Sources */,
 				E52C1C6E1D38D82A0051B509 /* HexColorExtention.swift in Sources */,
 				E5E8B1E51D276D8400E33644 /* Subject.swift in Sources */,
+				D48CC1ED1E24C52700420EC1 /* InputViewSubjectListCell.swift in Sources */,
 				B21A9FCF1D27AB4100B2CBF7 /* Model.swift in Sources */,
 				6F264F571D274CCA006509D0 /* AppDelegate.swift in Sources */,
 				D4D8473D1D2CCDAE007F0D14 /* CameraViewController.swift in Sources */,
