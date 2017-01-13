@@ -5,15 +5,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var sortButton: UIButton!
 
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var keys = [NSDate]()
     private var photo = Photo()
+    private var sortOrder: SortOrder = .deadline
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
@@ -28,7 +29,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadDictionary() {
         homeworkDictionary = [:]
-        for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
+        switch sortOrder {
+        case .deadline:
+            for homework in realm.findAllObjects(Homework.self).sorted("closeAt", ascending: true) {
                 if homeworkDictionary[homework.closeAt] == nil {
                     homeworkDictionary[homework.closeAt] = [homework]
                     dispatch_async(dispatch_get_main_queue()) {
@@ -37,6 +40,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }else {
                     homeworkDictionary[homework.closeAt]?.append(homework)
                 }
+            }
+        case .createdAt:
+            for homework in realm.findAllObjects(Homework.self).sorted("createdAt", ascending: true) {
+                if homeworkDictionary[homework.createdAt] == nil {
+                    homeworkDictionary[homework.createdAt] = [homework]
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
+                }else {
+                    homeworkDictionary[homework.createdAt]?.append(homework)
+                }
+            }
         }
         keys = Array(homeworkDictionary.keys)
         keys.sortInPlace({ $0.compare($1) == NSComparisonResult.OrderedAscending })
@@ -47,9 +62,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let closeDate = String((keys)[section])
-        let formattedCloseDate = closeDate[closeDate.startIndex..<closeDate.endIndex.advancedBy(-14)]
-        return formattedCloseDate
+        let date = String(keys[section])
+        let formattedDate = date[date.startIndex..<date.endIndex.advancedBy(-14)]
+        return "\(sortOrder.rawValue[sortOrder.rawValue.startIndex..<sortOrder.rawValue.endIndex.advancedBy(-1)]) \(formattedDate)"
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +75,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
         cell.setCell(homework)
+        cell.sortOrder = sortOrder
         cell.delegate = self
         return cell
     }
@@ -90,6 +106,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! TableViewCell
         inputView.homework = cell.homework
         self.presentViewController(inputView, animated: true, completion: nil)
+    }
+    
+    @IBAction func sortButtonDidTap(sender: UIButton) {
+        switch sortOrder {
+        case .deadline: sortOrder = .createdAt
+        case .createdAt: sortOrder = .deadline
+        }
+        sortButton.setTitle(sortOrder.rawValue, forState: .Normal)
+        loadDictionary()
+        self.tableView.reloadData()
     }
     
     @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
