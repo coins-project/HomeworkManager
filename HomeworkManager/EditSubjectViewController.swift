@@ -11,6 +11,9 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         subjects = realm.findAllObjects(Subject)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         tableView.reloadData()
     }
     
@@ -30,7 +33,6 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
         let subject:Subject? = subjects![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("Subject", forIndexPath: indexPath) as! EditSubjectViewCell
         cell.subject.text = subject!.name
-        print(subject!.hexColor)
         cell.backgroundColor = UIColor.hexStr(subject!.hexColor, alpha: 1)
         return cell
     }
@@ -43,7 +45,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editSubject" {
             let colorPanelViewController: ColorPanelViewController = segue.destinationViewController as! ColorPanelViewController
-            colorPanelViewController.deliverName = subjectName
+            colorPanelViewController.deliverName! = subjectName
             colorPanelViewController.update = true
         }
     }
