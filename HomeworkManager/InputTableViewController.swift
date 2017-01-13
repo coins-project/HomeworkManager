@@ -111,6 +111,9 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         deadlineDatePicker.date = NSDate(timeInterval: 24*60*60, sinceDate: deadlineDatePicker.date)
     }
     
+    
+    
+    
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
         let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
         let homework = Homework()
