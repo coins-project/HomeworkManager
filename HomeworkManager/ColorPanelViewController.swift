@@ -1,7 +1,7 @@
 import UIKit
 import RealmSwift
 
-class ColorPanelViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     private let realm = RealmModelManager.sharedManager
     private var subjects :Results<Subject>?
@@ -51,9 +51,10 @@ class ColorPanelViewController: UIViewController, UICollectionViewDataSource, UI
         return xCount
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAt indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let color = colorFromPos(indexPath.section, posS: indexPath.row)
         self.hexColor = color.strHex()
+        print(color.strHex())
         self.colorView.backgroundColor = color
     }
     
