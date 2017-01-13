@@ -9,20 +9,24 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var colorPanel: UICollectionView!
     @IBOutlet weak var subjectName: UITextField!
     @IBOutlet weak var colorView: UIView!
-
+    
     var color = UIColor.grayColor()
     var hexColor = ""
     let xCount = 15
     let yCount = 20
-
+    var update: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.subjectName.text = deliverName
-        let hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName!))?.hexColor)!
+        if(update) {
+            self.subjectName.text = deliverName
+            hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName!))?.hexColor)!
+        }
+        
         self.colorView.backgroundColor = UIColor.hexStr(hexColor, alpha: CGFloat(1.0))
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
@@ -53,23 +57,29 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let color = colorFromPos(indexPath.section, posS: indexPath.row)
+        
         self.hexColor = color.strHex()
         print(color.strHex())
         self.colorView.backgroundColor = color
-    }
+    }//構文をよく確認しよう
     
     @IBAction func cancel(sender: UIButton) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func finished(sender: UIButton) {
-        let newSubject = Subject()
-        newSubject.name = subjectName.text!
-        newSubject.hexColor = self.color.strHex()
-        if(newSubject.name != "") {
-            realm.update(newSubject, value: ["name": newSubject.name as AnyObject, "hexColor": newSubject.hexColor as AnyObject])
+        if(update) {
+            let updateSubject = realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName!))
+            let name = subjectName.text!
+            let hexColor = self.hexColor
+//            print(name)
+//            print(hexColor)
+            realm.update(updateSubject!, value: ["name": name as AnyObject, "hexColor": hexColor as AnyObject])
         } else {
-            realm.create(Subject.self, value: subjects!)
+            let newSubject = Subject()
+            newSubject.name = subjectName.text!
+            newSubject.hexColor = self.hexColor
+            realm.create(Subject.self, value: newSubject)
         }
         let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(0.3 * Double(NSEC_PER_SEC)))
         dispatch_after(delayTime, dispatch_get_main_queue()) {

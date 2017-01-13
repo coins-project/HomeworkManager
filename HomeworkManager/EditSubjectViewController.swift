@@ -30,6 +30,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
         let subject:Subject? = subjects![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("Subject", forIndexPath: indexPath) as! EditSubjectViewCell
         cell.subject.text = subject!.name
+        print(subject!.hexColor)
         cell.backgroundColor = UIColor.hexStr(subject!.hexColor, alpha: 1)
         return cell
     }
@@ -43,6 +44,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
         if segue.identifier == "editSubject" {
             let colorPanelViewController: ColorPanelViewController = segue.destinationViewController as! ColorPanelViewController
             colorPanelViewController.deliverName = subjectName
+            colorPanelViewController.update = true
         }
     }
     
