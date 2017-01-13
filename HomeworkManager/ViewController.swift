@@ -132,14 +132,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
             cameraButton.enabled = false
             self.photo = photo
-            let imageViewController = ImageViewController()
             let appearImage = UIImage(contentsOfFile: photo.url)
             let imageView = UIImageView(image: appearImage)
+            imageView.frame = calcImageFrame()
             imageView.userInteractionEnabled = true
             imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.disappearImageView(_:))))
             self.view.addSubview(imageView)
             self.tableView.reloadData()
         }
+    }
+    
+    func calcImageFrame() -> CGRect {
+        let navigationBarFrame = self.navigationController!.navigationBar.frame
+        var imageFrame = tableView.subviews[0].frame
+        imageFrame.origin.y = navigationBarFrame.size.height + navigationBarFrame.origin.y
+        return imageFrame
     }
  
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
