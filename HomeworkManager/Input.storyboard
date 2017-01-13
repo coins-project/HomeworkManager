@@ -169,7 +169,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" apportionsSegmentWidthsByContent="YES" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
                                                     <rect key="frame" x="8" y="58.5" width="1008" height="151"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="150" id="k3M-oQ-hxu"/>

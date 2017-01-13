@@ -27,10 +27,13 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             deadlineDatePicker.date = homework.closeAt
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             for (i, subject) in subjects!.enumerate(){
-                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
                 if (subject ==  homework.subject) {
-                    subjectSegmentedControl.selectedSegmentIndex = i
+                    
+                    subjectSegmentedControl.selectedSegmentIndex = i % 5
+                    subjectSelectedTabSegmentedControl.selectedSegmentIndex = i / 5
                     subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![i].hexColor, alpha: 1)
+                    segmentChange()
                 }
             }
             if(homework.reference == "教科書") {
@@ -68,14 +71,16 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     }
     
     func segmentChange() {
-        self.subjectSegmentedControl.removeAllSegments()
+        if (self.subjectSegmentedControl.numberOfSegments != 0) {
+            self.subjectSegmentedControl.removeAllSegments()
+        }
         self.subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![tabNum*5].hexColor, alpha: 1)
         for i in 0...4 {
-            let tabNum = subjectSelectedTabSegmentedControl.selectedSegmentIndex
+            tabNum = subjectSelectedTabSegmentedControl.selectedSegmentIndex
             if i + tabNum * 5 < subjects?.count {
                 self.subjectSegmentedControl.insertSegmentWithTitle(subjects![i + tabNum * 5].name, atIndex: i, animated: true)
             } else {
-                self.subjectSegmentedControl.insertSegmentWithTitle("", atIndex: i, animated: true)
+                break
             }
         }
     }
@@ -132,11 +137,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         deadlineDatePicker.date = NSDate(timeInterval: 24*60*60, sinceDate: deadlineDatePicker.date)
     }
     
-    
-    
-    
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
+        let subject = subjects![subjectSegmentedControl.selectedSegmentIndex + tabNum * 5]
         let homework = Homework()
         homework.subject = subject
         homework.reference = reference!
