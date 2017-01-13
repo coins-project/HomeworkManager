@@ -1,38 +1,29 @@
 import UIKit
 import RealmSwift
 
-class ColorPanelViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ToColorPanelDelegate {
+class ColorPanelViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     private let realm = RealmModelManager.sharedManager
     private var subjects :Results<Subject>?
+    var deliverName: String?
     @IBOutlet weak var colorPanel: UICollectionView!
     @IBOutlet weak var subjectName: UITextField!
     @IBOutlet weak var colorView: UIView!
 
     var color = UIColor.grayColor()
     var hexColor = ""
-    var deliverName = ""
     let xCount = 15
     let yCount = 20
-    var editSubject:EditSubjectViewController?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = UICollectionViewFlowLayout()
-        let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
-        layout.itemSize = CGSizeMake(width, width)
-        layout.minimumInteritemSpacing = 0.0
-        layout.minimumLineSpacing = 0.0
-        colorPanel.collectionViewLayout = layout
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        editSubject = EditSubjectViewController()
-        editSubject!.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        self.subjectName.text = deliverName
+        let hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName!))?.hexColor)!
+        self.colorView.backgroundColor = UIColor.hexStr(hexColor, alpha: CGFloat(1.0))
         let layout = UICollectionViewFlowLayout()
         let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
@@ -91,11 +82,5 @@ class ColorPanelViewController: UIViewController, UICollectionViewDataSource, UI
         } else {
             return UIColor(hue: CGFloat(posH-1)/CGFloat(yCount-1), saturation: CGFloat(posS+1)/CGFloat(xCount), brightness: 1.0, alpha: 1.0)
         }
-    }
-    
-    func setSubjectNameAndColor(subjectName: String) {
-        self.subjectName.text = subjectName
-        let hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", subjectName))?.hexColor)!
-        self.colorView.backgroundColor = UIColor.hexStr(hexColor, alpha: CGFloat(0.0))
     }
 }
