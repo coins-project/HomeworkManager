@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="JPd-Jk-LlW">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" style="done" id="Y7Y-4S-buq">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" style="done" id="Y7Y-4S-buq">
                                             <connections>
                                                 <action selector="cancel:" destination="5Dd-Gf-xNM" id="yMs-Ru-8yg"/>
                                             </connections>
