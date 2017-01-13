@@ -15,7 +15,7 @@
         <scene sceneID="q1m-wO-fU9">
             <objects>
                 <tableViewController restorationIdentifier="InputScreen" storyboardIdentifier="InputScreen" id="MxV-5y-NY7" customClass="InputTableViewController" customModule="HomeworkManager" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="ORj-sk-XBb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="1" id="ORj-sk-XBb">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -162,31 +162,48 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="追加する課題の教科" id="on7-OG-F42">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="160" id="EV4-uA-4Jf">
-                                        <rect key="frame" x="0.0" y="161" width="1024" height="160"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="217" id="EV4-uA-4Jf">
+                                        <rect key="frame" x="0.0" y="144" width="1024" height="217"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EV4-uA-4Jf" id="CgG-cn-qep">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="159"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="216"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
-                                                    <rect key="frame" x="8" y="8" width="1008" height="144.5"/>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CQh-ys-9Y3">
+                                                    <rect key="frame" x="8" y="58.5" width="1008" height="151"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="150" id="k3M-oQ-hxu"/>
+                                                    </constraints>
                                                     <segments>
-                                                        <segment title="国語"/>
-                                                        <segment title="数学"/>
-                                                        <segment title="理科"/>
-                                                        <segment title="社会"/>
-                                                        <segment title="英語"/>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
+                                                        <segment title=""/>
                                                     </segments>
                                                     <connections>
                                                         <action selector="subjectSegmentedControl:" destination="MxV-5y-NY7" eventType="valueChanged" id="eaC-ER-m2I"/>
                                                     </connections>
                                                 </segmentedControl>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Cpo-Zm-jLm">
+                                                    <rect key="frame" x="8" y="9" width="1008" height="53.5"/>
+                                                    <segments>
+                                                        <segment title="1"/>
+                                                        <segment title="2"/>
+                                                        <segment title="3"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="subjectSelectedTabSegmentControl:" destination="MxV-5y-NY7" eventType="valueChanged" id="yBL-Hz-oEQ"/>
+                                                    </connections>
+                                                </segmentedControl>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="CQh-ys-9Y3" firstAttribute="top" secondItem="Cpo-Zm-jLm" secondAttribute="bottom" constant="6" id="254-Zw-62O"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Cpo-Zm-jLm" secondAttribute="trailing" id="6Dq-3p-0f5"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="CQh-ys-9Y3" secondAttribute="trailing" id="7nh-qQ-kSX"/>
-                                                <constraint firstItem="CQh-ys-9Y3" firstAttribute="top" secondItem="CgG-cn-qep" secondAttribute="topMargin" id="Zrq-Vg-1uX"/>
+                                                <constraint firstItem="Cpo-Zm-jLm" firstAttribute="top" secondItem="CgG-cn-qep" secondAttribute="topMargin" id="X5d-Ig-Ddg"/>
                                                 <constraint firstItem="CQh-ys-9Y3" firstAttribute="leading" secondItem="CgG-cn-qep" secondAttribute="leadingMargin" id="dDh-Lh-0ur"/>
+                                                <constraint firstItem="Cpo-Zm-jLm" firstAttribute="leading" secondItem="CgG-cn-qep" secondAttribute="leadingMargin" id="ezz-W8-HfV"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="CQh-ys-9Y3" secondAttribute="bottom" id="gke-cn-Xpz"/>
                                             </constraints>
                                             <variation key="widthClass=regular">
@@ -201,7 +218,7 @@
                             <tableViewSection headerTitle="追加する課題の種類と締め切り" id="6UP-5j-tOH">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="219" id="aW4-Cr-cgW">
-                                        <rect key="frame" x="0.0" y="378" width="1024" height="219"/>
+                                        <rect key="frame" x="0.0" y="401" width="1024" height="219"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aW4-Cr-cgW" id="pfZ-33-2jk">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="218"/>
@@ -312,7 +329,7 @@
                             <tableViewSection headerTitle=" " id="O75-pV-Yau" userLabel="　">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="110" id="78b-aM-Ufr">
-                                        <rect key="frame" x="0.0" y="654" width="1024" height="110"/>
+                                        <rect key="frame" x="0.0" y="660" width="1024" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="78b-aM-Ufr" id="g1p-Ol-bWA">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="109"/>
@@ -395,6 +412,7 @@
                         <outlet property="plusButton" destination="iTh-D3-AVo" id="ewD-MP-jOT"/>
                         <outlet property="referenceSegmentedControl" destination="kgs-nO-jsj" id="c5L-aS-Fmn"/>
                         <outlet property="subjectSegmentedControl" destination="CQh-ys-9Y3" id="VFa-ZC-LVw"/>
+                        <outlet property="subjectSelectedTabSegmentedControl" destination="Cpo-Zm-jLm" id="cdX-TF-Qt3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1R-Yv-m61" userLabel="First Responder" sceneMemberID="firstResponder"/>

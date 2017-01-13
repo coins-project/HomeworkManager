@@ -11,10 +11,12 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     private var update = false
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
-    
+    @IBOutlet weak var subjectSelectedTabSegmentedControl: UISegmentedControl!
     @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    
+    var tabNum = 0
     
     override func viewDidLoad() {
         subjects = realm.findAllObjects(Subject)
@@ -41,7 +43,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         } else {
             reference = "プリント"
             deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
-            for (i, subject) in subjects!.enumerate(){
+            for i in 0...4{
+                let subject = subjects![i+tabNum*5]
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
             }
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
@@ -59,9 +62,27 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         }
     }
     
+    @IBAction func subjectSelectedTabSegmentControl(sender: UISegmentedControl) {
+        segmentChange()
+        print(subjectSelectedTabSegmentedControl.selectedSegmentIndex)
+    }
+    
+    func segmentChange() {
+        self.subjectSegmentedControl.removeAllSegments()
+        self.subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![tabNum*5].hexColor, alpha: 1)
+        for i in 0...4 {
+            let tabNum = subjectSelectedTabSegmentedControl.selectedSegmentIndex
+            if i + tabNum * 5 < subjects?.count {
+                self.subjectSegmentedControl.insertSegmentWithTitle(subjects![i + tabNum * 5].name, atIndex: i, animated: true)
+            } else {
+                self.subjectSegmentedControl.insertSegmentWithTitle("", atIndex: i, animated: true)
+            }
+        }
+    }
+    
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
-        let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
+        let selectedSubjectColor = UIColor.hexStr(subjects![index+tabNum*5].hexColor, alpha: 1)
         self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     
