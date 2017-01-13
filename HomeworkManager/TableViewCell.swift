@@ -7,20 +7,28 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var subject: UILabel!
     @IBOutlet weak var toPhoto: UIButton!
     @IBOutlet weak var reference: UILabel!
-    
+
+    var sortOrder: SortOrder = .deadline
     var homework = Homework()
     var realm = RealmModelManager.sharedManager
     var delegate: ToPhotoDelegate?
     
     func setCell(homework :Homework) {
-        let createDate = DateFormatter.stringFromDate(homework.createdAt)
-        let formattedCreateDate = createDate[createDate.startIndex..<createDate.endIndex.advancedBy(-6)]
+        var date: String?
+        var sortName: String
+        switch sortOrder {
+        case .deadline: date = DateFormatter.stringFromDate(homework.createdAt)
+            sortName = "入力日"
+        case .createdAt: date = DateFormatter.stringFromDate(homework.closeAt)
+            sortName = "締切日"
+        }
+        let formattedDate = date![date!.startIndex..<date!.endIndex.advancedBy(-6)]
         let cellBackgroundColor = UIColor.hexStr(homework.subject!.hexColor, alpha: 1)
         self.reference.text = homework.reference
         self.subject.text = homework.subject?.name
         self.check.addTarget(self, action: #selector(TableViewCell.tapCheckButton(_:)), forControlEvents: .TouchUpInside)
         self.backgroundColor = cellBackgroundColor
-        self.toPhoto.setTitle(formattedCreateDate, forState: .Normal)
+        self.toPhoto.setTitle("\(sortName) \(formattedDate)", forState: .Normal)
         self.homework = homework
         toPhoto.setTitleColor(UIColor.blackColor(), forState: .Normal)
         changeCheckButton(homework)
