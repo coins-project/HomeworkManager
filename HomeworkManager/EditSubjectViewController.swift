@@ -6,7 +6,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     private var subjects :Results<Subject>?
     private let realm = RealmModelManager.sharedManager
-    var delegate: ToColorPanelDelegate?
+    var subjectName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +35,15 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:NSIndexPath) {
-        let subjectName = subjects![indexPath.row].name
-        self.delegate?.setSubjectNameAndColor(subjectName)
-        performSegueWithIdentifier("editSubject", sender: nil)
+        subjectName = subjects![indexPath.row].name
+        performSegueWithIdentifier("editSubject" , sender: UITableViewCell.self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editSubject" {
+            let colorPanelViewController: ColorPanelViewController = segue.destinationViewController as! ColorPanelViewController
+            colorPanelViewController.deliverName = subjectName
+        }
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -50,7 +56,3 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 }
-
-//protocol ToColorPanelDelegate {
-//    func setSubjectNameAndColor(subjectName: String)
-//}

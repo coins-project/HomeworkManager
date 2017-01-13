@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
@@ -47,7 +47,7 @@
                                         <rect key="frame" x="0.0" y="28" width="1024" height="68"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cdy-Xe-CTg" id="BKA-BF-uSb">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="67.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教科名" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-GA-ppq">
@@ -68,7 +68,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="subject" destination="lYd-GA-ppq" id="L2i-IM-d4y"/>
-                                            <segue destination="TK6-tZ-yFA" kind="show" identifier="editSubject" id="6rx-56-1a2"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -91,6 +90,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="nzn-Bk-WXA" id="RWC-KO-EHM"/>
+                        <segue destination="TK6-tZ-yFA" kind="show" identifier="editSubject" id="qGF-SG-8rF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K23-ik-Ho2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -201,6 +201,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8T7-dp-AKD"/>
+        <segue reference="qGF-SG-8rF"/>
     </inferredMetricsTieBreakers>
 </document>
