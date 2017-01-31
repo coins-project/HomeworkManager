@@ -324,7 +324,7 @@
 				TargetAttributes = {
 					6F264F521D274CCA006509D0 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = QKV2NNMWV2;
+						DevelopmentTeam = RM3N4N4RRF;
 					};
 					6F264F661D274CCA006509D0 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -683,7 +683,7 @@
 			baseConfigurationReference = 3733F378FD71A892B6124BBD /* Pods-HomeworkManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QKV2NNMWV2;
+				DEVELOPMENT_TEAM = RM3N4N4RRF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/Realm",
@@ -692,7 +692,6 @@
 				INFOPLIST_FILE = HomeworkManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kazuki-furukawa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -704,7 +703,7 @@
 			baseConfigurationReference = 4114E5BC0384DE8B52C00B69 /* Pods-HomeworkManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = QKV2NNMWV2;
+				DEVELOPMENT_TEAM = RM3N4N4RRF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Build/Products/Debug-iphonesimulator/Realm",
@@ -713,7 +712,6 @@
 				INFOPLIST_FILE = HomeworkManager/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "kazuki-furukawa";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -11,7 +11,7 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var color = UIColor.grayColor()
     var hexColor: String = ""
-    var deliverName: String? = ""
+    var deliverName: String = ""
     let xCount = 15
     let yCount = 20
     var update: Bool = false
@@ -24,11 +24,11 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLayoutSubviews()
         if(update) {
             self.subjectName.text = deliverName
-            hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName!))?.hexColor)!
+            hexColor = (realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName))?.hexColor)!
         }
         self.colorView.backgroundColor = UIColor.hexStr(hexColor, alpha: CGFloat(1.0))
         let layout = UICollectionViewFlowLayout()
-        let width = colorPanel.bounds.width/(CGFloat(xCount)+0.3)
+        let width = colorPanel.bounds.width / (CGFloat(xCount)+0.3)
         layout.itemSize = CGSizeMake(width, width)
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
@@ -58,7 +58,6 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
         let color = colorFromPos(indexPath.section, posS: indexPath.row)
         
         self.hexColor = color.strHex()
-        print(color.strHex())
         self.colorView.backgroundColor = color
     }
     
@@ -68,7 +67,7 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
     
     @IBAction func finished(sender: UIButton) {
         if(update) {
-            let updateSubject = realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName!))
+            let updateSubject = realm.findBy(Subject.self, filter: NSPredicate(format: "name == %@", deliverName))
             let name = subjectName.text!
             let hexColor = self.hexColor
             realm.update(updateSubject!, value: ["name": name as AnyObject, "hexColor": hexColor as AnyObject])
@@ -86,9 +85,9 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func colorFromPos(posH: Int, posS: Int) -> UIColor {
         if posH == 0 {
-            return UIColor(hue: 0, saturation: 0, brightness: 1.0-CGFloat(posS)/CGFloat(xCount-1), alpha: 1.0)
+            return UIColor(hue: 0, saturation: 0, brightness: 1.0-CGFloat(posS) / CGFloat(xCount-1), alpha: 1.0)
         } else {
-            return UIColor(hue: CGFloat(posH-1)/CGFloat(yCount-1), saturation: CGFloat(posS+1)/CGFloat(xCount), brightness: 1.0, alpha: 1.0)
+            return UIColor(hue: CGFloat(posH-1) / CGFloat(yCount-1), saturation: CGFloat(posS+1) / CGFloat(xCount), brightness: 1.0, alpha: 1.0)
         }
     }
 }

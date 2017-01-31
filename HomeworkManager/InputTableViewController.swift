@@ -89,7 +89,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
-        let selectedSubjectColor = UIColor.hexStr(subjects![index+tabNum*5].hexColor, alpha: 1)
+        let selectedSubjectColor = UIColor.hexStr(subjects![index + tabNum * 5].hexColor, alpha: 1)
         self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     

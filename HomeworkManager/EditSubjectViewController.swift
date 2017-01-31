@@ -17,10 +17,6 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.reloadData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
     @IBAction func cancel(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -45,7 +41,7 @@ class EditSubjectViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "editSubject" {
             let colorPanelViewController: ColorPanelViewController = segue.destinationViewController as! ColorPanelViewController
-            colorPanelViewController.deliverName! = subjectName
+            colorPanelViewController.deliverName = subjectName
             colorPanelViewController.update = true
         }
     }
