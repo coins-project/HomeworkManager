@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Uap-T7-Low">
-    <device id="ipad9_7" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Uap-T7-Low">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -156,11 +156,6 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="camera" id="7x3-Ff-g5x">
                             <connections>
                                 <action selector="cameraButtonDidTap:" destination="DTn-FK-vu4" id="ryn-WE-F6T"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="設定" style="plain" id="tUK-Ua-tPb">
-                            <connections>
-                                <action selector="settingButton:" destination="DTn-FK-vu4" id="HUQ-d2-Bm0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
