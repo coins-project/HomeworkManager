@@ -132,8 +132,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         sender.view!.removeFromSuperview()
         cameraButton.enabled = true
     }
-    
-    //設定し直す
+
     @IBAction func settingButton(sender: UIBarButtonItem) {
         let colorPanelStoryboard = UIStoryboard(name: "ColorPanel", bundle: nil)
         let colorPanelViewController = colorPanelStoryboard.instantiateViewControllerWithIdentifier("Subject") as! EditSubjectViewController

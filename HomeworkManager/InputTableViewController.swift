@@ -30,6 +30,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             for (i, subject) in subjects!.enumerate(){
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
                 if (subject ==  homework.subject) {
+                    subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
                     subjectSelectedTabSegmentedControl.selectedSegmentIndex = i / 5
                     segmentChange()
                     subjectSegmentedControl.selectedSegmentIndex = i % 5
@@ -54,7 +55,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
-        subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
+
         configurePlusMinusButton()
     }
 
@@ -76,14 +77,13 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         tabNum = subjectSelectedTabSegmentedControl.selectedSegmentIndex
         for i in 0...4 {
             if i + tabNum * 5 < subjects?.count {
-                if(i == 1) {
-                    self.subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![tabNum*5].hexColor, alpha: 1)
-                    print(subjects![tabNum*5].name)
-                }
                 self.subjectSegmentedControl.insertSegmentWithTitle(subjects![i + tabNum * 5].name, atIndex: i, animated: true)
             } else {
                 break
             }
+        }
+        if tabNum * 5 < subjects?.count {
+            self.subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![tabNum*5].hexColor, alpha: 1)
         }
     }
     
