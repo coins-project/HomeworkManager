@@ -57,6 +57,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
 
         configurePlusMinusButton()
+        subjectSegmentedControl(subjectSegmentedControl)
     }
 
     func configurePlusMinusButton() {

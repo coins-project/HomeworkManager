@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "idiom" : "ipad",
-      "size" : "20x20",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "ipad",
+      "idiom" : "iphone",
       "size" : "20x20",
       "scale" : "2x"
     },
     {
-      "idiom" : "ipad",
+      "idiom" : "iphone",
+      "size" : "20x20",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
       "size" : "29x29",
       "scale" : "2x"
     },
@@ -42,15 +42,24 @@
       "scale" : "3x"
     },
     {
+      "idiom" : "ipad",
+      "size" : "20x20",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "20x20",
+      "scale" : "2x"
+    },
+    {
       "size" : "29x29",
       "idiom" : "ipad",
       "filename" : "Icon-App-29x29@1x.png",
       "scale" : "1x"
     },
     {
-      "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-App-29x29@2x.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
@@ -81,6 +90,13 @@
       "size" : "83.5x83.5",
       "idiom" : "ipad",
       "filename" : "Screen Shot 2016-07-29 at 1.08.09 PM.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "Icon-App-29x29@2x.png",
+      "unassigned" : true,
       "scale" : "2x"
     }
   ],
