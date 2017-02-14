@@ -10,8 +10,8 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var colorView: UIView!
     
     var color = UIColor.grayColor()
-    var hexColor: String = ""
-    var deliverName: String = ""
+    var hexColor: String
+    var deliverName: String
     let xCount = 15
     let yCount = 20
     var update: Bool = false
@@ -28,7 +28,7 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         self.colorView.backgroundColor = UIColor.hexStr(hexColor, alpha: CGFloat(1.0))
         let layout = UICollectionViewFlowLayout()
-        let width = colorPanel.bounds.width / (CGFloat(xCount)+0.3)
+        let width = colorPanel.bounds.width / (CGFloat(xCount) + 0.3)
         layout.itemSize = CGSizeMake(width, width)
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
@@ -56,7 +56,6 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let color = colorFromPos(indexPath.section, posS: indexPath.row)
-        
         self.hexColor = color.strHex()
         self.colorView.backgroundColor = color
     }
@@ -85,9 +84,9 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func colorFromPos(posH: Int, posS: Int) -> UIColor {
         if posH == 0 {
-            return UIColor(hue: 0, saturation: 0, brightness: 1.0-CGFloat(posS) / CGFloat(xCount-1), alpha: 1.0)
+            return UIColor(hue: 0, saturation: 0, brightness: 1.0 - CGFloat(posS) / CGFloat(xCount - 1), alpha: 1.0)
         } else {
-            return UIColor(hue: CGFloat(posH-1) / CGFloat(yCount-1), saturation: CGFloat(posS+1) / CGFloat(xCount), brightness: 1.0, alpha: 1.0)
+            return UIColor(hue: CGFloat(posH - 1) / CGFloat(yCount - 1), saturation: CGFloat(posS + 1) / CGFloat(xCount), brightness: 1.0, alpha: 1.0)
         }
     }
 }
