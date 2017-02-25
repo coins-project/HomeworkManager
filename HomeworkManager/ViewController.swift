@@ -167,6 +167,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cameraButton.enabled = true
     }
 
+    @IBAction func settingButton(sender: UIBarButtonItem) {
+        let colorPanelStoryboard = UIStoryboard(name: "ColorPanel", bundle: nil)
+        let colorPanelViewController = colorPanelStoryboard.instantiateViewControllerWithIdentifier("Subject") as! EditSubjectViewController
+        self.presentViewController(colorPanelViewController, animated: true, completion: nil)
+    }
+
     @IBAction func tapAddButton(sender: UIButton) {
         let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
         let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
@@ -225,8 +231,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 }
-
-protocol ToPhotoDelegate {
-    func deliverCreateAt(createAt: NSDate)
-}
-
