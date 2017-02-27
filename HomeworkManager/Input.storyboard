@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MxV-5y-NY7">
-    <device id="ipad9_7" orientation="landscape">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MxV-5y-NY7">
+    <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -243,21 +243,25 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iTh-D3-AVo">
                                                             <rect key="frame" x="402" y="8" width="98" height="203"/>
                                                             <color key="backgroundColor" red="0.83021092414855957" green="0.95859533548355103" blue="0.95668178796768188" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="16"/>
                                                             <state key="normal" title="+"/>
                                                             <connections>
                                                                 <action selector="plusDeadlineUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="8OJ-ju-yUC"/>
+                                                                <outletCollection property="gestureRecognizers" destination="Br4-mh-ODq" appends="YES" id="HKk-V7-u2X"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxI-Ud-Zfv">
                                                             <rect key="frame" x="8" y="8" width="98" height="203"/>
                                                             <color key="backgroundColor" red="0.79265713691711426" green="0.95020061731338501" blue="0.93197023868560791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <gestureRecognizers/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                                             <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="13"/>
                                                             <state key="normal" title="−"/>
                                                             <connections>
                                                                 <action selector="minusDeadlineUIButtonTouchUpInside:" destination="MxV-5y-NY7" eventType="touchUpInside" id="6P1-A0-9I9"/>
+                                                                <outletCollection property="gestureRecognizers" destination="CX9-f3-Njs" appends="YES" id="4Pj-cZ-nTw"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -416,6 +420,16 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1R-Yv-m61" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer delaysTouchesEnded="NO" allowableMovement="10" minimumPressDuration="0.40000000000000002" id="CX9-f3-Njs">
+                    <connections>
+                        <action selector="minusDeadlineUIButtonLongTouchUpInside:" destination="MxV-5y-NY7" id="Az1-KH-h5O"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+                <pongPressGestureRecognizer delaysTouchesBegan="YES" allowableMovement="10" minimumPressDuration="0.40000000000000002" id="Br4-mh-ODq">
+                    <connections>
+                        <action selector="plusDeadlineUIButtonLongTouchUpInside:" destination="MxV-5y-NY7" id="LSQ-lK-rzH"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="885.9375" y="-109.5703125"/>
         </scene>

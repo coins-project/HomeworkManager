@@ -172,7 +172,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if let photo = realm.findBy(Photo.self, filter: NSPredicate(format: "createdAt == %@", date)) {
             cameraButton.enabled = false
             self.photo = photo
-            let appearImage = UIImage(contentsOfFile: photo.url)
+            let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let photoUrl = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent("images")?.URLByAppendingPathComponent((photo.url as NSString).lastPathComponent)
+            let appearImage = UIImage(contentsOfFile: photoUrl!.path!)
             let imageView = UIImageView(image: appearImage)
             imageView.frame = calcImageFrame()
             imageView.userInteractionEnabled = true
