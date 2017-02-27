@@ -10,8 +10,8 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var colorView: UIView!
     
     var color = UIColor.grayColor()
-    var hexColor: String
-    var deliverName: String
+    var hexColor: String = ""
+    var deliverName: String = ""
     let xCount = 15
     let yCount = 20
     var update: Bool = false

@@ -7,6 +7,8 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var subject: UILabel!
     @IBOutlet weak var toPhoto: UIButton!
     @IBOutlet weak var reference: UILabel!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var checkImage: UIImageView!
     
     var homework = Homework()
     var realm = RealmModelManager.sharedManager
@@ -20,12 +22,11 @@ class TableViewCell: UITableViewCell {
         self.subject.text = homework.subject?.name
         self.check.addTarget(self, action: #selector(TableViewCell.tapCheckButton(_:)), forControlEvents: .TouchUpInside)
         self.backgroundColor = cellBackgroundColor
-        self.toPhoto.setTitle(formattedCreateDate, forState: .Normal)
+        self.date.text = formattedCreateDate
         self.homework = homework
-        toPhoto.setTitleColor(UIColor.blackColor(), forState: .Normal)
         changeCheckButton(homework)
     }
-    
+
     func tapCheckButton(sender: UIButton){
         check.selected = !check.selected
         realm.update(homework, value: ["finished": check.selected])
@@ -34,9 +35,9 @@ class TableViewCell: UITableViewCell {
     
     func changeCheckButton(homework: Homework) {
         if(homework.finished) {
-            self.check.setImage(UIImage(named: "checked.png"), forState: UIControlState.Normal)
+            self.checkImage.image = UIImage(named: "checked.png")
         } else {
-            self.check.setImage(UIImage(named: "unchecked.png"), forState: UIControlState.Normal)
+            self.checkImage.image = UIImage(named: "unchecked.png")
         }
     }
     

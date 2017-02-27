@@ -50,6 +50,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             for i in 0...4{
                 let subject = subjects![i+tabNum*5]
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+                subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!, forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
             }
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
@@ -69,7 +70,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     @IBAction func subjectSelectedTabSegmentControl(sender: UISegmentedControl) {
         segmentChange()
     }
-    
+
     func segmentChange() {
         if (self.subjectSegmentedControl.numberOfSegments != 0) {
             self.subjectSegmentedControl.removeAllSegments()
@@ -78,6 +79,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         for i in 0...4 {
             if i + tabNum * 5 < subjects?.count {
                 self.subjectSegmentedControl.insertSegmentWithTitle(subjects![i + tabNum * 5].name, atIndex: i, animated: true)
+                self.subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont(name: "HelveticaNeue-Bold", size: 20.0)!, forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
             } else {
                 break
             }
