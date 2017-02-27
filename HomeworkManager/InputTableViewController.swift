@@ -9,6 +9,8 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     private var closeAt = NSDate()
     private var subjects: Results<Subject>?
     private var update = false
+    private var incrementDayTimer: NSTimer?
+    private var decrementDayTimer: NSTimer?
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
     
@@ -104,15 +106,47 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         return cell
     }
     
-    @IBAction func minusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+    @objc private func decrementDayTime() {
         deadlineDatePicker.date = NSDate(timeInterval: -24*60*60, sinceDate: deadlineDatePicker.date)
     }
     
-    @IBAction func plusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+    @objc private func incrementDayTime() {
         deadlineDatePicker.date = NSDate(timeInterval: 24*60*60, sinceDate: deadlineDatePicker.date)
     }
     
+    @IBAction func minusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+        decrementDayTime()
+    }
     
+    @IBAction func plusDeadlineUIButtonTouchUpInside(sender: AnyObject) {
+        incrementDayTime()
+    }
+    
+    @IBAction func minusDeadlineUIButtonLongTouchUpInside(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case UIGestureRecognizerState.Began:
+            decrementDayTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(decrementDayTime), userInfo: nil, repeats: true)
+            break
+        case UIGestureRecognizerState.Ended:
+            decrementDayTimer?.invalidate()
+            break
+        default:
+            break
+        }
+    }
+    
+    @IBAction func plusDeadlineUIButtonLongTouchUpInside(sender: UILongPressGestureRecognizer) {
+        switch sender.state {
+        case UIGestureRecognizerState.Began:
+            incrementDayTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(incrementDayTime), userInfo: nil, repeats: true)
+            break
+        case UIGestureRecognizerState.Ended:
+            incrementDayTimer?.invalidate()
+            break
+        default:
+            break
+        }
+    }
     
     
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
