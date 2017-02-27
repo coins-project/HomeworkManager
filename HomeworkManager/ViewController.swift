@@ -7,6 +7,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var sortButton: UIButton!
 
+
     private let realm = RealmModelManager.sharedManager
     private var homeworkDictionary: Dictionary = [NSDate: [Homework]]()
     private var keys = [NSDate]()
@@ -208,7 +209,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.presentViewController(myCameraViewController as UIViewController, animated: true, completion: nil)
         myCameraViewController.pickImageFromCamera()
     }
-    
+
     func startImagePicker() {
         let myCameraViewController = CameraViewController()
         myCameraViewController.modalTransitionStyle = UIModalTransitionStyle.CoverVertical

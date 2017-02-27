@@ -28,9 +28,9 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             deadlineDatePicker.date = homework.closeAt
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             for (i, subject) in subjects!.enumerate(){
-                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
                 if (subject ==  homework.subject) {
                     subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
+                    subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
                     subjectSelectedTabSegmentedControl.selectedSegmentIndex = i / 5
                     segmentChange()
                     subjectSegmentedControl.selectedSegmentIndex = i % 5
@@ -44,12 +44,14 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
                 reference = "プリント"
                 referenceSegmentedControl.selectedSegmentIndex = 0
             }
+            referenceSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         } else {
             reference = "プリント"
             deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
             for i in 0...4{
                 let subject = subjects![i+tabNum*5]
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+                subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
             }
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
