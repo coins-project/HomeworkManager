@@ -83,32 +83,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func deliverCreateAt(createAt: NSDate) {
         displayPhoto(createAt)
-        
-        
-        let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
-                                              handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
-                                                       handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
-        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
-                                           handler:{(action:UIAlertAction!) -> Void in self.editItem() })
-        
-        alertController.addAction(startCameraAction)
-        alertController.addAction(pickImageFromLibraryAction)
-        alertController.addAction(editItemAction)
-        
-        if alertController.popoverPresentationController != nil {
-            alertController.popoverPresentationController!.sourceView = view
-            //alertController.popoverPresentationController!.sourceRect = navigationItem.bounds
-            self.presentViewController(alertController, animated: true, completion: nil)
-        } else {
-            self.presentViewController(alertController, animated: true, completion: {
-                alertController.view.superview?.subviews[1].userInteractionEnabled = true
-                alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertView)))
-            })
-        }
-        
-        
     }
     
     func tableView(tableView: UITableView,canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -217,28 +191,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     @IBAction func tapAddButton(sender: UIButton) {
         editItem()
-//        let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-//        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
-//                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-//        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
-//                handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
-//        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
-//                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
-//        
-//        alertController.addAction(startCameraAction)
-//        alertController.addAction(pickImageFromLibraryAction)
-//        alertController.addAction(editItemAction)
-//        
-//        if alertController.popoverPresentationController != nil {
-//            alertController.popoverPresentationController!.sourceView = sender
-//            alertController.popoverPresentationController!.sourceRect = sender.bounds
-//            self.presentViewController(alertController, animated: true, completion: nil)
-//        } else {
-//            self.presentViewController(alertController, animated: true, completion: {
-//                alertController.view.superview?.subviews[1].userInteractionEnabled = true
-//                alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertView)))
-//            })
-//        }
     }
     
     func dismissAlertView() {
