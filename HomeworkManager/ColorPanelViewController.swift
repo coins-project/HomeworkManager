@@ -9,7 +9,7 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
     @IBOutlet weak var subjectName: UITextField!
     @IBOutlet weak var colorView: UIView!
     
-    var color = UIColor.grayColor()
+    private var color = UIColor.grayColor()
     var hexColor: String = ""
     var deliverName: String? = ""
     let xCount = 15
@@ -56,9 +56,7 @@ class ColorPanelViewController: UIViewController, UICollectionViewDelegate, UICo
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let color = colorFromPos(indexPath.section, posS: indexPath.row)
-        
         self.hexColor = color.strHex()
-        print(color.strHex())
         self.colorView.backgroundColor = color
     }
     

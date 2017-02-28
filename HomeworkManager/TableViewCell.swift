@@ -33,8 +33,6 @@ class TableViewCell: UITableViewCell {
         self.backgroundColor = cellBackgroundColor
         self.date.text = "\(sortName) \(formattedDate)"
         self.homework = homework
-        //toPhoto.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        
         changeCheckButton(homework)
     }
     
@@ -48,7 +46,8 @@ class TableViewCell: UITableViewCell {
         if(homework.finished) {
             self.checkImage.image = UIImage(named: "checked.png")
         } else {
-            self.checkImage.image = UIImage(named: "unchecked.png")        }
+            self.checkImage.image = UIImage(named: "unchecked.png")
+        }
     }
     
     @IBAction func tapToPhoto(sender: UIButton) {

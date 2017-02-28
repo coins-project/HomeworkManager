@@ -54,7 +54,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="XmX-AG-zCa"/>
                                                     </constraints>
-                                                    <state key="normal" title="check">
+                                                    <state key="normal">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>

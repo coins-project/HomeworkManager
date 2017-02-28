@@ -28,7 +28,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         subjectSegmentedControl.apportionsSegmentWidthsByContent = false
         if(update) {
             deadlineDatePicker.date = homework.closeAt
-            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7 * 24 * 60 * 60))
             for (i, subject) in subjects!.enumerate(){
                 if (subject ==  homework.subject) {
                     subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
@@ -94,7 +94,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
-        let selectedSubjectColor = UIColor.hexStr(subjects![index+tabNum*5].hexColor, alpha: 1)
+        let selectedSubjectColor = UIColor.hexStr(subjects![index + tabNum * 5].hexColor, alpha: 1)
         self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     

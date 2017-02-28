@@ -16,8 +16,10 @@ class RealmModelManager {
         if !fileManager.fileExistsAtPath(realmPath.path!) {
             try! fileManager.copyItemAtURL(path, toURL: realmPath)
         }
+        
         var config = Realm.Configuration.defaultConfiguration
         config.fileURL = realmPath
+        
         try! self.realm = Realm(configuration: config)
     }
     
