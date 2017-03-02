@@ -120,7 +120,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func cameraButtonDidTap(sender: UIBarButtonItem) {
         let today = TimezoneConverter.convertToJST(NSDate())
-        displayPhoto(today)
+        let alertController = UIAlertController(title: "選択してください", message: "", preferredStyle: .ActionSheet)
+        let displayPhotoAction = UIAlertAction(title: "今日の写真を表示", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.displayPhoto(today) })
+        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
+                                              handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
+        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default, handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
+        
+        alertController.addAction(displayPhotoAction)
+        alertController.addAction(startCameraAction)
+        alertController.addAction(pickImageFromLibraryAction)
+        
+        alertController.popoverPresentationController!.sourceView = view
+        alertController.popoverPresentationController!.sourceRect = CGRect(x: 25, y: 50, width: 10, height: 10)
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     func tapHomework(sender: UIGestureRecognizer) {
@@ -169,29 +182,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cameraButton.enabled = true
     }
 
+    @IBAction func settingButton(sender: UIBarButtonItem) {
+        let colorPanelStoryboard = UIStoryboard(name: "ColorPanel", bundle: nil)
+        let colorPanelViewController = colorPanelStoryboard.instantiateViewControllerWithIdentifier("Subject") as! EditSubjectViewController
+        self.presentViewController(colorPanelViewController, animated: true, completion: nil)
+    }
+
     @IBAction func tapAddButton(sender: UIButton) {
-        let alertController = UIAlertController(title: "新規作成", message: "選択してください", preferredStyle: .ActionSheet)
-        let startCameraAction = UIAlertAction(title: "カメラ起動", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.startCamera() })
-        let pickImageFromLibraryAction = UIAlertAction(title: "カメラロールから選択", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.startImagePicker() })
-        let editItemAction = UIAlertAction(title: "課題入力", style: .Default,
-                handler:{(action:UIAlertAction!) -> Void in self.editItem() })
-        
-        alertController.addAction(startCameraAction)
-        alertController.addAction(pickImageFromLibraryAction)
-        alertController.addAction(editItemAction)
-        
-        if alertController.popoverPresentationController != nil {
-            alertController.popoverPresentationController!.sourceView = sender
-            alertController.popoverPresentationController!.sourceRect = sender.bounds
-            self.presentViewController(alertController, animated: true, completion: nil)
-        } else {
-            self.presentViewController(alertController, animated: true, completion: {
-                alertController.view.superview?.subviews[1].userInteractionEnabled = true
-                alertController.view.superview?.subviews[1].addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertView)))
-            })
-        }
+        editItem()
     }
     
     func dismissAlertView() {
@@ -227,8 +225,3 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 }
-
-protocol ToPhotoDelegate {
-    func deliverCreateAt(createAt: NSDate)
-}
-

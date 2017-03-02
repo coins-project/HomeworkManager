@@ -13,23 +13,29 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     private var decrementDayTimer: NSTimer?
     @IBOutlet weak var deadlineDatePicker: UIDatePicker!
     @IBOutlet weak var subjectSegmentedControl: UISegmentedControl!
-    
+    @IBOutlet weak var subjectSelectedTabSegmentedControl: UISegmentedControl!
     @IBOutlet weak var referenceSegmentedControl: UISegmentedControl!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var plusButton: UIButton!
+    
+    var tabNum = 0
     
     override func viewDidLoad() {
         subjects = realm.findAllObjects(Subject)
         if(homework.subject?.name != nil) {
             update = true
         }
+        subjectSegmentedControl.apportionsSegmentWidthsByContent = false
         if(update) {
             deadlineDatePicker.date = homework.closeAt
-            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7 * 24 * 60 * 60))
             for (i, subject) in subjects!.enumerate(){
-                subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
                 if (subject ==  homework.subject) {
-                    subjectSegmentedControl.selectedSegmentIndex = i
+                    subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
+                    subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
+                    subjectSelectedTabSegmentedControl.selectedSegmentIndex = i / 5
+                    segmentChange()
+                    subjectSegmentedControl.selectedSegmentIndex = i % 5
                     subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![i].hexColor, alpha: 1)
                 }
             }
@@ -40,17 +46,20 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
                 reference = "プリント"
                 referenceSegmentedControl.selectedSegmentIndex = 0
             }
+            referenceSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         } else {
             reference = "プリント"
             deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
-            for (i, subject) in subjects!.enumerate(){
+            for i in 0...4{
+                let subject = subjects![i+tabNum*5]
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
+                subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
             }
             closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
         closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
-        subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
+
         configurePlusMinusButton()
         subjectSegmentedControl(subjectSegmentedControl)
     }
@@ -62,9 +71,30 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         }
     }
     
+    @IBAction func subjectSelectedTabSegmentControl(sender: UISegmentedControl) {
+        segmentChange()
+    }
+    
+    func segmentChange() {
+        if (self.subjectSegmentedControl.numberOfSegments != 0) {
+            self.subjectSegmentedControl.removeAllSegments()
+        }
+        tabNum = subjectSelectedTabSegmentedControl.selectedSegmentIndex
+        for i in 0...4 {
+            if i + tabNum * 5 < subjects?.count {
+                self.subjectSegmentedControl.insertSegmentWithTitle(subjects![i + tabNum * 5].name, atIndex: i, animated: true)
+            } else {
+                break
+            }
+        }
+        if tabNum * 5 < subjects?.count {
+            self.subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![tabNum*5].hexColor, alpha: 1)
+        }
+    }
+    
     @IBAction func subjectSegmentedControl(sender: UISegmentedControl) {
         let index = subjectSegmentedControl.selectedSegmentIndex
-        let selectedSubjectColor = UIColor.hexStr(subjects![index].hexColor, alpha: 1)
+        let selectedSubjectColor = UIColor.hexStr(subjects![index + tabNum * 5].hexColor, alpha: 1)
         self.subjectSegmentedControl.tintColor = selectedSubjectColor
     }
     
@@ -150,7 +180,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
     
     
     @IBAction func saveUIButtonTouchUpInside(sender: UIButton) {
-        let subject = subjects![subjectSegmentedControl.selectedSegmentIndex]
+        let subject = subjects![subjectSegmentedControl.selectedSegmentIndex + tabNum * 5]
         let homework = Homework()
         homework.subject = subject
         homework.reference = reference!
