@@ -46,7 +46,6 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
                 reference = "プリント"
                 referenceSegmentedControl.selectedSegmentIndex = 0
             }
-            referenceSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         } else {
             reference = "プリント"
             deadlineDatePicker.date = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 24*60*60*7))
@@ -58,7 +57,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             closeAt = deadlineDatePicker.date
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
-
+        referenceSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         configurePlusMinusButton()
         subjectSegmentedControl(subjectSegmentedControl)
     }
