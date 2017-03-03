@@ -74,8 +74,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath) as! TableViewCell
         let homework = homeworkDictionary[keys[indexPath.section]]![indexPath.row]
-        cell.setCell(homework)
         cell.sortOrder = sortOrder
+        cell.setCell(homework)
         cell.delegate = self
         return cell
     }
