@@ -28,7 +28,7 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
         subjectSegmentedControl.apportionsSegmentWidthsByContent = false
         if(update) {
             deadlineDatePicker.date = homework.closeAt
-            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7 * 24 * 60 * 60))
+            closeAt = deadlineDatePicker.date
             for (i, subject) in subjects!.enumerate(){
                 if (subject ==  homework.subject) {
                     subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i % 5)
@@ -49,16 +49,15 @@ class InputTableViewController: UITableViewController,UICollectionViewDelegate,U
             referenceSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
         } else {
             reference = "プリント"
-            deadlineDatePicker.date = NSDate(timeInterval: 24*60*60*7, sinceDate: NSDate())
+            deadlineDatePicker.date = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 24*60*60*7))
             for i in 0...4{
                 let subject = subjects![i+tabNum*5]
                 subjectSegmentedControl.setTitle(subject.name, forSegmentAtIndex: i)
                 subjectSegmentedControl.setTitleTextAttributes(NSDictionary(object: UIFont.boldSystemFontOfSize(25), forKey: NSFontAttributeName) as [NSObject : AnyObject], forState: UIControlState.Normal)
             }
-            closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
+            closeAt = deadlineDatePicker.date
             subjectSegmentedControl.tintColor = UIColor.hexStr(subjects![0].hexColor, alpha: 1)
         }
-        closeAt = TimezoneConverter.convertToJST(NSDate(timeIntervalSinceNow: 7*24*60*60))
 
         configurePlusMinusButton()
         subjectSegmentedControl(subjectSegmentedControl)
